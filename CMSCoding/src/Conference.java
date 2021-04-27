@@ -63,5 +63,9 @@ public class Conference
         return "Conference Name:" + " " + conName + "," + "Conference Title:" + " " + conTitle + "," + "Conference Topic:" + " "
                 + conTopic + "，" + "Submission time:" + " " + subDate + "," + "Review time:" + " " + revDate;
     }
+    public String toStringToDatabase()
+    {
+        return conName + ","+ conTitle +","+ conTopic +","+ subDate + "," + revDate;
 
+    }
 }

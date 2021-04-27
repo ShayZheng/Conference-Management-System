@@ -1,6 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.*;
 import java.util.*;
 
@@ -37,8 +35,10 @@ public class chairManagement
         conferenceList.add(newConference);
     }
 
-    public void readFromFile()
+
+    public void modifyConference()
     {
+        //read from database
         try
         {
             FileReader inputFile = new FileReader("src/test.txt");
@@ -71,50 +71,57 @@ public class chairManagement
         {
             System.out.println("Unexpected I/O exception occurs");
         }
-    }
 
-    public void modifyConference()
-    {
+
+        // change part
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please choose one conference to modify");
-
         for(Conference one : conferenceList)
+            System.out.println(conferenceList.indexOf(one)+"."+ one.toString());
+        System.out.println("Please choose one conference to modify");
+        String option = sc.nextLine();
+        if(Integer.parseInt(option) > conferenceList.size())
+            System.out.println("Can not find the conference!");
+        for(Conference one: conferenceList)
         {
-           /*if(one.getConName().equals(name))
+            if (Integer.parseInt(option) == conferenceList.indexOf(one))
             {
                 System.out.println("please choose which part to modify:");
                 System.out.println("(1) conference name");
-                System.out.println("(1) conference title");
-                System.out.println("(1) conference topic");
-                System.out.println("(1) conference submission deadline");
-                System.out.println("(1) conference review deadline");
-                String option = sc.nextLine();
-                switch (option)
-                {
-                    case"1":
+                System.out.println("(2) conference title");
+                System.out.println("(3) conference topic");
+                System.out.println("(4) conference submission deadline");
+                System.out.println("(5) conference review deadline");
+                System.out.println("(6) delete the conference");
+                String number = sc.nextLine();
+                switch (number) {
+                    case "1":
                         System.out.print("please input the new name:");
                         String newName = sc.nextLine();
                         one.setConName(newName);
                         break;
-                    case"2":
+                    case "2":
                         System.out.print("please input the new title:");
                         String newTitle = sc.nextLine();
-                        one.setConName(newTitle);
+                        one.setConTitle(newTitle);
                         break;
-                    case"3":
+                    case "3":
                         System.out.print("please input the new topic:");
                         String newTopic = sc.nextLine();
-                        one.setConName(newTopic);
+                        one.setConTitle(newTopic);
                         break;
-                    case"4":
+                    case "4":
                         System.out.print("please input the new submission deadline:");
                         String newSubDeadline = sc.nextLine();
-                        one.setConName(newSubDeadline);
+                        one.setSubDate(newSubDeadline);
                         break;
-                    case"5":
+                    case "5":
                         System.out.print("please input the new review deadline:");
                         String newRevDeadline = sc.nextLine();
-                        one.setConName(newRevDeadline);
+                        one.setRevDate(newRevDeadline);
+                        break;
+                    case "6":
+                        conferenceList.remove(one);
+                        System.out.println("Successfully delete!");
                         break;
                     default:
                         System.out.println("please input the correct number!");
@@ -122,52 +129,22 @@ public class chairManagement
 
                 }
             }
-            else
-                return;*/
-            System.out.println(conferenceList.indexOf(one)+"."+ one.toString());
 
         }
-        int option = sc.nextInt();
-        Conference modifyObject = conferenceList.get(option);
-        System.out.println("please choose which part to modify:");
-        System.out.println("(1) conference name");
-        System.out.println("(2) conference title");
-        System.out.println("(3) conference topic");
-        System.out.println("(4) conference submission deadline");
-        System.out.println("(5) conference review deadline");
-        String number = sc.nextLine();
-        switch (number)
+       // rewrite to database
+        try
         {
-            case"1":
-                System.out.print("please input the new name:");
-                String newName = sc.nextLine();
-                modifyObject.setConName(newName);
-                break;
-            case"2":
-                System.out.print("please input the new title:");
-                String newTitle = sc.nextLine();
-                modifyObject.setConName(newTitle);
-                break;
-            case"3":
-                System.out.print("please input the new topic:");
-                String newTopic = sc.nextLine();
-                modifyObject.setConName(newTopic);
-                break;
-            case"4":
-                System.out.print("please input the new submission deadline:");
-                String newSubDeadline = sc.nextLine();
-                modifyObject.setConName(newSubDeadline);
-                break;
-            case"5":
-                System.out.print("please input the new review deadline:");
-                String newRevDeadline = sc.nextLine();
-                modifyObject.setConName(newRevDeadline);
-                break;
-            default:
-                System.out.println("please input the correct number!");
-                break;
-
+            PrintWriter outputFile = new PrintWriter("src/test.txt");
+            for (Conference one : conferenceList)
+                outputFile.println(one.toStringToDatabase());
+            outputFile.close();
         }
+        catch(IOException e)
+        {
+            System.out.println("Unexpected I/O exception occurs");
+        }
+
+       // show the new conference list
         System.out.println("this is new conference list");
         for(Conference one :conferenceList)
         {
@@ -175,9 +152,12 @@ public class chairManagement
         }
 
     }
+
+
+
+
     public static void main(String[] args) throws ParseException {
         chairManagement c = new chairManagement();
-        c.readFromFile();
         c.modifyConference();
 
     }
