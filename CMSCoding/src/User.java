@@ -10,6 +10,14 @@ public class User {
     private String Name;
     private String Psw;
 
+    //changing part, default constructor
+    public User(){
+        ID = 56;
+        Type = "Reviewer";
+        Name = "Nono";
+        Psw = "123456";
+    }
+
     public User(int newID, String newName, String newPsw, String newType){
         ID = newID;
         Type = newType;
