@@ -14,6 +14,4 @@ public class CMS {
         System.out.println("\n" + "-----------Paper message------------");
         System.out.println(p);
     }
-
-
 }
