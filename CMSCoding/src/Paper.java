@@ -2,7 +2,10 @@
 // @ date: 25/04/2021
 //
 
+import java.util.ArrayList;
+
 public class Paper {
+
     private String Name;
     private String smDeadline;
     private String rmDeadline;
@@ -11,6 +14,8 @@ public class Paper {
     private String Keyword;
     private String Decision;
     private String conName;
+    private ArrayList<Reviewer> assignedReviewers;
+
 
     public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String keyword, String decision, String conName) {
         Name = name;
@@ -21,6 +26,7 @@ public class Paper {
         Keyword = keyword;
         Decision = decision;
         this.conName = conName;
+        assignedReviewers = new ArrayList<>();
     }
 
     public String getName() {
@@ -86,6 +92,17 @@ public class Paper {
     public void setConName(String conName) {
         this.conName = conName;
     }
+
+
+    public ArrayList<Reviewer> getAssignedReviewerList()
+    {
+       return assignedReviewers;
+    }
+
+
+
+
+
 
     @Override
     public String toString() {
