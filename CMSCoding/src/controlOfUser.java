@@ -78,7 +78,7 @@ public class controlOfUser {
         Scanner scan = null;
         try
         {
-            FileReader reader = new FileReader("User.txt");
+            FileReader reader = new FileReader("user.txt");
             scan = new Scanner(reader);
             while (scan.hasNextLine())
             {
@@ -129,7 +129,7 @@ public class controlOfUser {
         PrintWriter writer = null;
         try
         {
-            writer = new PrintWriter("User.txt");
+            writer = new PrintWriter("user.txt");
             // get every details of borrowers of the borrower database
             for (User user : files)
             {
