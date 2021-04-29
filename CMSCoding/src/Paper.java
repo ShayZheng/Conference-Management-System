@@ -2,7 +2,11 @@
 // @ date: 25/04/2021
 //
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Paper {
+
     private String Name;
     private String smDeadline;
     private String rmDeadline;
@@ -11,6 +15,8 @@ public class Paper {
     private String Keyword;
     private String Decision;
     private String conName;
+    private ArrayList<Reviewer> assignedReviewers;
+
 
     public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String keyword, String decision, String conName) {
         Name = name;
@@ -21,6 +27,7 @@ public class Paper {
         Keyword = keyword;
         Decision = decision;
         this.conName = conName;
+        assignedReviewers = new ArrayList<>();//change part
     }
 
     public String getName() {
@@ -87,6 +94,32 @@ public class Paper {
         this.conName = conName;
     }
 
+
+    public ArrayList<Reviewer> getAssignedReviewerList()
+    {
+       return assignedReviewers;
+    }//change part
+
+    public String getReviewer()//change part
+    {
+        ArrayList<String> reviewerName = new ArrayList<>();
+
+        for(Reviewer one: assignedReviewers)
+            reviewerName.add(one.getName());
+
+        Iterator<String> reviewer = reviewerName.iterator();
+        String reviewers = "";
+        while(reviewer.hasNext())
+        {
+            reviewers +=","+ reviewer.next();
+        }
+
+        return reviewers;
+    }
+
+
+
+
     @Override
     public String toString() {
         return "Paper{" +
@@ -98,6 +131,13 @@ public class Paper {
                 ", Keyword='" + Keyword + '\'' +
                 ", Decision='" + Decision + '\'' +
                 ", conName='" + conName + '\'' +
+                ", Assigned Reviewers='" + getReviewer() +'\''+//change part
                 '}';
     }
+
+    public String toStringDatabase()//change part
+    {
+        return Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName+""+getReviewer();
+    }
+
 }

@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.util.*;
 
 public class Conference
 {
@@ -63,5 +63,9 @@ public class Conference
         return "Conference Name:" + " " + conName + "," + "Conference Title:" + " " + conTitle + "," + "Conference Topic:" + " "
                 + conTopic + "，" + "Submission time:" + " " + subDate + "," + "Review time:" + " " + revDate;
     }
+    public String toStringToDatabase()
+    {
+        return conName + ","+ conTitle +","+ conTopic +","+ subDate + "," + revDate;
 
+    }
 }
