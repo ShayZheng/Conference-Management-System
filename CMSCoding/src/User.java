@@ -60,5 +60,9 @@ public class User {
         return "ID=" + ID + ", Type='" + Type + '\'' + ", Name='" + Name + '\'' + ", Psw='" + Psw + '\'';
     }
 
+    public String toStringData()
+    {
+        return ID + "," + Type + "," + Name +","+ Psw;
+    }
 
 }

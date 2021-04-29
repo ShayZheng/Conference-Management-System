@@ -7,6 +7,7 @@ public class Author extends User{
     //field
     private String Email;
     private ArrayList<Paper> personalPaper;
+    private ArrayList<String> authorMessage;
 
     public String getEmail() {
         return Email;

@@ -23,7 +23,7 @@ public class conferenceReport
     {
         try
         {
-            FileReader inputFile = new FileReader("src/test.txt");
+            FileReader inputFile = new FileReader("src/conference.txt");
             try
             {
                 Scanner parser = new Scanner(inputFile);

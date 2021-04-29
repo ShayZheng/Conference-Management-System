@@ -3,6 +3,7 @@
 //
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Paper {
 
@@ -26,7 +27,7 @@ public class Paper {
         Keyword = keyword;
         Decision = decision;
         this.conName = conName;
-        assignedReviewers = new ArrayList<>();
+        assignedReviewers = new ArrayList<>();//change part
     }
 
     public String getName() {
@@ -97,9 +98,24 @@ public class Paper {
     public ArrayList<Reviewer> getAssignedReviewerList()
     {
        return assignedReviewers;
+    }//change part
+
+    public String getReviewer()//change part
+    {
+        ArrayList<String> reviewerName = new ArrayList<>();
+
+        for(Reviewer one: assignedReviewers)
+            reviewerName.add(one.getName());
+
+        Iterator<String> reviewer = reviewerName.iterator();
+        String reviewers = "";
+        while(reviewer.hasNext())
+        {
+            reviewers +=","+ reviewer.next();
+        }
+
+        return reviewers;
     }
-
-
 
 
 
@@ -115,6 +131,13 @@ public class Paper {
                 ", Keyword='" + Keyword + '\'' +
                 ", Decision='" + Decision + '\'' +
                 ", conName='" + conName + '\'' +
+                ", Assigned Reviewers='" + getReviewer() +'\''+//change part
                 '}';
     }
+
+    public String toStringDatabase()//change part
+    {
+        return Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName+""+getReviewer();
+    }
+
 }
