@@ -1,8 +1,8 @@
-public class Adminstrator {
+public class Administrator {
     private String adminType;
     private String adminPsw;
 
-    public Adminstrator(String newType, String newPsw){
+    public Administrator(String newType, String newPsw){
         adminPsw = newPsw;
         adminType = newType;
     }
