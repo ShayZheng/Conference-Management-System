@@ -11,18 +11,12 @@ public class Reviewer extends User{
     private String Keyword;
     private ArrayList<Paper> papers;
     private ArrayList<String> reviewerMassage;//change part
-    private ArrayList<Paper> assignedPaper;//change part
-    private String hasTask;//change part
-
-
-    public String getHasTask(){ return hasTask;}
-    public void setHasTask(String status){ hasTask = status;}// change part
 
 
 
     public ArrayList<Paper> getAssignedPaper()//change part
     {
-        return assignedPaper;
+        return papers;
     }
     public ArrayList<String> getReviewerMassage()//change part
     {
@@ -40,11 +34,11 @@ public class Reviewer extends User{
     }
 
     //change part
-    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword, String hasTask) {
+    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword) {
         super(newID, newName, newPsw, newType); // inherit from User class
         Keyword = newKeyword;
         papers = new ArrayList<>();
-        hasTask = "NO";
+
     }
 
     @Override
@@ -54,7 +48,7 @@ public class Reviewer extends User{
                 "} " ;
     }
     public String toStringDatabase(){
-        return super.toStringData() + "," + getKeyword() +","+getHasTask();
+        return super.toStringData() + "," + getKeyword();
     }
     //
 //        public String toString() {

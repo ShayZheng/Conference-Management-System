@@ -120,7 +120,7 @@ public class CMS {
     public static void main(String[] args){
         System.out.println("Hello World!");
 
-        Reviewer r = new Reviewer(1, "Shay", "666666", "Reviewer", "IT","NO");
+        Reviewer r = new Reviewer(1, "Shay", "666666", "Reviewer", "IT");
         System.out.println("-----------Reviewer message------------");
         System.out.println(r);
 

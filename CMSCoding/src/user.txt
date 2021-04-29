@@ -1,7 +1,9 @@
-1,Shay,Reviewer,******,IT,NO
-2,Joy,Reviewer,******,IT,NO
-3,Tom,Reviewer,******,IT,NO
-4,Joyce,Chair,******
-5,Merrit,Administrator,******
-8,T1,Reviewer,******,Finance,NO
-9,T2,Reviewer,******,IT,NO
+1,Shay,******,Reviewer,IT
+2,Joy,******,Reviewer,IT
+3,Tom,******,Reviewer,IT
+4,Joyce,******,Chair
+5,Merrit,******,Administrator
+6,Carol,******,Author
+7,T3,******,Author
+8,T1,******,Reviewer,IT
+9,T2,******,Reviewer,IT
