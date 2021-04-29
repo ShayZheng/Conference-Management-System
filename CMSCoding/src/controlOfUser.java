@@ -3,7 +3,8 @@ import java.util.Scanner;
 import java.io.*;
 
 
-public class controlOfUser {
+public class controlOfUser
+{
     private User user;
     //    private Reviewer reviewer;
     private ArrayList<User> files;
@@ -12,7 +13,8 @@ public class controlOfUser {
         files = new ArrayList<>();
     }
 
-    public void addUser() {
+    public void addUser()
+    {
 
 //        default:
 //        ID = 56;

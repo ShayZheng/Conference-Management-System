@@ -4,7 +4,8 @@
 
 import java.util.ArrayList;
 
-public class Reviewer extends User{
+public class Reviewer extends User
+{
 
 
     //field
@@ -18,23 +19,35 @@ public class Reviewer extends User{
         return papers;
     }
 
+    public int getNumberOfPaper()
+    {
+        return papers.size();
+    }
+
     public ArrayList<String> getReviewerMassage()//change part
     {
         return reviewerMassage;
     }
 
+    public int getNumberOfMessage()
+    {
+        return reviewerMassage.size();
+    }
 
 
-    public String getKeyword() {
+    public String getKeyword()
+    {
         return Keyword;
     }
 
-    public void setKeyword(String keyword) {
+    public void setKeyword(String keyword)
+    {
         Keyword = keyword;
     }
 
     //change part
-    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword) {
+    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword)
+    {
         super(newID, newName, newPsw, newType); // inherit from User class
         Keyword = newKeyword;
         papers = new ArrayList<>();
