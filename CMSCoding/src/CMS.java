@@ -63,7 +63,7 @@ public class CMS {
             psw2 = scan.nextLine();
         }
 
-        if (type.equals("Chair")){
+        if(type.equals("Chair")){
             boolean status;
             status = false;
             new Chair(ID, name, psw2, type, status);
@@ -76,7 +76,7 @@ public class CMS {
                 System.out.println("The keyword should not be null and could only be alphabetic.");
                 keyword = scan.nextLine();
             }
-//            Reviewer reviewer = new Reviewer(ID, name, psw2, type, keyword);
+            new Reviewer(ID, name, psw2, type, keyword);
         }else if(type.equals("Author")){
             String email;
             ArrayList<Paper> personalPaper;
@@ -118,25 +118,16 @@ public class CMS {
     }
 
     public static void main(String[] args){
+        System.out.println("Hello World!");
+
         Reviewer r = new Reviewer(1, "Shay", "666666", "Reviewer", "IT");
-        System.out.println("\n" + "-----------Reviewer message------------");
+        System.out.println("-----------Reviewer message------------");
         System.out.println(r);
 
         Paper p = new Paper("Distributed application", "03/05/2021", "13/05/2021", "No",
                 "Peter Wong", "IT", "Notknow", "Application");
 
         System.out.println("\n" + "-----------Paper message------------");
-        System.out.println(p + "\n");
-        controlOfUser conUser = new controlOfUser();
-        conUser.readFile();
-        System.out.println("\n" + "-----------User message------------");
-        conUser.displayUsers();
-
-        conUser.addUser();
-        conUser.writeFile();
-        System.out.println("\n" + "-----------User message------------");
-        conUser.displayUsers();
-
-
+        System.out.println(p);
     }
 }

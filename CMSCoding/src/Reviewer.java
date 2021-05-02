@@ -4,8 +4,7 @@
 
 import java.util.ArrayList;
 
-public class Reviewer extends User
-{
+public class Reviewer extends User{
 
 
     //field
@@ -14,43 +13,39 @@ public class Reviewer extends User
     private ArrayList<String> reviewerMassage;//change part
 
 
-    public ArrayList<Paper> getPapers()//change part
+
+
+    public ArrayList<Paper> getAssignedPaper()//change part
     {
         return papers;
     }
-
-    public int getNumberOfPaper()
-    {
-        return papers.size();
-    }
-
     public ArrayList<String> getReviewerMassage()//change part
     {
         return reviewerMassage;
     }
-
-    public int getNumberOfMessage()
+    public String getPaperNames()
     {
-        return reviewerMassage.size();
+        String paperNames="";
+        for(Paper one: papers)
+             paperNames += ","+ one.getName();
+        return paperNames;
     }
 
 
-    public String getKeyword()
-    {
+    public String getKeyword() {
         return Keyword;
     }
 
-    public void setKeyword(String keyword)
-    {
+    public void setKeyword(String keyword) {
         Keyword = keyword;
     }
 
     //change part
-    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword)
-    {
+    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword) {
         super(newID, newName, newPsw, newType); // inherit from User class
         Keyword = newKeyword;
         papers = new ArrayList<>();
+        reviewerMassage = new ArrayList<>();
 
     }
 
@@ -61,8 +56,9 @@ public class Reviewer extends User
                 "} " ;
     }
     public String toStringDatabase(){
-        return super.toStringData() + "," + getKeyword() ;
+        return super.toStringData() + "," + getKeyword()  + getPaperNames();
     }
+    //
 //        public String toString() {
 //        return "ID: " + newID + "Name: " + newName + "Type: " + newType + "Keyword: " + newKeyword;
 //    }

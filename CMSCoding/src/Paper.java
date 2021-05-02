@@ -16,7 +16,7 @@ public class Paper
     private String Keyword;
     private String Decision;
     private String conName;
-    private ArrayList<Reviewer> assignedReviewers;
+    private ArrayList<Reviewer> assignedReviewers;//change part
 
 
     public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String keyword, String decision, String conName)
@@ -113,25 +113,16 @@ public class Paper
     }
 
 
-    public ArrayList<Reviewer> getAssignedReviewerList()
-    {
-       return assignedReviewers;
+    public ArrayList<Reviewer> getAssignedReviewerList() {
+        return assignedReviewers;
     }//change part
 
-    public String getReviewer()//change part
+    public String getReviewerNames()//change part
     {
-        ArrayList<String> reviewerName = new ArrayList<>();
-
-        for(Reviewer one: assignedReviewers)
-            reviewerName.add(one.getName());
-
-        Iterator<String> reviewer = reviewerName.iterator();
         String reviewers = "";
-        while(reviewer.hasNext())
-        {
-            reviewers +=","+ reviewer.next();
+        for (Reviewer one : assignedReviewers) {
+            reviewers += "," + one.getName();
         }
-
         return reviewers;
     }
 
@@ -150,13 +141,13 @@ public class Paper
                 ", Keyword='" + Keyword + '\'' +
                 ", Decision='" + Decision + '\'' +
                 ", conName='" + conName + '\'' +
-                ", Assigned Reviewers='" + getReviewer() +'\''+//change part
+                ", Assigned Reviewers='" + getReviewerNames() +'\''+//change part
                 '}';
     }
 
     public String toStringDatabase()//change part
     {
-        return Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName+""+getReviewer();
+        return Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName+""+getReviewerNames();
     }
 
 }
