@@ -9,6 +9,12 @@ public class Author extends User{
     private ArrayList<Paper> personalPaper;
     private ArrayList<String> authorMessage;
 
+
+    public ArrayList<String> getAuthorMessage()
+    {
+        return authorMessage;
+    }
+
     public String getEmail() {
         return Email;
     }

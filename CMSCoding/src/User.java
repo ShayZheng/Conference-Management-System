@@ -70,7 +70,7 @@ public class User {
 
     public String toStringData()
     {
-        return ID + "," + Name + "," + Type +","+ Psw;
+        return ID + "," + Name + "," + Psw +","+ Type;
     }
 
 }

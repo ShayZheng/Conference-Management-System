@@ -295,11 +295,46 @@ public class chairManagement
             } catch (IOException e) {
                 System.out.println("Unexpected I/O exception occurs");
             }
+            // assign paper in reviewer list
+            for(Paper one: paperList)
+            {
+                if(one.getAssignedReviewerList().size() > 0)
+                {
+                        for(Reviewer r: one.getAssignedReviewerList())
+                        {
+                            if(r.getAssignedPaper().size() == 0)
+                                r.getAssignedPaper().add(one);
+                            else if(r.getAssignedPaper().size() !=0)
+                            {
+                                for(Paper p: r.getAssignedPaper())
+                                {
+                                    if(!(p.getName().equals(one.getName())))
+                                         r.getAssignedPaper().add(one);
 
+                                }
+                            }
+                        }
+                }
+            }
+            for (Reviewer one : reviewerList)
+                System.out.println(one.toStringDatabase());
+            // rewrite to the user database
 
+            try {
+                PrintWriter outputFile = new PrintWriter("src/user.txt");
+                for (Reviewer one : reviewerList) {
+                    System.out.println(one.toStringDatabase());
+                    outputFile.println(one.toStringDatabase());
+                }
+                outputFile.close();
+            } catch (IOException e) {
+                System.out.println("Unexpected I/O exception occurs");
+            }
 
 
         }
+
+
         return true;
     }
     public void sendNotification()
@@ -307,23 +342,105 @@ public class chairManagement
         System.out.println("please choose the user type to send notification!");
         System.out.println("(1)Send notification to reviewers!");
         System.out.println("(2)Send notification to authors!");
+        //read paper from paper database
+        try {
+            FileReader inputFile = new FileReader("src/paper.txt");
+            try {
+                Scanner parser = new Scanner(inputFile);
+                while (parser.hasNextLine()) {
+                    String line = parser.nextLine();
+                    String[] values = line.split(",");
+                    String Name = values[0];
+                    String smDeadline = values[1];
+                    String rmDeadline = values[2];
+                    String Status = values[3];
+                    String Author = values[4];
+                    String Keyword = values[5];
+                    String Decision = values[6];
+                    String conName = values[7];
+                    Paper p = new Paper(Name, smDeadline, rmDeadline, Status, Author, Keyword, Decision, conName);
+                    paperList.add(p);
+                }
+            } finally {
+                inputFile.close();
+            }
+        } catch (FileNotFoundException exception) {
+            System.out.println("file not found");
+        } catch (IOException exception) {
+            System.out.println("Unexpected I/O exception occurs");
+        }
+        //user input number
+
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+
+
         switch (input)
         {
             case"1":
                 //read reviewer from reviewerList
-                for(Reviewer one: reviewerList)
-                {
-                        System.out.println(one.toString());
-                }
-                System.out.println("Choose one reviewer to send notification!");
-                System.out.println("Please input the notification:");
-                String reviewMessage = sc.nextLine();
+                try {
+                    FileReader inputFile = new FileReader("src/user.txt");
+                    try {
+                        Scanner parser = new Scanner(inputFile);
+                        while (parser.hasNextLine()) {
+                            String line = parser.nextLine();
+                            String[] values = line.split(",");
+                            String id = values[0];
+                            String name = values[1];
+                            String psw = values[2];
+                            String type = values[3];
+                            String keyword = values[4];
+                            Reviewer r = new Reviewer(Integer.parseInt(id),name,psw,type,keyword);
+                            if (values.length == 6) {
+                                for (Paper one : paperList) {
+                                    if (one.getName().equals(values[5])) {
+                                        r.getAssignedPaper().add(one);
 
+                                    }
+                                }
+                            }
+                            if (values.length == 7) {
+                                for (Paper one : paperList) {
+                                    if (one.getName().equals(values[5]) || one.getName().equals(values[6])) {
+                                        r.getAssignedPaper().add(one);
+                                    }
+
+                                }
+                            }
+                            if (values.length == 8) {
+                                for (Paper one : paperList) {
+                                    if (one.getName().equals(values[5]) || one.getName().equals(values[6]) || one.getName().equals(values[7])) {
+                                      r.getAssignedPaper().add(one);
+                                    }
+                                }
+                            }
+
+                            reviewerList.add(r);
+                        }
+                    } finally {
+                        inputFile.close();
+                    }
+                } catch (FileNotFoundException exception) {
+                    System.out.println("file not found");
+                } catch (IOException exception) {
+                    System.out.println("Unexpected I/O exception occurs");
+                }
+                for(Reviewer R:reviewerList)
+                    if(R.getAssignedPaper().size()>0)
+                        System.out.println(reviewerList.indexOf(R)+"."+R.toString());
+                System.out.println("Choose one reviewer to send notification!");
+                String option = sc.nextLine();
+                Reviewer modifyObject = reviewerList.get(Integer.parseInt(option));
+                System.out.println("Please input the notification content:");
+                String reviewMessage = sc.nextLine();
+                modifyObject.getReviewerMassage().add(reviewMessage);
+                System.out.println("Send successfully!");
                 break;
             case"2":
                 break;
+            default:
+                System.out.println("please input the correct number!");
         }
 
     }
@@ -340,7 +457,7 @@ public class chairManagement
 
     public static void main(String[] args) throws ParseException {
         chairManagement c = new chairManagement();
-        c.assignReviewer();
+        c.sendNotification();
 
     }
 }

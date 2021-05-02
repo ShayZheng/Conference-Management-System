@@ -14,6 +14,7 @@ public class Reviewer extends User{
 
 
 
+
     public ArrayList<Paper> getAssignedPaper()//change part
     {
         return papers;
@@ -22,7 +23,13 @@ public class Reviewer extends User{
     {
         return reviewerMassage;
     }
-
+    public String getPaperNames()
+    {
+        String paperNames="";
+        for(Paper one: papers)
+             paperNames += ","+ one.getName();
+        return paperNames;
+    }
 
 
     public String getKeyword() {
@@ -38,6 +45,7 @@ public class Reviewer extends User{
         super(newID, newName, newPsw, newType); // inherit from User class
         Keyword = newKeyword;
         papers = new ArrayList<>();
+        reviewerMassage = new ArrayList<>();
 
     }
 
@@ -48,7 +56,7 @@ public class Reviewer extends User{
                 "} " ;
     }
     public String toStringDatabase(){
-        return super.toStringData() + "," + getKeyword();
+        return super.toStringData() + "," + getKeyword()  + getPaperNames();
     }
     //
 //        public String toString() {
