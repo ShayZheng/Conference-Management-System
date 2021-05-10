@@ -19,8 +19,43 @@ public class chairManagement
 
     }
     public void addConference() throws ParseException {
+        //read conference from database
+        try
+        {
+            FileReader inputFile = new FileReader("src/conference.txt");
+            try
+            {
+                Scanner parser = new Scanner(inputFile);
+                while (parser.hasNextLine())
+                {
+                    String line = parser.nextLine();
+                    String[] values = line.split(",");
+                    String name = values[0];
+                    String title = values[1];
+                    String topic = values[2];
+                    String submission = values[3];
+                    String review = values[4];
+                    Conference c = new Conference(name, title, topic,submission,review);
+                    conferenceList.add(c);
+                }
+            }
+            finally
+            {
+                inputFile.close();
+            }
+        }
+        catch(FileNotFoundException exception)
+        {
+            System.out.println("file not found");
+        }
+        catch(IOException exception)
+        {
+            System.out.println("Unexpected I/O exception occurs");
+        }
+        // add part
         Date date = new Date();
-        //String conferenceName,String conferenceTitle,String conferenceTopic,String conSubTime, String conRevTime
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = formatter.format(date);
         System.out.print("Please input the conference name:");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
@@ -30,11 +65,47 @@ public class chairManagement
         String topic = sc.nextLine();
         System.out.println("Please set the submission deadline for this conference, the format is (yyyy-MM-dd HH:mm:ss)");
         String subDate = sc.nextLine();
-        System.out.println("Please set the submission deadline for this conference, the format is (yyyy-MM-dd HH:mm:ss)");
+        if ((formatter.parse(subDate).before(formatter.parse(currentTime))))
+        {
+            System.out.println("The input time must after the current time!");
+            return;
+        }
+        String[]subvalues = subDate.split(" ");
+        String[]firstHalf = subvalues[0].split("-");
+        String[]lastHalf = subvalues[1].split(":");
+        if(Integer.parseInt(firstHalf[1]) < 0 || Integer.parseInt(firstHalf[1]) >12
+                || Integer.parseInt(firstHalf[2]) < 0 || Integer.parseInt(firstHalf[2]) > 31
+                ||Integer.parseInt(lastHalf[0]) < 0 ||Integer.parseInt(lastHalf[0]) > 24
+                ||Integer.parseInt(lastHalf[1]) < 0 ||Integer.parseInt(lastHalf[1]) > 60
+                ||Integer.parseInt(lastHalf[2]) < 0 ||Integer.parseInt(lastHalf[2]) > 60
+        )
+        {
+            System.out.println("please input the correct time format!");
+            return;
+        }
+
+        System.out.println("Please set the review deadline for this conference, the format is (yyyy-MM-dd HH:mm:ss)");
         String revDate = sc.nextLine();
-        SimpleDateFormat submission = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat review = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if (submission.parse(subDate).after(review.parse(revDate)))
+        String[]revValues = revDate.split(" ");
+        String[]revFirstHalf = revValues[0].split("-");
+        String[]revLastHalf = revValues[1].split(":");
+        if(Integer.parseInt(revFirstHalf[1]) < 0 || Integer.parseInt(revFirstHalf[1]) >12
+                || Integer.parseInt(revFirstHalf[2]) < 0 || Integer.parseInt(revFirstHalf[2]) > 31
+                ||Integer.parseInt(revLastHalf[0]) < 0 ||Integer.parseInt(revLastHalf[0]) > 24
+                ||Integer.parseInt(revLastHalf[1]) < 0 ||Integer.parseInt(revLastHalf[1]) > 60
+                ||Integer.parseInt(revLastHalf[2]) < 0 ||Integer.parseInt(revLastHalf[2]) > 60
+        )
+        {
+            System.out.println("please input the correct time format!");
+            return;
+        }
+        if ((formatter.parse(revDate).before(formatter.parse(currentTime))))
+        {
+            System.out.println("The input time must after the current time!");
+            return;
+        }
+
+        if (formatter.parse(subDate).after(formatter.parse(revDate)))
         {
             System.out.println("Submission time should before the review time");
             return;
@@ -42,12 +113,21 @@ public class chairManagement
         Conference newConference = new Conference(name,title,topic,subDate,revDate);
         conferenceList.add(newConference);
         // add the new conference to database
+        try {
+            PrintWriter outputFile = new PrintWriter("src/conference.txt");
+            for (Conference one : conferenceList) {
+                outputFile.println(one.toStringToDatabase());
+            }
+            outputFile.close();
+        } catch (IOException e) {
+            System.out.println("Unexpected I/O exception occurs");
+        }
+
 
     }
 
 
-    public void modifyConference()
-    {
+    public void modifyConference() throws ParseException {
         //read from database
         try
         {
@@ -84,17 +164,21 @@ public class chairManagement
 
 
         // change part
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String currentTime = formatter.format(date);
         Scanner sc = new Scanner(System.in);
         for(Conference one : conferenceList)
             System.out.println(conferenceList.indexOf(one)+"."+ one.toString());
         System.out.println("Please choose one conference to modify");
         String option = sc.nextLine();
-        if(Integer.parseInt(option) > conferenceList.size())
-            System.out.println("Can not find the conference!");
-        for(Conference one: conferenceList)
+        if(Integer.parseInt(option) > conferenceList.size() || Integer.parseInt(option) < 0)
         {
-            if (Integer.parseInt(option) == conferenceList.indexOf(one))
-            {
+            System.out.println("Can not find the conference!");
+            return;
+        }
+        Conference one = conferenceList.get(Integer.parseInt(option));
+
                 System.out.println("please choose which part to modify:");
                 System.out.println("(1) conference name");
                 System.out.println("(2) conference title");
@@ -120,14 +204,55 @@ public class chairManagement
                         one.setConTitle(newTopic);
                         break;
                     case "4":
-                        System.out.print("please input the new submission deadline:");
-                        String newSubDeadline = sc.nextLine();
-                        one.setSubDate(newSubDeadline);
+                        System.out.print("please input the new submission deadline:(Format:yyyy-MM-dd HH:mm:ss)");
+                        String subDate = sc.nextLine();
+                        if ((formatter.parse(subDate).before(formatter.parse(currentTime))))
+                        {
+                            System.out.println("The input time must after the current time!");
+                            return;
+                        }
+                        String[]subvalues = subDate.split(" ");
+                        String[]firstHalf = subvalues[0].split("-");
+                        String[]lastHalf = subvalues[1].split(":");
+                        if(Integer.parseInt(firstHalf[1]) < 0 || Integer.parseInt(firstHalf[1]) >12
+                                || Integer.parseInt(firstHalf[2]) < 0 || Integer.parseInt(firstHalf[2]) > 31
+                                ||Integer.parseInt(lastHalf[0]) < 0 ||Integer.parseInt(lastHalf[0]) > 24
+                                ||Integer.parseInt(lastHalf[1]) < 0 ||Integer.parseInt(lastHalf[1]) > 60
+                                ||Integer.parseInt(lastHalf[2]) < 0 ||Integer.parseInt(lastHalf[2]) > 60
+                        )
+                        {
+                            System.out.println("please input the correct time format!");
+                            return;
+                        }
+                        one.setSubDate(subDate);
                         break;
                     case "5":
-                        System.out.print("please input the new review deadline:");
-                        String newRevDeadline = sc.nextLine();
-                        one.setRevDate(newRevDeadline);
+                        System.out.print("please input the new review deadline:(Format:yyyy-MM-dd HH:mm:ss)");
+                        String revDate = sc.nextLine();
+                        String[]revValues = revDate.split(" ");
+                        String[]revFirstHalf = revValues[0].split("-");
+                        String[]revLastHalf = revValues[1].split(":");
+                        if(Integer.parseInt(revFirstHalf[1]) < 0 || Integer.parseInt(revFirstHalf[1]) >12
+                                || Integer.parseInt(revFirstHalf[2]) < 0 || Integer.parseInt(revFirstHalf[2]) > 31
+                                ||Integer.parseInt(revLastHalf[0]) < 0 ||Integer.parseInt(revLastHalf[0]) > 24
+                                ||Integer.parseInt(revLastHalf[1]) < 0 ||Integer.parseInt(revLastHalf[1]) > 60
+                                ||Integer.parseInt(revLastHalf[2]) < 0 ||Integer.parseInt(revLastHalf[2]) > 60
+                        )
+                        {
+                            System.out.println("please input the correct time format!");
+                            return;
+                        }
+                        if ((formatter.parse(revDate).before(formatter.parse(currentTime))))
+                        {
+                            System.out.println("The input time must after the current time!");
+                            return;
+                        }
+                        if (formatter.parse(one.getSubDate()).after(formatter.parse(revDate)))
+                        {
+                            System.out.println("Submission time should before the review time");
+                            return;
+                        }
+                        one.setRevDate(revDate);
                         break;
                     case "6":
                         conferenceList.remove(one);
@@ -138,15 +263,15 @@ public class chairManagement
                         break;
 
                 }
-            }
 
-        }
+
+
        // rewrite to database
         try
         {
             PrintWriter outputFile = new PrintWriter("src/conference.txt");
-            for (Conference one : conferenceList)
-                outputFile.println(one.toStringToDatabase());
+            for (Conference c : conferenceList)
+                outputFile.println(c.toStringToDatabase());
             outputFile.close();
         }
         catch(IOException e)
@@ -156,9 +281,9 @@ public class chairManagement
 
        // show the new conference list
         System.out.println("this is new conference list");
-        for(Conference one :conferenceList)
+        for(Conference c :conferenceList)
         {
-            System.out.println(conferenceList.indexOf(one)+"."+ one.toString());
+            System.out.println(conferenceList.indexOf(c)+"."+ c.toString());
         }
 
     }
@@ -302,17 +427,7 @@ public class chairManagement
                 {
                         for(Reviewer r: one.getAssignedReviewerList())
                         {
-                            if(r.getAssignedPaper().size() == 0)
                                 r.getAssignedPaper().add(one);
-                            else if(r.getAssignedPaper().size() !=0)
-                            {
-                                for(Paper p: r.getAssignedPaper())
-                                {
-                                    if(!(p.getName().equals(one.getName())))
-                                         r.getAssignedPaper().add(one);
-
-                                }
-                            }
                         }
                 }
             }
@@ -457,7 +572,7 @@ public class chairManagement
 
     public static void main(String[] args) throws ParseException {
         chairManagement c = new chairManagement();
-        c.sendNotification();
+        c.modifyConference();
 
     }
 }
