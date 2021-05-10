@@ -40,8 +40,8 @@ public class Reviewer extends User{
     }
 
     //change part
-    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword, String hasTask) {
-        super(newID, newName, newPsw, newType); // inherit from User class
+    public Reviewer(int newID, String newName, String newPsw, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA, String newKeyword, String hasTask) {
+        super(newID, newName, newPsw, newEmail, newOccupation, newMN, newHQ, newED, newIA); // inherit from User class
         Keyword = newKeyword;
         papers = new ArrayList<>();
         hasTask = "NO";

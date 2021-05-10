@@ -9,12 +9,24 @@ public class User {
     private String Type;
     private String Name;
     private String Psw;
+    private String Email;
+    private String Occupation;
+    private String mobileNumber;
+    private String highQualification;
+    private String employerDetail;
+    private String interestArea;
 
-    public User(int newID, String newName, String newPsw, String newType){
+
+    public User(int newID, String newName, String newPsw, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA){
         ID = newID;
-        Type = newType;
         Name = newName;
         Psw = newPsw;
+        Email = newEmail;
+        Occupation = newOccupation;
+        mobileNumber = newMN;
+        highQualification = newHQ;
+        employerDetail = newED;
+        interestArea = newIA;
     }
 
     public int getID(){
@@ -33,6 +45,30 @@ public class User {
         return Psw;
     }
 
+    public String getEmail(){ return Email; }
+
+    public String getOccupation(){ return Occupation; }
+
+    public String getMobileNumber(){ return mobileNumber; }
+
+    public String getHighQualification(){ return highQualification; }
+
+    public String getEmployerDetail(){ return employerDetail; }
+
+    public String getInterestArea(){ return interestArea; }
+
+    public void setEmail(String newEmail){ Email = newEmail; }
+
+    public void setOccupation(String newOccupation){ Occupation = newOccupation; }
+
+    public void setMobileNumber(String newNuber){ mobileNumber = newNuber; }
+
+    public void setHighQualification(String newHighQualification){ highQualification = newHighQualification; }
+
+    public void setEmployerDetail(String newEmployerDetail){ employerDetail = newEmployerDetail; }
+
+    public void setInterestArea(String newInterestArea){ interestArea = newInterestArea; }
+
     public void setID(int newID){
         ID = newID;
     }
@@ -48,6 +84,8 @@ public class User {
     public void setPsw(String newPsw){
         Psw = newPsw;
     }
+
+
 
     public void printUserInfo(){
         System.out.println(ID);

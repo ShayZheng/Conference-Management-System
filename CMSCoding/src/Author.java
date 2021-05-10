@@ -1,5 +1,6 @@
 // author: changyi li
 // data: 25/04/2021
+
 import java.util.*;
 
 public class Author extends User{
@@ -17,9 +18,8 @@ public class Author extends User{
         Email = email;
     }
 
-    public Author(int newID, String newName, String newPsw, String newType, String Email) {
-        super(newID, newName, newPsw, newType); // inherit from User class
-        this.Email = Email;
+    public Author(int newID, String newName, String newPsw, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA) {
+        super(newID, newName, newPsw, newEmail, newOccupation, newMN, newHQ, newED, newIA); // inherit from User class
         this.personalPaper = new ArrayList<>();
     }
 
