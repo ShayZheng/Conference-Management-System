@@ -1,3 +1,7 @@
+/**
+ * @author Yuzhe Wang
+ * @version 29 Oct 2020
+ */
 public class Menu {
     public Menu(){}
 

@@ -11,25 +11,24 @@ public class Reviewer extends User{
     private String Keyword;
     private ArrayList<Paper> papers;
     private ArrayList<String> reviewerMassage;//change part
+    private ArrayList<Paper> assignedPaper;//change part
+    private String hasTask;//change part
 
+
+    public String getHasTask(){ return hasTask;}
+    public void setHasTask(String status){ hasTask = status;}// change part
 
 
 
     public ArrayList<Paper> getAssignedPaper()//change part
     {
-        return papers;
+        return assignedPaper;
     }
     public ArrayList<String> getReviewerMassage()//change part
     {
         return reviewerMassage;
     }
-    public String getPaperNames()
-    {
-        String paperNames="";
-        for(Paper one: papers)
-             paperNames += ","+ one.getName();
-        return paperNames;
-    }
+
 
 
     public String getKeyword() {
@@ -41,12 +40,11 @@ public class Reviewer extends User{
     }
 
     //change part
-    public Reviewer(int newID, String newName, String newPsw, String newType, String newKeyword) {
-        super(newID, newName, newPsw, newType); // inherit from User class
+    public Reviewer(int newID, String newName, String newPsw, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA, String newKeyword, String hasTask) {
+        super(newID, newName, newPsw, newEmail, newOccupation, newMN, newHQ, newED, newIA); // inherit from User class
         Keyword = newKeyword;
         papers = new ArrayList<>();
-        reviewerMassage = new ArrayList<>();
-
+        hasTask = "NO";
     }
 
     @Override
@@ -56,7 +54,7 @@ public class Reviewer extends User{
                 "} " ;
     }
     public String toStringDatabase(){
-        return super.toStringData() + "," + getKeyword()  + getPaperNames();
+        return super.toStringData() + "," + getKeyword() +","+getHasTask();
     }
     //
 //        public String toString() {
