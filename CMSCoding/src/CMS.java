@@ -10,14 +10,15 @@ public class CMS {
 
     public CMS(){
         CM = new ConferenceManagement();
-        register();
     }
 
-    public void register() {
+    public void register()
+    {
         String name;
         String psw1;
         String psw2;
         int ID;
+        int chooseType = 0;
         String email;
         String occupation;
         String mobileNumber;
@@ -31,14 +32,14 @@ public class CMS {
         name = scan.nextLine();
         while (name.trim().equals("") || !isStringAlphabetic(name)) // check whether the name is allowed.
         {
-            System.out.println("The user's neme cannot be null and should only be alphabetic.");
+            System.out.println("The user's name cannot be null and should only be alphabetic.");
             System.out.print("Enter the user's name: ");
             name = scan.nextLine();
         }
 
-        email = setUserInfo("email");
-        occupation = setUserInfo("occupation");
-        psw1 = setUserInfo("password");
+        email = "email";//validations
+        occupation ="occupation";
+        psw1 = "password";
 
         System.out.print("Enter the password again: ");
         psw2 = scan.nextLine();
@@ -48,12 +49,51 @@ public class CMS {
             psw2 = scan.nextLine();
         }
 
-        mobileNumber = setUserInfo("mobileNumber");
-        highQualification = setUserInfo("high qualification");
-        employerDetail = setUserInfo("employer detail");
-        interestArea = setUserInfo("interesting area");
+        mobileNumber = "mobileNumber";
+        highQualification = "high qualification";
+        employerDetail = "employer detail";
+        interestArea = "interesting area";
+        User newUser = new User(ID,name,psw2,chooseType,email,occupation,mobileNumber,highQualification,employerDetail,interestArea);
+        CM.getUserList().add(newUser);
+        System.out.println("Please choose one keyword from the list or add your new keyword(if you want to add more keywords, please use comma to split it.)");
+        System.out.println("0.Add keywords from list");
+        System.out.println("1.Add new keywords");
+        String option = scan.nextLine();
+        switch (option){
+            case"0":
+                System.out.println("Here is the keywords list");
+                for(String k:CM.getKeywordList())
+                {
+                    if(!k.equals(""))
+                         System.out.println(CM.getKeywordList().indexOf(k)+"."+ k);
+                }
+                String choose = scan.nextLine();//validations
+                newUser.getKeywords().add(CM.getKeywordList().get(Integer.parseInt(choose)));
+                System.out.println("Add successfully");
+                break;
+            case"1":
+                System.out.println("Please input the keywords, if you want to put several keywords, please use comma to split");
+                String[] newKeys = scan.nextLine().split(",");
+                for(int k = 0;k <newKeys.length;k++)
+                {
+                    CM.getKeywordList().add(newKeys[k]);
+                    newUser.getKeywords().add(newKeys[k]);
+                }
+                if(newKeys.length <= 1)
+                    System.out.println("You have not add anything!");
+                if(newKeys.length > 1)
+                    System.out.println("Add successfully");
+                break;
+            default:
+                System.out.println("Please input the correct number");
+                break;
 
-        CM.addUser(new User(ID, name, psw2, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
+        }
+
+
+
+
+
     }
 
     /**
@@ -87,7 +127,20 @@ public class CMS {
     }
 
 
-    public static void main(String[] args){
-        new CMS();
+    public static void main(String[] args) throws Exception
+    {
+        CMS cms = new CMS();
+        cms.CM.readFromFile();
+        cms.register();
+        for(User u: cms.CM.getUserList())
+        {
+            System.out.println(u.toString());
+        }
+        for(String s: cms.CM.getKeywordList())
+        {
+            if(!s.equals(""))
+                System.out.println(s);
+        }
+
     }
 }
