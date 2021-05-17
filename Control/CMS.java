@@ -1,5 +1,5 @@
-// author: @Changyi Li, @Ying Zheng ,@Yuzhe Wang, @Yuxin Zhou
-// date: @25/04/2021
+//
+// @ date: 25/04/2021
 //
 
 public class CMS {

@@ -261,8 +261,6 @@ public class author_demo {
                 case 3: //back home screen
                     System.out.println("home Screen");
             }
-
         }
-
     }
 }

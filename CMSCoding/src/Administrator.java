@@ -1,3 +1,7 @@
+/**
+ * @author Yuzhe Wang
+ * @version 26 Oct 2020
+ */
 public class Administrator {
     private String adminType;
     private String adminPsw;
