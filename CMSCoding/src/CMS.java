@@ -168,7 +168,7 @@ public class CMS {
         employerDetail = setUserInfo("employer detail");
         interestArea = setUserInfo("interesting area");
 
-        CM.addUser(new User(ID, name, psw2, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
+        //CM.addUser(new User(ID, name, psw2, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
         login();
     }
 
