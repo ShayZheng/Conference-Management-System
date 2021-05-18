@@ -39,6 +39,7 @@ public class CMS {
             {
                 case "1": administratorLogin(); break;
                 case "2": register(); break;
+                case "3": login(); break;
             }
         }
 
@@ -62,6 +63,7 @@ public class CMS {
             userName = scan.nextLine();
         }
 
+        System.out.print("Please enter the administrator's pasword: ");
         psw = scan.nextLine();
         System.out.print("\n");
         while(!psw.equals(adminPsw)){
@@ -104,12 +106,16 @@ public class CMS {
         String psw;
 
         Scanner scan = new Scanner(System.in);
+        System.out.println("\n Welcome to the Conference Management System");
+        System.out.println("======================================");
+        System.out.print("Enter the username: ");
         name = scan.nextLine();
         for (User thisUser : CM.getUserList() ) {
             if (thisUser.getName().equals(name)) {
+                System.out.print("Enter password: ");
                 psw = scan.nextLine();
                 int count = 0;
-                while(count <= 3 && psw.equals(thisUser.getPsw())) {
+                while(count < 3 && !psw.equals(thisUser.getPsw())) {
                     System.out.print("Your password is incorrect, please enter again: ");
                     psw = scan.nextLine();
                     count += 1;
@@ -121,8 +127,31 @@ public class CMS {
                 register();
             }
         }
+        String option;
+        option = "";
+        while (!option.equals("4"))
+        {
+            menu.displayTypeMenu();
 
-        menu.displayTypeMenu();
+            option = scan.nextLine();
+            System.out.print("\n");
+            // Check whether the input option is valid.
+            if (!isStringNumeric(option))
+                System.out.println("You need to choose a number between 1 to 4.");
+            else
+            {
+                int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
+                if (checkOption < 1 || checkOption > 3)
+                    System.out.println("You need to choose a number between 1 to 4.");
+            }
+
+            switch (option)
+            {
+                case "1": break;
+                case "2": break;
+                case "3": break;
+            }
+        }
 
 
 
@@ -144,7 +173,7 @@ public class CMS {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter the user's name: ");
         name = scan.nextLine();
-        while (name.trim().equals("") || !isStringAlphabetic(name)) // check whether the name is allowed.
+        while (name.trim().equals("") || !isStringAlphabetic(name) || CM.findUser(name) != -1) // check whether the name is allowed.
         {
             System.out.println("The user's neme cannot be null and should only be alphabetic.");
             System.out.print("Enter the user's name: ");
@@ -168,7 +197,7 @@ public class CMS {
         employerDetail = setUserInfo("employer detail");
         interestArea = setUserInfo("interesting area");
 
-        //CM.addUser(new User(ID, name, psw2, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
+        CM.addUser(new User(ID, name, psw2, 0, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
         login();
     }
 

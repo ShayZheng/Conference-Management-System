@@ -561,10 +561,6 @@ public class ConferenceManagement {
         {
             System.out.println("Unexpected I/O exception occurs");
         }
-
-
-
-
     }
 
     public boolean isInputUpToFormat(String str)
@@ -574,10 +570,10 @@ public class ConferenceManagement {
         return true;
     }
     public boolean isStringAlphabetic(String checkedString)
-         {
-            int i;
-            for (i = 0; i < checkedString.length(); i ++)
-         {
+    {
+        int i;
+        for (i = 0; i < checkedString.length(); i ++)
+        {
             char character = checkedString.charAt(i);
             // To restrict the string can only contain alpha and space. Avoid special symbol like , + =.
             if ((character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z') || character == ' '){}
@@ -585,19 +581,19 @@ public class ConferenceManagement {
                 return false;
         }
         return true;
+    }
+    public boolean isTimeUpToStandard(String s) throws ParseException {
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(dateFormat.parse(s).before(now))
+        {
+            System.out.println("The input date could not before the current time!");
+            return false;
         }
-        public boolean isTimeUpToStandard(String s) throws ParseException {
-            Date now = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            if(dateFormat.parse(s).before(now))
-            {
-                System.out.println("The input date could not before the current time!");
-                return false;
-            }
-            String[]dateBlocks = s.split(" ");
-            String[]dateLeftPart = dateBlocks[0].split("-");
-            String[]dateRightPart = dateBlocks[1].split(":");
-            if(Integer.parseInt(dateLeftPart[0]) > 2025 || Integer.parseInt(dateLeftPart[1]) < 0|| Integer.parseInt(dateLeftPart[1]) > 12
+        String[]dateBlocks = s.split(" ");
+        String[]dateLeftPart = dateBlocks[0].split("-");
+        String[]dateRightPart = dateBlocks[1].split(":");
+        if(Integer.parseInt(dateLeftPart[0]) > 2025 || Integer.parseInt(dateLeftPart[1]) < 0|| Integer.parseInt(dateLeftPart[1]) > 12
             || Integer.parseInt(dateLeftPart[2]) < 0|| Integer.parseInt(dateLeftPart[2]) > 31 || Integer.parseInt(dateRightPart[0]) < 0
             ||Integer.parseInt(dateRightPart[0]) > 24||Integer.parseInt(dateRightPart[1]) < 0 || Integer.parseInt(dateRightPart[1]) > 60
             ||Integer.parseInt(dateRightPart[2]) < 0 || Integer.parseInt(dateRightPart[2]) > 60)
@@ -607,7 +603,30 @@ public class ConferenceManagement {
             }
             return true;
 
+    }
+
+    public int findUser(String name)
+    {
+        int index = -1;
+        for (User user : userList)
+        {
+            if (user.getName().equals(name))
+                index = userList.indexOf(user);
         }
+        return index;
+    }
+
+    public ArrayList<User> findValidReviewer(Conference con, User user){
+        ArrayList<User> validReviewer = new ArrayList<>();
+        for (User u : userList){
+            if (u.findConference(con.getConName()) == -1 && !u.getName().equals(user.getName()))
+                validReviewer.add(u);
+        }
+        return validReviewer;
+    }
+
+
+
 
 
     public static void main(String[] args) throws Exception {

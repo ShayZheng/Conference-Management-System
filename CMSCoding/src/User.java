@@ -152,4 +152,28 @@ public class User {
         this.messageBox = messageBox;
     }
 
+    public int findConference(String conferenceName)
+    {
+        int index1 = -1;
+        int index2 = -1;
+        int result;
+        for (Conference con : conferenceListForChair)
+        {
+            if (con.getConName().equals(conferenceName))
+                index1 = 1;
+        }
+        for (Conference con : conferenceListForAuthor)
+        {
+            if (con.getConName().equals(conferenceName))
+                index2 = 1;
+        }
+        if (index1 == -1 && index2 == -1)
+            result = -1;
+        else
+            result = 1;
+        return result;
+    }
+
+
+
 }

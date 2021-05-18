@@ -61,6 +61,7 @@ public class Menu {
         System.out.println("(1) Chair");
         System.out.println("(2) Reviewer");
         System.out.println("(3) Author");
+        System.out.println("(4) Return to main menu.");
         System.out.print("Choose an option: ");
     }
 }
