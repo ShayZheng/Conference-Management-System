@@ -9,9 +9,10 @@ public class CMS {
     private ConferenceManagement CM;
     private Menu menu;
 
-    public CMS(){
+    public CMS() throws Exception{
         CM = new ConferenceManagement();
         menu = new Menu();
+        CM.readFromFile();
         openSystem();
     }
 
@@ -240,17 +241,9 @@ public class CMS {
         }
         return inFo;
     }
-/**
-    public static void main(String[] args){
-        System.out.println("Hello World!");
-
-        Reviewer r = new Reviewer(1, "Shay", "666666", "Reviewer", "IT");
-        System.out.println("-----------Reviewer message------------");
-        System.out.println(r);
-*/
 
 
-        public static void main(String[] args){
+        public static void main(String[] args) throws Exception{
             new CMS();
         }
     }
