@@ -7,12 +7,127 @@ import java.util.*;
 
 public class CMS {
     private ConferenceManagement CM;
+    private Menu menu;
 
     public CMS(){
         CM = new ConferenceManagement();
-        register();
+        menu = new Menu();
+        openSystem();
     }
 
+    public void openSystem(){
+        String option;
+        option = "";
+        while (!option.equals("4"))
+        {
+            menu.displayMainMenu();
+
+            Scanner scan = new Scanner(System.in);
+            option = scan.nextLine();
+            System.out.print("\n");
+            // Check whether the input option is valid.
+            if (!isStringNumeric(option))
+                System.out.println("You need to choose a number between 1 to 4.");
+            else
+            {
+                int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
+                if (checkOption < 1 || checkOption > 4)
+                    System.out.println("You need to choose a number between 1 to 4.");
+            }
+
+            switch (option)
+            {
+                case "1": administratorLogin(); break;
+                case "2": register(); break;
+            }
+        }
+
+    }
+
+    public void administratorLogin(){
+        String adminUsername;
+        String adminPsw;
+        String userName;
+        String psw;
+
+        adminUsername = "admin";
+        adminPsw = "admin";
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Please enter the administrator's username: ");
+        userName = scan.nextLine();
+        System.out.print("\n");
+        while(!userName.equals(adminUsername)){
+            System.out.print("Your administrator name is incorrect, please enter again: ");
+            userName = scan.nextLine();
+        }
+
+        psw = scan.nextLine();
+        System.out.print("\n");
+        while(!psw.equals(adminPsw)){
+            System.out.print("Your administrator password is incorrect, please enter again: ");
+            psw = scan.nextLine();
+        }
+
+        String option;
+        option = "";
+        while (!option.equals("4"))
+        {
+            menu.displayMainMenu();
+
+            option = scan.nextLine();
+            System.out.print("\n");
+            // Check whether the input option is valid.
+            if (!isStringNumeric(option))
+                System.out.println("You need to choose a number between 1 to 4.");
+            else
+            {
+                int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
+                if (checkOption < 1 || checkOption > 3)
+                    System.out.println("You need to choose a number between 1 to 4.");
+            }
+
+            switch (option)
+            {
+                case "1": break;
+                case "2": break;
+                case "3": break;
+            }
+        }
+
+
+
+    }
+
+    public void login() {
+        String name;
+        String psw;
+
+        Scanner scan = new Scanner(System.in);
+        name = scan.nextLine();
+        for (User thisUser : CM.getUserList() ) {
+            if (thisUser.getName().equals(name)) {
+                psw = scan.nextLine();
+                int count = 0;
+                while(count <= 3 && psw.equals(thisUser.getPsw())) {
+                    System.out.print("Your password is incorrect, please enter again: ");
+                    psw = scan.nextLine();
+                    count += 1;
+                }
+                break;
+            }
+            else {
+                System.out.println("This user is not exist, please register first.");
+                register();
+            }
+        }
+
+        menu.displayTypeMenu();
+
+
+
+
+    }
     public void register() {
         String name;
         String psw1;
@@ -54,11 +169,10 @@ public class CMS {
         interestArea = setUserInfo("interesting area");
 
         CM.addUser(new User(ID, name, psw2, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
+        login();
     }
 
-    /**
-     * To check whether the borrower's name is alphabetic.
-     */
+
     public boolean isStringAlphabetic(String checkedString)
     {
         int i;
@@ -73,6 +187,18 @@ public class CMS {
         return true;
     }
 
+    public boolean isStringNumeric(String checkedString)
+    {
+        int i;
+        for (i = 0; i < checkedString.length(); i ++)
+        {
+            if (!Character.isDigit(checkedString.charAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+
     public String setUserInfo(String info){
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter the " + info + " : ");
@@ -85,9 +211,17 @@ public class CMS {
         }
         return inFo;
     }
-
-
+/**
     public static void main(String[] args){
-        new CMS();
+        System.out.println("Hello World!");
+
+        Reviewer r = new Reviewer(1, "Shay", "666666", "Reviewer", "IT");
+        System.out.println("-----------Reviewer message------------");
+        System.out.println(r);
+*/
+
+
+        public static void main(String[] args){
+            new CMS();
+        }
     }
-}
