@@ -1,7 +1,55 @@
-1,Shay,Reviewer,******,IT,NO
-2,Joy,Reviewer,******,IT,NO
-3,Tom,Reviewer,******,IT,NO
-4,Joyce,Chair,******
-5,Merrit,Administrator,******
-8,T1,Reviewer,******,Finance,NO
-9,T2,Reviewer,******,IT,NO
+user{1,Merritt,********,0,Merrit@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1,con2,con3}
+Conference for Author{con5,con6}
+Conference for Reviewer{con4}
+Keywords{IT,BIS,CS,DS}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1}
+Conference for Author{con2,con3}
+Conference for Reviewer{con5,con6}
+Keywords{CS}
+Assigned Paper{}
+Submitted Paper{one,two}
+Message{}
+
+user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1}
+Conference for Author{con2,con3}
+Conference for Reviewer{con6,con7}
+Keywords{}
+Assigned Paper{}
+Submitted Paper{Three}
+Message{}
+
+user{4,Joyce,********,2,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1,con2,con3}
+Conference for Author{con5}
+Conference for Reviewer{con4}
+Keywords{DS,IT}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{5,Tester one,********,0,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1,con2}
+Conference for Author{con7}
+Conference for Reviewer{con5,con6}
+Keywords{}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{6,Tester two,********,2,T2@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con5,con6,con7}
+Conference for Author{con1,con2}
+Conference for Reviewer{con4,con3}
+Keywords{}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+
