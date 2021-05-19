@@ -9,11 +9,11 @@ Message{}
 
 user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
-Conference for Author{con2,con3}
+Conference for Author{con2,con3,con7}
 Conference for Reviewer{}
 Keywords{CS}
 Assigned Paper{}
-Submitted Paper{}
+Submitted Paper{paper test.pdf}
 Message{}
 
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
@@ -26,29 +26,38 @@ Submitted Paper{}
 Message{}
 
 user{4,Joyce,********,1,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{Data Science}
+Conference for chair{Data Science,Information Technology}
 Conference for Author{}
 Conference for Reviewer{Cyber Security,Cyber Security}
 Keywords{DS,IT}
 Assigned Paper{paper one,paper two,paper three,paper six,paper seven,paper eight,paper one,paper one}
 Submitted Paper{}
-Message{,jj}
+Message{}
 
 user{5,T1,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{con1,con2,con3}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Information Technology,Data Science,con6,con7,con1,Cyber Security,Cyber Security,Data Science}
+Conference for Reviewer{}
 Keywords{DS,IT}
-Assigned Paper{paper one,paper two,paper three,paper six,paper seven,paper eight,paper one,paper one,paper three}
+Assigned Paper{}
 Submitted Paper{}
-Message{,jj,dd}
+Message{}
 
 user{6,T2,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{con1,con2,con3}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Information Technology,Data Science,con4,con4,con6,con1,Cyber Security,Cyber Security,Data Science}
+Conference for Reviewer{}
 Keywords{DS,IT,Finance}
-Assigned Paper{paper one,paper two,paper three,paper four,paper six,paper eight,paper one,paper one,paper three}
+Assigned Paper{}
 Submitted Paper{}
-Message{,jj,dd}
+Message{}
+
+user{7,T3,********,2,T3@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1,con2,con3}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{DS,IT,Finance}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
 

@@ -455,6 +455,9 @@ public class ConferenceManagement {
         readFromFile();
         User chair = searchUser(name);
         System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as a chair!");
+        System.out.println("**************************************");
+        System.out.println("          Chair Management           ");
+        System.out.println("**************************************");
         System.out.println("0.Assign reviewer by system");
         System.out.println("1.Assign reviewer manually");
         Scanner sc = new Scanner(System.in);
@@ -758,7 +761,11 @@ public class ConferenceManagement {
 
     }
 
-    public void addPaper(User author) throws ParseException {
+    public void submitPaper(String name) throws Exception
+    {
+        readFromFile();
+        User author =searchUser(name);
+        System.out.println("Hi"+" "+author.getName()+","+"you are now logging in as an author!");
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
         System.out.println("**************************************");
@@ -812,7 +819,7 @@ public class ConferenceManagement {
 
         author.getConferenceListForAuthor().add(conferenceObject);
         author.getSubmittedPaper().add(newPaper);
-        System.out.println(author.getSubmittedPaper().get(1).getName());
+
         writePaperToFile();
         writeUserToUserFile();
     }
@@ -831,7 +838,7 @@ public class ConferenceManagement {
     {
 
         ConferenceManagement cm = new ConferenceManagement();
-        cm.assignReviewer("Joyce");
+        cm.submitPaper("Carol" );
 
 
 
