@@ -1,4 +1,3 @@
-// @ author:Ying Zheng
 // @ date: 25/04/2021
 //
 
@@ -17,6 +16,8 @@ public class Paper {
     private String conName;
     private ArrayList<User> assignedReviewers;
 
+    public Paper() {
+    }
 
     public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String keyword, String decision, String conName) {
         Name = name;
@@ -28,7 +29,10 @@ public class Paper {
         Decision = decision;
         this.conName = conName;
         assignedReviewers = new ArrayList<>();//change part
+
     }
+
+
 
     public String getName() {
         return Name;
@@ -98,25 +102,28 @@ public class Paper {
     public ArrayList<User> getAssignedReviewerList()
     {
        return assignedReviewers;
-    }//change part
+    }
 
-    public String getReviewerNames()//change part
+    public String getReviewerNames(ArrayList<User> u)
     {
         String names = "";
-        if(assignedReviewers.size() > 0)
+        if(u.size() == 0)
+            names = "";
+        if(u.size() > 0)
         {
-         for(User u: assignedReviewers)
+            for (User i : u)
             {
-                names += "," + u.getName();
+                if( i != null)
+                    names += "," + i.getName();
             }
         }
-        return names;
 
+        return names;
     }
 
 
 
-    public String toString() {
+   /* public String toString() {
         return "Paper{" +
                 "Name='" + Name + '\'' +
                 ", smDeadline='" + smDeadline + '\'' +
@@ -126,13 +133,15 @@ public class Paper {
                 ", Keyword='" + Keyword + '\'' +
                 ", Decision='" + Decision + '\'' +
                 ", conName='" + conName + '\'' +
-                ", Assigned Reviewers='" + getReviewerNames() +'\''+//change part
+                ", Assigned Reviewers='" + getReviewerNames(assignedReviewers) +'\''+
                 '}';
-    }
+    }*/
 
-    public String toStringDatabase()//change part
+    /*public String toStringDatabase()//change part
     {
-        return Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName + getReviewerNames();
-    }
+        String str = Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName + getReviewerNames(assignedReviewers);
+        return str;
+    }*/
+
 
 }
