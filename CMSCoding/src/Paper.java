@@ -16,6 +16,8 @@ public class Paper {
     private String conName;
     private ArrayList<User> assignedReviewers;
 
+    public Paper() {
+    }
 
     public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String keyword, String decision, String conName) {
         Name = name;

@@ -8,9 +8,10 @@ public class Menu {
     public void displayMainMenu(){
         System.out.println("\n Welcome to the Conference Management System");
         System.out.println("======================================");
-        System.out.println("(1) Register New User");
-        System.out.println("(2) Login");
-        System.out.println("(3) Exit System");
+        System.out.println("(1) Administrator login");
+        System.out.println("(2) Register New User");
+        System.out.println("(3) Login");
+        System.out.println("(4) Exit System");
         System.out.print("Choose an option: ");
     }
 
@@ -50,6 +51,17 @@ public class Menu {
         System.out.println("======================================");
         System.out.println("(1) Submit paper");
         System.out.println("(2) Return to Main Menu");
+        System.out.print("Choose an option: ");
+    }
+
+    public void displayTypeMenu() {
+        System.out.println("\n Welcome to the Conference Management System");
+        System.out.println("======================================");
+        System.out.println("Please Choose a user type: ");
+        System.out.println("(1) Chair");
+        System.out.println("(2) Reviewer");
+        System.out.println("(3) Author");
+        System.out.println("(4) Return to main menu.");
         System.out.print("Choose an option: ");
     }
 }

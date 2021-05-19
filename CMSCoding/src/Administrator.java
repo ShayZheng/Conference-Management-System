@@ -5,16 +5,16 @@ package src;
  * @version 26 Oct 2020
  */
 public class Administrator {
-    private String adminType;
+    private String adminUsername;
     private String adminPsw;
 
-    public Administrator(String newType, String newPsw){
+    public Administrator(String newUsername, String newPsw){
         adminPsw = newPsw;
-        adminType = newType;
+        adminUsername = newUsername;
     }
 
-    public String getAdminType(){
-        return adminType;
+    public String getAdminUsername(){
+        return adminUsername;
     }
 
     public  String getAdminPsw(){
@@ -22,9 +22,9 @@ public class Administrator {
         return adminPsw;
     }
 
-    public void setAdminType(String newType){
+    public void setAdminUsername(String newUsername){
 
-        adminType = newType;
+        adminUsername = newUsername;
     }
 
     public void setAdminPsw(String newPsw){
