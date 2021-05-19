@@ -13,16 +13,16 @@ Conference for Author{con2,con3}
 Conference for Reviewer{con5,con6}
 Keywords{CS}
 Assigned Paper{}
-Submitted Paper{one,two}
+Submitted Paper{}
 Message{}
 
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{con1}
 Conference for Author{con2,con3}
 Conference for Reviewer{con6,con7}
-Keywords{}
+Keywords{DS,CS}
 Assigned Paper{}
-Submitted Paper{Three}
+Submitted Paper{}
 Message{}
 
 user{4,Joyce,********,2,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
@@ -34,22 +34,61 @@ Assigned Paper{}
 Submitted Paper{}
 Message{}
 
-user{5,Tester one,********,0,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{con1,con2}
-Conference for Author{con7}
-Conference for Reviewer{con5,con6}
-Keywords{}
+user{5,Tester one,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{IT,DS,Finance}
 Assigned Paper{}
 Submitted Paper{}
 Message{}
 
 user{6,Tester two,********,2,T2@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{con5,con6,con7}
-Conference for Author{con1,con2}
-Conference for Reviewer{con4,con3}
-Keywords{}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{Finance,IT,CS,DS}
 Assigned Paper{}
 Submitted Paper{}
 Message{}
+
+user{7,Tester three,********,2,T3@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{Finance}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{8,t4,********,0,Merrit@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1,con2,con3}
+Conference for Author{con5,con6}
+Conference for Reviewer{con4}
+Keywords{IT,BIS,CS,DS}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{9,t5,********,0,Merrit@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{}
+Conference for Author{con5,con6}
+Conference for Reviewer{con4}
+Keywords{IT,BIS,CS,DS}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{1,Merritt,********,0,Merrit@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
+Conference for chair{con1,con2,con3}
+Conference for Author{con5,con6}
+Conference for Reviewer{con4}
+Keywords{IT,BIS,CS,DS}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+
+
 
 
