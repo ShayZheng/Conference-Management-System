@@ -671,9 +671,8 @@ public class ConferenceManagement {
                 break;
 
         }
-
-
     }
+
     public boolean checkTwoArrayListHaveSameVariable(ArrayList<String> one, ArrayList<String> two)
     {
         for(String s: one)
@@ -683,7 +682,6 @@ public class ConferenceManagement {
         }
         return false;
     }
-
 
     public void writeConferenceToFile()
     {
@@ -818,13 +816,6 @@ public class ConferenceManagement {
     }
 
 
-
-
-
-
-
-
-
     public boolean isInputUpToFormat(String str)
     {
         if(str.trim().equals("") || !isStringAlphabetic(str))
@@ -957,8 +948,7 @@ public class ConferenceManagement {
     {
 
         ConferenceManagement cm = new ConferenceManagement();
-        cm.readFromFile();
-        cm.assignReviewer("Joyce");
+        cm.submitPaper();
 
 
     }
