@@ -1,8 +1,7 @@
-// @ author:Yuzhe Wang
 // @ date: 25/04/2021
 //
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class User {
     private int ID;
@@ -15,7 +14,6 @@ public class User {
     private String highQualification;
     private String employerDetail;
     private String interestArea;
-    private String[] Types;
     private ArrayList<String> keywords;
     private ArrayList<Conference> conferenceListForChair;
     private ArrayList<Conference> conferenceListForAuthor;
@@ -23,6 +21,7 @@ public class User {
     private ArrayList<Paper> assignedPaper;
     private ArrayList<Paper> submittedPaper;
     private ArrayList<String> messageBox;
+
 
 
     public User(int newID, String newName, String newPsw,int newType, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA)
@@ -37,11 +36,6 @@ public class User {
         highQualification = newHQ;
         employerDetail = newED;
         interestArea = newIA;//some basic features for user
-        Types = new String[4];//user can choose different types
-        Types[0] = "Initial User";
-        Types[1] = "Chair";
-        Types[2] = "Reviewer";
-        Types[3] = "Author";
         keywords = new ArrayList<>();
         conferenceListForChair = new ArrayList<>();
         conferenceListForAuthor= new ArrayList<>();
@@ -76,7 +70,6 @@ public class User {
 
     public String getInterestArea(){ return interestArea; }
 
-    public String[] getTypes(){return Types;}
 
     public int getChooseType() { return chooseType; }
 
@@ -120,9 +113,6 @@ public class User {
         this.keywords = keywords;
     }
 
-    public void setTypes(String[] types) {
-        Types = types;
-    }
 
     public void setConferenceListForAuthor(ArrayList<Conference> conferenceListForAuthor) {
         this.conferenceListForAuthor = conferenceListForAuthor;
@@ -133,16 +123,73 @@ public class User {
     }
     public ArrayList<Paper> getSubmittedPaper(){return submittedPaper;}
 
-    public ArrayList<Paper> getAssignedPaper() { return assignedPaper; }
+    public ArrayList<Paper> getAssignedPaper() { return assignedPaper;}
 
-
-    public String toString()
+    public String getStringListNames(ArrayList<String> as)
     {
-        String str = "";
-        str = "user{"+ID+","+Name+","+Psw+","+chooseType+","+Email+","+Occupation+","+mobileNumber
-                +","+highQualification+","+employerDetail+","+interestArea+"}";
-        return str;
+        String names = "";
+        if(as.size()==1)
+            if(as.get(0)!=null)
+                names = as.get(0);
+        if(as.size()>1)
+        {
+            for(int i = 0 ; i < as.size()-1; i++ )
+                {
+                    if(as.get(i) != null)
+                        names += as.get(i)+",";
+                }
+            names += as.get(as.size()-1);
+        }
+
+
+         return names;
+        }
+
+
+    public String getConferenceNames(ArrayList<Conference> con)
+    {
+        String names = "";
+        if(con.size()==1)
+            if(con.get(0)!=null&&!con.get(0).getConName().equals(""))
+                names = con.get(0).getConName();
+        if(con.size()>1)
+        {
+            for(int i = 0 ; i < con.size()-1; i++ )
+            {
+                if(con.get(i) != null)
+                    names += con.get(i).getConName()+",";
+            }
+            names += con.get(con.size()-1).getConName();
+        }
+
+
+        return names;
     }
+
+
+
+    public String getPaperNames(ArrayList<Paper> papers)
+    {
+        String names = "";
+        if(papers.size()==1)
+            if(papers.get(0)!=null&&!papers.get(0).getName().equals(""))
+                names = papers.get(0).getName();
+        if(papers.size()>1)
+        {
+            for(int i = 0 ; i < papers.size()-1; i++ )
+            {
+                if(papers.get(i) != null)
+                    names +=papers.get(i).getName()+",";
+            }
+            names += papers.get(papers.size()-1).getName();
+        }
+
+
+        return names;
+        }
+
+
+
 
     public ArrayList<String> getMessageBox() {
         return messageBox;
@@ -151,5 +198,29 @@ public class User {
     public void setMessageBox(ArrayList<String> messageBox) {
         this.messageBox = messageBox;
     }
+
+    public int findConference(String conferenceName)
+    {
+        int index1 = -1;
+        int index2 = -1;
+        int result;
+        for (Conference con : conferenceListForChair)
+        {
+            if (con.getConName().equals(conferenceName))
+                index1 = 1;
+        }
+        for (Conference con : conferenceListForAuthor)
+        {
+            if (con.getConName().equals(conferenceName))
+                index2 = 1;
+        }
+        if (index1 == -1 && index2 == -1)
+            result = -1;
+        else
+            result = 1;
+        return result;
+    }
+
+
 
 }
