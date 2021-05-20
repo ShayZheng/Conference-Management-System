@@ -203,16 +203,43 @@ public class CMS
 
         System.out.print("Enter the user's email: ");
         email = scan.nextLine();
-        while (email.trim().equals("") || CM.findAccount(email) != -1) // check whether the name is allowed.
+        // regex syntax
+        // " \w"：equals to '[A-Za-z0-9_]',could be alphabets,numbers and _
+        // "|"  : means "or"
+        // "*" : 0 or multiple times
+        // "+" : 1 or multiple times
+        // "{n,m}" : the length should be n to m(n and m is numbers)
+        // "$" : end by the previous string
+
+        //validation for email format
+        // check whether the email is allowed.
+        while (!email.matches("^\\w+((-\\w+)|(\\.\\w+))*@\\w+(\\.\\w{2,3}){1,3}$"))
         {
-            System.out.println("This email cannot be used.");
-            System.out.print("Enter the user's name: ");
+            System.out.println("The email format is not correct.");
+            System.out.print("Enter the user's email: ");
+            email = scan.nextLine();
+        }
+
+        while (CM.findAccount(email) != -1)
+        {
+            System.out.println("This email exist already.");
+            System.out.print("Enter the user's email: ");
             email = scan.nextLine();
         }
 
 
-        occupation = setUserInfo("occupation");
-        psw1 = setUserInfo("password");
+        System.out.print("Enter the user's password: ");
+        psw1 = scan.nextLine();
+
+
+        //validation for password format
+        //reference from here:  https://segmentfault.com/a/1190000038356577
+        while (!psw1.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"))
+        {
+            System.out.println("The password should be at least 8 characters long, must include 1 upper case, 1 lower case and 1 number.");
+            System.out.print("Enter the user's password: ");
+            psw1 = scan.nextLine();
+        }
 
         System.out.print("Enter the password again: ");
         psw2 = scan.nextLine();
@@ -222,12 +249,14 @@ public class CMS
             psw2 = scan.nextLine();
         }
 
+        occupation = setUserInfo("occupation");
         mobileNumber = setUserInfo("mobileNumber");
         highQualification = setUserInfo("high qualification");
         employerDetail = setUserInfo("employer detail");
         interestArea = setUserInfo("interesting area");
 
         CM.getUserList().add(new User(ID, name, psw2, 0, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
+        CM.writeUserToUserFile();
         login();
     }
 
@@ -298,52 +327,129 @@ public class CMS
 
     }
 
+    //specify the keywords for reviewer
     public void specifyExpertise(String email)
     {
         User userReviewer = CM.searchUserByEmail(email);
-        ArrayList<String> rvKeywordList = userReviewer.getKeywords();
-        System.out.println("Please input your keywords (Split with comma,at least three keywords)");
+
+        System.out.println("\n" + "Please select three keywords(first one should be your strong expertise)" + "\n");
+        System.out.println("1.Information Technology");
+        System.out.println("2.Cyber Security");
+        System.out.println("3.Cloud Computing");
+        System.out.println("4.Network Develop");
+        System.out.println("5.Software Engineering");
+        System.out.println("6.Distributed Mobile Develop");
+        System.out.println("7.Database");
+        System.out.println("8.Big Data");
+        System.out.println("9.User Interface Design");
+        System.out.println("10.Manually Add New Keywords ");
         Scanner sc = new Scanner(System.in);
-        String[] inputKeywords = sc.nextLine().split(",");
-        for (int i = 0;i<inputKeywords.length;i++)
+
+        String selectKeywords = sc.nextLine();
+
+        //need validation of at least three options
+        switch(selectKeywords)
         {
-            userReviewer.getKeywords().add(inputKeywords[i]);
+            case "1":
+                userReviewer.getKeywords().add("Information Technology");
+                System.out.println("Information Technology have added");
+                break;
+            case "2":
+                userReviewer.getKeywords().add("Cyber Security");
+                System.out.println("Cyber Security have added");
+                break;
+            case "3":
+                userReviewer.getKeywords().add("Cloud Computing");
+                System.out.println("Cloud Computing have added");
+
+                break;
+            case "4":
+                userReviewer.getKeywords().add("Network Develop");
+                System.out.println("Network Develop have added");
+                break;
+            case "5":
+                userReviewer.getKeywords().add("Software Engineering");
+                System.out.println("Software Engineering have added");
+                break;
+            case "6":
+                userReviewer.getKeywords().add("Distributed Mobile Develop");
+                System.out.println("Distributed Mobile Develop have added");
+                break;
+            case "7":
+                userReviewer.getKeywords().add("Database");
+                System.out.println("Database have added");
+                break;
+            case "8":
+                userReviewer.getKeywords().add("Big Data");
+                System.out.println("Big Data have added");
+                break;
+            case "9":
+                userReviewer.getKeywords().add("User Interface Design");
+                System.out.println("User Interface Design have added");
+                break;
+            case "10":
+                System.out.println("Please input your keywords (Split with comma,at least three keywords)");
+                String[] inputKeywords = sc.nextLine().split(",");
+
+                for (int i = 0; i<inputKeywords.length; i++)
+                {
+//                    if (isStringAlphabetic(inputKeywords[i]))
+                    userReviewer.getKeywords().add(inputKeywords[i]);
+                    System.out.println("Keywords: " + inputKeywords[i]  + " added successfully");
+                }
+                break;
+            default:
+                System.out.println("Please choose 1 - 10");
+                break;
+
+
+
         }
 
-        System.out.println(userReviewer.getKeywords().size());
+
+
+        System.out.println("You have " + userReviewer.getKeywords().size() + " Keywords");
         CM.writeUserToUserFile();
 
 
     }
 
+    public void selectKeywords(String selection)
+    {
+
+    }
+
+    //reviewer write evaluation for assign paper
     public void writeEvaluation(String email) throws ParseException {
         User userReviewer = CM.searchUserByEmail(email);
         ArrayList<Paper> assignPaper = userReviewer.getAssignedPaper();
         ArrayList<String> assignMesage = userReviewer.getMessageBox();
-        System.out.println(assignMesage.size());
-        System.out.println(assignPaper.size());
+        System.out.println("Message numbers: " + assignMesage.size());
+        System.out.println("Assign paper numbers: " +assignPaper.size() + "\n");
         if (assignMesage.size() >= 1) {
             for (String message : assignMesage)
             {
-                System.out.println("This is your message: " + message);
+                System.out.println("This is your message: " + message + "\n");
             }
         }
         else
         {
-            System.out.println("You do not have message");
+            System.out.println("You do not have message and assign paper"  + "\n");
             return;
         }
 
 
         Scanner sc = new Scanner(System.in);
-        int paperIndex = 0;
+        String Evaulation = "";
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String evPaper = "";
         System.out.println("Current Time: " + sdf.format(d));
-        if (assignPaper.size() >= 1)
+
+        while (assignPaper.size() >= 1)
         {
-            for (int i = 0; i < assignPaper.size(); i++) {
+            for (int i = 0; i < assignPaper.size(); i++)
+            {
                 Paper one = assignPaper.get(i);
                 {
                     if (!sdf.parse(one.getRmDeadline()).before(d)){
@@ -354,29 +460,47 @@ public class CMS
                 }
 
             }
-            System.out.println("Please select the paper to evaluate");
+            System.out.println("\n" + "Please select the paper to evaluate");
             evPaper = sc.nextLine();
-            if (!evPaper.isEmpty() && !isStringAlphabetic(evPaper))
+            if (!evPaper.trim().isEmpty() && isStringNumeric(evPaper))
             {
-                Paper rvPaper = assignPaper.get(Integer.parseInt(evPaper));
-                System.out.println("Please enter an evaluation");
-                String Evaulation = sc.nextLine();
-                if (!Evaulation.isEmpty())
+                int option = Integer.parseInt(evPaper);
+                if (option <= assignPaper.size())
                 {
-                    rvPaper.getEvaluation().add(Evaulation);
-                    CM.writePaperToFile();
-                    System.out.println("Add Evaluation for paper "+ "'" + rvPaper.getName() + "'" + ": " + rvPaper.getEvaluation().get(0));
+                    Paper rvPaper = assignPaper.get(Integer.parseInt(evPaper) - 1); //index should minus 1 of the list size
 
+                    System.out.println("Please enter an evaluation");
+                    Evaulation = sc.nextLine();
+                    if (!Evaulation.trim().isEmpty() && isStringAlphabetic(Evaulation))
+                    {
+                        rvPaper.getEvaluation().add(Evaulation);
+
+                        CM.writePaperToFile();
+                        System.out.println("Add Evaluation for paper "+ "'" + rvPaper.getName() + "'" + ": " + rvPaper.getEvaluation().get(0));
+                        return;
+
+                    }
+
+                    else
+                    {
+                    System.out.println("Evaluation should not be empty");
+//                    Evaulation = sc.nextLine();
+                    }
                 }
 
-                else
-                    System.out.println("Evaluation should not be empty");
-
             }
-            if (isStringAlphabetic(evPaper))
+            else if (Integer.parseInt(evPaper) > assignPaper.size())
+            {
+                System.out.println("Please choose from 1 to " + assignPaper.size() + "\n");
+//                evPaper = sc.nextLine();
+            }
+            else if (!isStringNumeric(evPaper))
+            {
                 System.out.println("you should enter numbers");
+//                evPaper = sc.nextLine();
+            }
         }
-        else
+        if (assignPaper.size() == 0)
             System.out.println("You do not have assign paper");
     }
 

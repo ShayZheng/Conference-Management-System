@@ -20,7 +20,7 @@ user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification 
 Conference for chair{Cyber Security}
 Conference for Author{}
 Conference for Reviewer{}
-Keywords{DS,CS,new,new,new,again,new,again}
+Keywords{DS,CS,new,new,new,again,new,again,Information Technology,Cyber Security,no regex,need regex,regex}
 Assigned Paper{paper one,paper two}
 Submitted Paper{}
 Message{one,two}
@@ -61,21 +61,21 @@ Assigned Paper{paper one,paper one,paper two,paper three}
 Submitted Paper{}
 Message{zhou,z,s}
 
-user{8,shayzheng,11111111,0,test@gmail.com,student,111111111111,high,null,IT}
-Conference for chair{}
-Conference for Author{}
-Conference for Reviewer{}
-Keywords{}
-Assigned Paper{}
-Submitted Paper{}
-Message{}
-
 user{8,T4,********,2,T4@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
 Conference for Reviewer{Cyber Security}
 Keywords{DS,IT,Finance}
 Assigned Paper{paper one}
+Submitted Paper{}
+Message{}
+
+user{9,test,Zzzz1111,0,test@gmail.com,student,15220566753,high,Monash Student,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{IT,CS,NW,Information Technology,Cyber Security,Database,new,regex,regex}
+Assigned Paper{}
 Submitted Paper{}
 Message{}
 
