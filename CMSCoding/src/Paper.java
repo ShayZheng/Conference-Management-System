@@ -1,7 +1,10 @@
-// @ date: 25/04/2021
-//
+/**
+ * @author Ying Zheng
+ * @version 20 May 2021
+ */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Paper {
 
@@ -20,32 +23,28 @@ public class Paper {
     }
 
     public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String decision, String conName) {
-        Name = name;
+        this.Name = name;
         this.smDeadline = smDeadline;
         this.rmDeadline = rmDeadline;
-        Status = status;
-        Author = author;
-
-        Decision = decision;
+        this.Status = status;
+        this.Author = author;
+        this.Decision = decision;
         this.conName = conName;
-        assignedReviewers = new ArrayList<>();//change part
-        Keywords = new ArrayList<>();//change part
-        Evaluation = new ArrayList<>();//change part
-
+        this.assignedReviewers = new ArrayList();
+        this.Keywords = new ArrayList();
+        this.Evaluation = new ArrayList();
     }
 
-
-
     public String getName() {
-        return Name;
+        return this.Name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.Name = name;
     }
 
     public String getSmDeadline() {
-        return smDeadline;
+        return this.smDeadline;
     }
 
     public void setSmDeadline(String smDeadline) {
@@ -53,7 +52,7 @@ public class Paper {
     }
 
     public String getRmDeadline() {
-        return rmDeadline;
+        return this.rmDeadline;
     }
 
     public void setRmDeadline(String rmDeadline) {
@@ -61,87 +60,84 @@ public class Paper {
     }
 
     public String getStatus() {
-        return Status;
+        return this.Status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.Status = status;
     }
 
     public String getAuthor() {
-        return Author;
+        return this.Author;
     }
 
     public void setAuthor(String author) {
-        Author = author;
+        this.Author = author;
     }
 
     public ArrayList<String> getEvaluation() {
-        return Evaluation;
+        return this.Evaluation;
     }
 
     public void setEvaluation(ArrayList<String> evaluation) {
-        Evaluation = evaluation;
+        this.Evaluation = evaluation;
     }
 
     public ArrayList<String> getKeywords() {
-        return Keywords;
+        return this.Keywords;
     }
 
     public void setKeywords(ArrayList<String> keywords) {
-        Keywords = keywords;
+        this.Keywords = keywords;
     }
 
-    //change part get each keyword in Keyword List
-    public String getEachKeyword()
-    {
+    public String getEachKeyword() {
         String eachKeyword = "null";
-        for (String Keyword:getKeywords()){
-            eachKeyword = Keyword;
-            return "," + eachKeyword;
+        Iterator var2 = this.getKeywords().iterator();
+        if (var2.hasNext()) {
+            String Keyword = (String) var2.next();
+            return "," + Keyword;
+        } else {
+            return eachKeyword;
         }
-        return  eachKeyword;
     }
 
     public String getDecision() {
-        return Decision;
+        return this.Decision;
     }
 
     public void setDecision(String decision) {
-        Decision = decision;
+        this.Decision = decision;
     }
 
     public String getConName() {
-        return conName;
+        return this.conName;
     }
 
     public void setConName(String conName) {
         this.conName = conName;
     }
 
-
-    public ArrayList<User> getAssignedReviewerList()
-    {
-       return assignedReviewers;
+    public ArrayList<User> getAssignedReviewerList() {
+        return this.assignedReviewers;
     }
 
-
-    public String getReviewerNames(ArrayList<User> u)
-    {
+    public String getReviewerNames(ArrayList<User> u) {
         String names = "";
-        if(u.size()==1)
-            if(u.get(0)!=null)
-                names = u.get(0).getName();
-        if(u.size()>1)
-        {
-            for(int i = 0 ; i < u.size(); i++ )
-            {
-                if(u.get(i) != null)
-                    names += u.get(i).getName()+",";
-            }
-
+        if (u.size() == 0) {
+            names = "";
         }
 
+        if (u.size() > 0) {
+            Iterator var3 = u.iterator();
+
+            while (var3.hasNext()) {
+                User i = (User) var3.next();
+                if (i != null) {
+                    names = names + "," + i.getName();
+                }
+            }
+        }
 
         return names;
     }
@@ -149,45 +145,26 @@ public class Paper {
     public String getStringListNames(ArrayList<String> as)
     {
         String names = "";
-        if(as.size()==1)
-            if(as.get(0)!=null)
-                names = as.get(0);
-        if(as.size()>1)
+        if(as.size() == 0)
+            names="";
+        if(as.size() == 1)
+            names=as.get(0);
+        if(as.size() > 1 )
         {
-            for(int i = 0 ; i < as.size()-1; i++ )
+            if(as.get(0)==null)
+                names ="";
+            if(as.get(0)!=null)
+                names+=as.get(0)+",";
+            for(int i = 1 ; i < as.size();i++)
             {
                 if(as.get(i) != null)
                     names += as.get(i)+",";
             }
-            names += as.get(as.size()-1);
-        }
 
+        }
 
         return names;
     }
-
-
-
-
-   /* public String toString() {
-        return "Paper{" +
-                "Name='" + Name + '\'' +
-                ", smDeadline='" + smDeadline + '\'' +
-                ", rmDeadline='" + rmDeadline + '\'' +
-                ", Status='" + Status + '\'' +
-                ", Author='" + Author + '\'' +
-                ", Keyword='" + Keyword + '\'' +
-                ", Decision='" + Decision + '\'' +
-                ", conName='" + conName + '\'' +
-                ", Assigned Reviewers='" + getReviewerNames(assignedReviewers) +'\''+
-                '}';
-    }*/
-
-    /*public String toStringDatabase()//change part
-    {
-        String str = Name + "," +smDeadline +","+rmDeadline+","+Status+","+Author+","+Keyword+","+Decision+","+conName + getReviewerNames(assignedReviewers);
-        return str;
-    }*/
 
 
 }
