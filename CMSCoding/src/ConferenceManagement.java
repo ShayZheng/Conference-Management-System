@@ -616,6 +616,17 @@ public class ConferenceManagement {
         return index;
     }
 
+    public int findAccount(String email)
+    {
+        int index = -1;
+        for (User user : userList)
+        {
+            if (user.getEmail().equals(email))
+                index = userList.indexOf(user);
+        }
+        return index;
+    }
+
     public ArrayList<User> findValidReviewer(Conference con, User user){
         ArrayList<User> validReviewer = new ArrayList<>();
         for (User u : userList){

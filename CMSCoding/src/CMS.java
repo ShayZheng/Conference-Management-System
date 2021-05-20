@@ -103,61 +103,65 @@ public class CMS {
     }
 
     public void login() {
-        String name;
+        String email;
         String psw;
+        int label = 0;
 
         Scanner scan = new Scanner(System.in);
         System.out.println("\n Welcome to the Conference Management System");
         System.out.println("======================================");
-        System.out.print("Enter the username: ");
-        name = scan.nextLine();
+        System.out.print("Enter the email: ");
+        email = scan.nextLine();
         for (User thisUser : CM.getUserList() ) {
-            if (thisUser.getName().equals(name)) {
+            if (thisUser.getEmail().equals(email)) {
+                label = 1;
                 System.out.print("Enter password: ");
                 psw = scan.nextLine();
-                int count = 0;
+                int count = 1;
                 while(count < 3 && !psw.equals(thisUser.getPsw())) {
                     System.out.print("Your password is incorrect, please enter again: ");
                     psw = scan.nextLine();
                     count += 1;
                 }
-                break;
-            }
-            else {
-                System.out.println("This user is not exist, please register first.");
-                register();
+                if (psw.equals(thisUser.getPsw())){
+                    String option;
+                    option = "";
+                    while (!option.equals("4"))
+                    {
+                        menu.displayTypeMenu();
+
+                        option = scan.nextLine();
+                        System.out.print("\n");
+                        // Check whether the input option is valid.
+                        if (!isStringNumeric(option))
+                            System.out.println("You need to choose a number between 1 to 4.");
+                        else
+                        {
+                            int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
+                            if (checkOption < 1 || checkOption > 3)
+                                System.out.println("You need to choose a number between 1 to 4.");
+                        }
+
+                        switch (option) {
+                            case "1": break;
+                            case "2": break;
+                            case "3": break;
+                        }
+                    }
+                    break;
+                }
+                else{
+                    System.out.println("Login failed!");
+                    System.out.println("System will return to main menu.");
+                    break;
+                }
             }
         }
-        String option;
-        option = "";
-        while (!option.equals("4"))
-        {
-            menu.displayTypeMenu();
 
-            option = scan.nextLine();
-            System.out.print("\n");
-            // Check whether the input option is valid.
-            if (!isStringNumeric(option))
-                System.out.println("You need to choose a number between 1 to 4.");
-            else
-            {
-                int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
-                if (checkOption < 1 || checkOption > 3)
-                    System.out.println("You need to choose a number between 1 to 4.");
-            }
-
-            switch (option)
-            {
-                case "1": break;
-                case "2": break;
-                case "3": break;
-            }
-        }
-
-
-
-
+        if (label == 0)
+            System.out.println("This user is not exist, please register first.");
     }
+
     public void register() {
         String name;
         String psw1;
@@ -181,7 +185,16 @@ public class CMS {
             name = scan.nextLine();
         }
 
-        email = setUserInfo("email");
+        System.out.print("Enter the user's email: ");
+        email = scan.nextLine();
+        while (email.trim().equals("") || CM.findAccount(email) != -1) // check whether the name is allowed.
+        {
+            System.out.println("This email cannot be used.");
+            System.out.print("Enter the user's name: ");
+            email = scan.nextLine();
+        }
+
+
         occupation = setUserInfo("occupation");
         psw1 = setUserInfo("password");
 
@@ -199,7 +212,6 @@ public class CMS {
         interestArea = setUserInfo("interesting area");
 
         CM.addUser(new User(ID, name, psw2, 0, email, occupation, mobileNumber, highQualification, employerDetail, interestArea));
-        login();
     }
 
 
