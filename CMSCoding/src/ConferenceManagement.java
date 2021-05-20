@@ -211,6 +211,18 @@ public class ConferenceManagement {
         {
             System.out.println("Unexpected I/O exception occurs");
         }
+
+        for(User u:userList)
+        {
+            if(u.getMessageBox().get(0).equals(""))
+                u.getMessageBox().clear();
+        }//clear some variables equals ""
+        for(Paper p:paperList)
+        {
+            if(p.getEvaluation().get(0).equals(""))
+                p.getEvaluation().clear();
+        }//clear some variables equals ""
+
     }
 
 
@@ -946,18 +958,7 @@ public class ConferenceManagement {
 
         ConferenceManagement cm = new ConferenceManagement();
         cm.readFromFile();
-       /* for(Paper p: cm.paperList)
-        {
-            p.getAssignedReviewerList().clear();
-        }*/
-        cm.writeUserToUserFile();
-        System.out.println(cm.userList.get(0).getMessageBox().size());
         cm.assignReviewer("Joyce");
-        cm.submitPaper("Carol");
-
-
-
-
 
 
     }
