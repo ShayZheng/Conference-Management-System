@@ -532,11 +532,14 @@ public class ConferenceManagement {
                 Paper paperAuto = paperList.get(Integer.parseInt(paperNumAuto));//after choose the paper , create a paper object
                 for(User u:userList)
                 {
-                    if(u.getChooseType() == 2)
+                    if(u.getChooseType() == 2&& u!=null )
                         reviewerListAuto.add(u);
                 }
-                for(User u:reviewerListAuto)
-                    System.out.println(u.getName());
+
+                for(Paper p: paperList)
+                {
+                    p.getAssignedReviewerList().clear();
+                }//clear the list to avoid the list does not contain null elements
 
                 int i = 0;
                 while(paperAuto.getAssignedReviewerList().size() < 3 && i < reviewerListAuto.size())
@@ -549,7 +552,8 @@ public class ConferenceManagement {
                     if(!userAuto.getName().equals(paperAuto.getAuthor())&&checkTwoArrayListHaveSameVariable(userAutoOne.getKeywords(),paperAuto.getKeywords())&&userAuto!=null)
                     //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords
                     {
-                        paperAuto.getAssignedReviewerList().add(userAuto);
+                        if(userAuto != null)
+                            paperAuto.getAssignedReviewerList().add(userAuto);
                         //paper add this reviewer into its assigned reviewer list
                     }
 
@@ -558,10 +562,12 @@ public class ConferenceManagement {
                 for(User u:paperAuto.getAssignedReviewerList())
                 {
                     if(u!=null)
+                    {
                         sendMessage(u);//send every reviewer a message to prompt him/her they have a paper to review
-                    u.getAssignedPaper().add(paperAuto);
+                        u.getAssignedPaper().add(paperAuto);
                     //reviewer add this paper into his/her assigned paper list
-                    u.getConferenceListForReviewer().add(searchConference(paperAuto.getConName()));
+                        u.getConferenceListForReviewer().add(searchConference(paperAuto.getConName()));
+                    }
                     //reviewer add this paper's conference into his/her reviewer conference list
                 }
                 chair.getConferenceListForChair().add(searchConference(paperAuto.getConName()));
@@ -576,7 +582,10 @@ public class ConferenceManagement {
                 break;
             case"1":
                 System.out.println("please choose one paper to assign");
-
+                for(Paper p: paperList)
+                {
+                    p.getAssignedReviewerList().clear();
+                }//clear the list to avoid the list does not contain null elements
                 for(Paper p:paperList)
                 {
                     if(p.getStatus().equals("NO"))
@@ -937,21 +946,10 @@ public class ConferenceManagement {
 
         ConferenceManagement cm = new ConferenceManagement();
         cm.readFromFile();
-        System.out.println(cm.userList.size());
-        for(User u: cm.userList)
-        {
-            u.getMessageBox().clear();
-            u.getConferenceListForChair().clear();
-            u.getConferenceListForReviewer().clear();
-            u.getConferenceListForAuthor().clear();
-            u.getAssignedPaper().clear();
-            u.getSubmittedPaper().clear();
-
-        }
-        for(Paper p: cm.paperList)
+       /* for(Paper p: cm.paperList)
         {
             p.getAssignedReviewerList().clear();
-        }
+        }*/
         cm.writeUserToUserFile();
         System.out.println(cm.userList.get(0).getMessageBox().size());
         cm.assignReviewer("Joyce");

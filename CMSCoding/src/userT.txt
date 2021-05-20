@@ -19,14 +19,14 @@ Message{}
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{con1}
+Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security}
 Keywords{DS,CS}
-Assigned Paper{paper test one.pdf}
+Assigned Paper{paper three,paper four,paper one}
 Submitted Paper{}
-Message{1}
+Message{hello you have a paper to review from Joyce,hello you have a paper to review,ZHOU}
 
 user{4,Joyce,********,1,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{con1}
+Conference for chair{Cyber Security,Cyber Security}
 Conference for Author{}
 Conference for Reviewer{}
 Keywords{DS,IT}
@@ -37,20 +37,20 @@ Message{}
 user{5,T1,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{}
+Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security}
 Keywords{DS,IT}
-Assigned Paper{}
+Assigned Paper{paper three,paper four,paper one}
 Submitted Paper{}
-Message{}
+Message{hello you have a paper to review from Joyce,hello,ZHOU}
 
 user{6,T2,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{}
+Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security}
 Keywords{DS,IT,Finance}
-Assigned Paper{}
+Assigned Paper{paper three,paper four,paper one}
 Submitted Paper{}
-Message{}
+Message{hello you have a paper to review from Joyce,halo,ZHOU}
 
 user{7,T3,********,2,T3@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
