@@ -5,7 +5,7 @@ Conference for Reviewer{}
 Keywords{IT,BIS,CS,DS}
 Assigned Paper{}
 Submitted Paper{}
-Message{}
+Message{one,two,three}
 
 user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
@@ -32,7 +32,7 @@ Conference for Reviewer{}
 Keywords{DS,IT}
 Assigned Paper{}
 Submitted Paper{}
-Message{}
+Message{one,two,three}
 
 user{5,T1,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
@@ -57,6 +57,15 @@ Conference for chair{}
 Conference for Author{}
 Conference for Reviewer{}
 Keywords{DS,IT,Finance}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{8,shayzheng,11111111,0,test@gmail.com,student,111111111111,high,null,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{}
 Assigned Paper{}
 Submitted Paper{}
 Message{}
