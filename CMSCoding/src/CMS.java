@@ -178,7 +178,7 @@ public class CMS {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter the user's name: ");
         name = scan.nextLine();
-        while (name.trim().equals("") || !isStringAlphabetic(name) || CM.findUser(name) != -1) // check whether the name is allowed.
+        while (name.trim().equals("") || !isStringAlphabetic(name)) // check whether the name is allowed.
         {
             System.out.println("The user's neme cannot be null and should only be alphabetic.");
             System.out.print("Enter the user's name: ");
