@@ -2,7 +2,6 @@
 //
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Paper {
 
@@ -11,24 +10,27 @@ public class Paper {
     private String rmDeadline;
     private String Status;
     private String Author;
-    private String Keyword;
     private String Decision;
     private String conName;
     private ArrayList<User> assignedReviewers;
+    private ArrayList<String> Evaluation;
+    private ArrayList<String> Keywords;
 
     public Paper() {
     }
 
-    public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String keyword, String decision, String conName) {
+    public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String decision, String conName) {
         Name = name;
         this.smDeadline = smDeadline;
         this.rmDeadline = rmDeadline;
         Status = status;
         Author = author;
-        Keyword = keyword;
+
         Decision = decision;
         this.conName = conName;
         assignedReviewers = new ArrayList<>();//change part
+        Keywords = new ArrayList<>();//change part
+        Evaluation = new ArrayList<>();//change part
 
     }
 
@@ -74,12 +76,31 @@ public class Paper {
         Author = author;
     }
 
-    public String getKeyword() {
-        return Keyword;
+    public ArrayList<String> getEvaluation() {
+        return Evaluation;
     }
 
-    public void setKeyword(String keyword) {
-        Keyword = keyword;
+    public void setEvaluation(ArrayList<String> evaluation) {
+        Evaluation = evaluation;
+    }
+
+    public ArrayList<String> getKeywords() {
+        return Keywords;
+    }
+
+    public void setKeywords(ArrayList<String> keywords) {
+        Keywords = keywords;
+    }
+
+    //change part get each keyword in Keyword List
+    public String getEachKeyword()
+    {
+        String eachKeyword = "null";
+        for (String Keyword:getKeywords()){
+            eachKeyword = Keyword;
+            return "," + eachKeyword;
+        }
+        return  eachKeyword;
     }
 
     public String getDecision() {
@@ -104,22 +125,47 @@ public class Paper {
        return assignedReviewers;
     }
 
+
     public String getReviewerNames(ArrayList<User> u)
     {
         String names = "";
-        if(u.size() == 0)
-            names = "";
-        if(u.size() > 0)
+        if(u.size()==1)
+            if(u.get(0)!=null&&!u.get(0).getName().equals(""))
+                names = u.get(0).getName();
+        if(u.size()>1)
         {
-            for (User i : u)
+            for(int i = 0 ; i < u.size()-1; i++ )
             {
-                if( i != null)
-                    names += "," + i.getName();
+                if(u.get(i) != null)
+                    names += u.get(i).getName()+",";
             }
+            names += u.get(u.size()-1).getName();
         }
+
 
         return names;
     }
+
+    public String getStringListNames(ArrayList<String> as)
+    {
+        String names = "";
+        if(as.size()==1)
+            if(as.get(0)!=null)
+                names = as.get(0);
+        if(as.size()>1)
+        {
+            for(int i = 0 ; i < as.size()-1; i++ )
+            {
+                if(as.get(i) != null)
+                    names += as.get(i)+",";
+            }
+            names += as.get(as.size()-1);
+        }
+
+
+        return names;
+    }
+
 
 
 
