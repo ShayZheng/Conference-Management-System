@@ -354,12 +354,20 @@ public class ConferenceManagement {
         writeConferenceToFile();//reload the database
 
     }
+    public User searchUserAccordingToEmail(String s)
+    {
+        for(User u:userList)
+            if(u.getEmail().equals(s))
+                return u;
+
+            return null;
+    }
 
     public void sendMessage(User u)
     {
         System.out.println("You are sending message to"+" "+u.getName()+"(Please end with the sender name)");
         Scanner sc = new Scanner(System.in);
-        String content = sc.nextLine();
+        String content = sc.nextLine()+"["+"from: "+u.getName()+"]";
         u.getMessageBox().add(content);
 
     }
@@ -561,8 +569,11 @@ public class ConferenceManagement {
 
                     User userAuto = searchUser(userAutoOne.getName());
                     //find the specific reviewer and find the location in the user list
-                    if(!userAuto.getName().equals(paperAuto.getAuthor())&&checkTwoArrayListHaveSameVariable(userAutoOne.getKeywords(),paperAuto.getKeywords())&&userAuto!=null)
-                    //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords
+                    if(!userAuto.getName().equals(paperAuto.getAuthor())
+                            &&checkTwoArrayListHaveSameVariable(userAutoOne.getKeywords(),paperAuto.getKeywords())
+                            &&userAuto!=null
+                            &&(checkConferenceOverlaps(userAuto.getConferenceListForChair(),searchConference(paperAuto.getConName())))==false)
+                    //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords and ensure this conference not in this reviewer's chair list and author list
                     {
                         if(userAuto != null)
                             paperAuto.getAssignedReviewerList().add(userAuto);
@@ -582,8 +593,10 @@ public class ConferenceManagement {
                     }
                     //reviewer add this paper's conference into his/her reviewer conference list
                 }
-                chair.getConferenceListForChair().add(searchConference(paperAuto.getConName()));
-                //this chair add this paper's conference into his chair conference list
+                if(checkConferenceOverlaps(chair.getConferenceListForAuthor(),searchConference(paperAuto.getConName())) ==false
+                    &&checkConferenceOverlaps(chair.getConferenceListForReviewer(),searchConference(paperAuto.getConName()))== false)
+                    chair.getConferenceListForChair().add(searchConference(paperAuto.getConName()));
+                //this chair add this paper's conference into his chair conference list and avoid his other lists contain this conference
                 if(paperAuto.getAssignedReviewerList().size() == 3)
                     paperAuto.setStatus("YES");
                 //set the paper status to "yes",so it can not be choose to review next time
@@ -616,7 +629,10 @@ public class ConferenceManagement {
 
                 for(User u:userList)
                 {
-                    if(u.getChooseType() == 2 && !u.getName().equals(paperObject.getAuthor()))//reviewer could not be the author of this paper
+                    if(u.getChooseType() == 2
+                            && !u.getName().equals(paperObject.getAuthor())
+                            && checkConferenceOverlaps(u.getConferenceListForChair(),searchConference(paperObject.getConName()))==false
+                            )//reviewer could not be the author of this paper
                         System.out.println(userList.indexOf(u)+"."+u.getName()+" "+"[Keywords:]"+u.getStringListNames(u.getKeywords()));
                 }
                 //show who can review paper and show their keywords
@@ -658,7 +674,10 @@ public class ConferenceManagement {
                     sendMessage(u);
                     //send every reviewer a message
                 }
-
+                if(checkConferenceOverlaps(chair.getConferenceListForAuthor(),searchConference(paperObject.getConName())) ==false
+                        &&checkConferenceOverlaps(chair.getConferenceListForReviewer(),searchConference(paperObject.getConName()))==false)
+                    chair.getConferenceListForChair().add(searchConference(paperObject.getConName()));
+                //ensure the chair conference list for chair is not overlap his other identities conference lists
                 paperObject.setStatus("YES");
                 //set the paper status to yes
                 System.out.println("This paper have enough reviewers!");
@@ -671,8 +690,9 @@ public class ConferenceManagement {
                 break;
 
         }
-    }
 
+
+    }
     public boolean checkTwoArrayListHaveSameVariable(ArrayList<String> one, ArrayList<String> two)
     {
         for(String s: one)
@@ -682,6 +702,27 @@ public class ConferenceManagement {
         }
         return false;
     }
+
+    public int findAccount(String email)
+    {
+        int index = -1;
+        for (User user : userList)
+        {
+            if (user.getEmail().equals(email))
+                index = userList.indexOf(user);
+        }
+        return index;
+    }
+
+    public ArrayList<User> findValidReviewer(Conference con, User user){
+        ArrayList<User> validReviewer = new ArrayList<>();
+        for (User u : userList){
+            if (u.findConference(con.getConName()) == -1 && !u.getName().equals(user.getName()))
+                validReviewer.add(u);
+        }
+        return validReviewer;
+    }
+
 
     public void writeConferenceToFile()
     {
@@ -816,6 +857,13 @@ public class ConferenceManagement {
     }
 
 
+
+
+
+
+
+
+
     public boolean isInputUpToFormat(String str)
     {
         if(str.trim().equals("") || !isStringAlphabetic(str))
@@ -881,6 +929,12 @@ public class ConferenceManagement {
             System.out.println("Please input the correct number:");
             option =sc.nextLine();
         }
+        while(checkConferenceOverlaps(author.getConferenceListForChair(),conferenceList.get(Integer.parseInt(option)))==true
+                ||checkConferenceOverlaps(author.getConferenceListForReviewer(),conferenceList.get(Integer.parseInt(option)))==true)
+        {
+            System.out.println("You can not submit paper in this conference, because you have another identity in this conference");
+            option =sc.nextLine();
+        }
         Conference conferenceObject = conferenceList.get(Integer.parseInt(option));
         //show the conference list and let the author to choose one conference to submit paper.
         System.out.println("The submission deadline for conference: " + conferenceObject.getSubDate());
@@ -934,7 +988,13 @@ public class ConferenceManagement {
         System.out.println("Submit the paper successfully");
     }
 
+      public boolean checkConferenceOverlaps(ArrayList<Conference> one,Conference two)
+    {
+        if(one.contains(two))
+            return true;
 
+        return false;
+     }//this method is used to check if the same user login with different identity, whether his conferences for different identities overlap
 
 
     public boolean validFile(String fileName)
@@ -943,14 +1003,28 @@ public class ConferenceManagement {
             return true;
         return false;
     }
+    public boolean checkEmail(String str)
+    {
+        for(User u:userList)
+            if(str.equals(u.getEmail()))
+                return true;
+        return false;
+    }
+    public boolean checkPsw(String str)
+    {
+        for(User u:userList)
+            if(str.equals(u.getPsw()))
+                return true;
+        return false;
+    }
 
     public static void main(String[] args) throws Exception
     {
 
         ConferenceManagement cm = new ConferenceManagement();
-        cm.submitPaper();
-
+        cm.readFromFile();
 
     }
+
 
 }
