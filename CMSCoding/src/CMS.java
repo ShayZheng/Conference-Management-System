@@ -2,10 +2,11 @@
  * @author Yuzhe Wang
  * @version 30 Apr 2021
  */
-import java.io.*;
-import java.util.*;
 
-public class CMS {
+import java.util.Scanner;
+
+public class CMS
+{
     private ConferenceManagement CM;
     private Menu menu;
 

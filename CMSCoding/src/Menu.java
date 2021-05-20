@@ -40,7 +40,7 @@ public class Menu {
     public void displayReviewerMenu(){
         System.out.println("\n Welcome to the Reviewer home screen");
         System.out.println("======================================");
-        System.out.println("(1) Specify expertise keywords of topic");
+        System.out.println("(1) Choose a topic to review");
         System.out.println("(2) Submit evaluation for paper");
         System.out.println("(3) Return to Main Menu");
         System.out.print("Choose an option: ");

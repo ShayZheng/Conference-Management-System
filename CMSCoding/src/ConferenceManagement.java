@@ -1,9 +1,12 @@
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,46 +53,65 @@ public class ConferenceManagement {
         }
 
         //read paper from paper file
-        try {
-            FileReader inputFile = new FileReader("src/paper.txt");
+        try
+        {
+            FileReader inputFile = new FileReader("src/paper test.txt");
             try {
                 Scanner parser = new Scanner(inputFile);
+
+                String allLines = "";
                 while (parser.hasNextLine()) {
                     String line = parser.nextLine();
-                    String[] values = line.split(",");
-                    String Name = values[0];
-                    String smDeadline = values[1];
-                    String rmDeadline = values[2];
-                    String Status = values[3];
-                    String Author = values[4];
-                    String Keyword = values[5];
-                    String Decision = values[6];
-                    String conName = values[7];
-                    Paper p = new Paper(Name, smDeadline, rmDeadline, Status, Author, Keyword, Decision, conName);
-                    if(values.length >8)
-                        p.setStatus("YES");
-                    if(values.length == 9)
-                        p.getAssignedReviewerList().add(searchUser(values[8]));
-                    if(values.length == 10)
+                    allLines += line + "\n";
+                }
+                String[] blocks = allLines.split("\n\n");
+                Pattern p = Pattern.compile("\\{(.*?)}");
+                for (int i = 0; i < blocks.length; i++)
+                {
+                    Matcher m = p.matcher(blocks[i]);
+                    ArrayList<String> cleaM = new ArrayList<>();
+                    while (m.find())
                     {
-                        p.getAssignedReviewerList().add(searchUser(values[8]));
-                        p.getAssignedReviewerList().add(searchUser(values[9]));
+                        cleaM.add(m.group().replace("{", "").replace("}", ""));
                     }
-                    if(values.length == 11)
+                    //Add paper information in paper list
+                    String[] paperInfo = cleaM.get(0).split(",");
+                    paperList.add(new Paper(paperInfo[0],paperInfo[1], paperInfo[2], paperInfo[3], paperInfo[4],paperInfo[5],paperInfo[6]));
+
+                    //reviewer list for paper
+                    String[] reviewer = cleaM.get(1).split(",");
+                    for(int j = 0; j < reviewer.length;j++)
                     {
-                        p.getAssignedReviewerList().add(searchUser(values[8]));
-                        p.getAssignedReviewerList().add(searchUser(values[9]));
-                        p.getAssignedReviewerList().add(searchUser(values[10]));
+                        if(!reviewer[j].equals(null))
+                            paperList.get(i).getAssignedReviewerList().add(searchUser(reviewer[j]));
+
+                    }
+                    //keyword list for this paper
+                    String[] paperKeyWord = cleaM.get(2).split(",");
+                    for(int j = 0; j < paperKeyWord.length;j++)
+                    {
+                        if(!paperKeyWord[j].equals(null))
+                            paperList.get(i).getKeywords().add(paperKeyWord[j]);
+                    }
+                    //Evaluation for this paper
+                    String[] evaluations = cleaM.get(3).split(",");
+                    for(int j = 0; j < evaluations.length;j++)
+                    {
+                        if(!evaluations[j].equals(null))
+                            paperList.get(i).getEvaluation().add(evaluations[j]);
                     }
 
-                    paperList.add(p);
                 }
-            } finally {
+
+            } finally
+            {
                 inputFile.close();
             }
-        } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException exception)
+        {
             System.out.println("file not found");
-        } catch (IOException exception) {
+        } catch (IOException exception)
+        {
             System.out.println("Unexpected I/O exception occurs");
         }
 
@@ -189,6 +211,18 @@ public class ConferenceManagement {
         {
             System.out.println("Unexpected I/O exception occurs");
         }
+
+        for(User u:userList)
+        {
+            if(u.getMessageBox().get(0).equals(""))
+                u.getMessageBox().clear();
+        }//clear some variables equals ""
+        for(Paper p:paperList)
+        {
+            if(p.getEvaluation().get(0).equals(""))
+                p.getEvaluation().clear();
+        }//clear some variables equals ""
+
     }
 
 
@@ -252,9 +286,14 @@ public class ConferenceManagement {
         userList.add(newUser);
     }
 
-    public void addConference() throws ParseException
+    public void addConference(String chairName) throws ParseException
     {
 
+        User chair = searchUser(chairName);
+        System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as a chair!");
+        System.out.println("**************************************");
+        System.out.println("          Chair Management           ");
+        System.out.println("**************************************");
         System.out.print("Please input the conference name:");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
@@ -273,7 +312,7 @@ public class ConferenceManagement {
             title = sc.nextLine();
         }
         System.out.println("Please choose the conference topic from the keywordList(Here is the keyword list):");
-        for(int i = 0; i < keywordList.size();i++)
+        for(int i = 0; i < keywordList.size();i++)//choose one keyword as a this conference topic
         {
             if (keywordList.get(i).equals(""))
             {
@@ -291,27 +330,28 @@ public class ConferenceManagement {
         String topic = keywordList.get(Integer.parseInt(option));
 
         System.out.println("Please set the submission deadline for this conference, the format is (yyyy-MM-dd HH:mm:ss)");
-        String subDate = sc.nextLine();
+        String subDate = sc.nextLine();//set submission deadline for this conference
         while(!isTimeUpToStandard(subDate))
         {
             subDate = sc.nextLine();
         }
 
         System.out.println("Please set the review deadline for this conference, the format is (yyyy-MM-dd HH:mm:ss)");
-        String revDate = sc.nextLine();
+        String revDate = sc.nextLine();//set the review deadline for this conference
         while(!isTimeUpToStandard(revDate))
         {
             revDate = sc.nextLine();
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        while (dateFormat.parse(subDate).after(dateFormat.parse(revDate)))
+        while (dateFormat.parse(subDate).after(dateFormat.parse(revDate)))//submission deadline should not after the review deadline
         {
             System.out.println("Submission time should before the review time");
             revDate = sc.nextLine();
         }
-        Conference newConference = new Conference(name,title,topic,subDate,revDate);
+        Conference newConference = new Conference(name,title,topic,subDate,revDate);//create the conference object
         conferenceList.add(newConference);
+        writeConferenceToFile();//reload the database
 
     }
 
@@ -341,8 +381,10 @@ public class ConferenceManagement {
         return keywordList;
     }
 
-    public void modifyConference() throws ParseException {
-        // change part
+    public void modifyConference(String name) throws ParseException {
+
+        User chair = searchUser(name);
+        System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as a chair!");
         Scanner sc = new Scanner(System.in);
         for(Conference one : conferenceList)
             System.out.println(conferenceList.indexOf(one)+"."+ one.toString());
@@ -354,7 +396,7 @@ public class ConferenceManagement {
             System.out.println("Please enter the number again: ");
             option = sc.nextLine();
 
-        }
+        }//let chair to choose one conference to modify
         for(Conference one: conferenceList)
         {
             if (Integer.parseInt(option) == conferenceList.indexOf(one))
@@ -381,7 +423,9 @@ public class ConferenceManagement {
                             System.out.println("Please input the correct name format:");
                             sc.nextLine();
                         }
-                        one.setConName(newName);
+                        one.setConName(newName);//new name, title and topic should not be null
+                        chair.getConferenceListForChair().add(one);
+                        //add this conference into chair's chair conference list
                         break;
                     case "2":
                         System.out.print("please input the new title:");
@@ -392,6 +436,8 @@ public class ConferenceManagement {
                             sc.nextLine();
                         }
                         one.setConTitle(newTitle);
+                        chair.getConferenceListForChair().add(one);
+                        //add this conference into chair's chair conference list
                         break;
                     case "3":
                         System.out.println("Please choose a new topic for this conference");
@@ -404,7 +450,7 @@ public class ConferenceManagement {
                             else
                                 System.out.println(i+"."+keywordList.get(i));
                         }
-                        String newTopic = sc.nextLine();
+                        String newTopic = sc.nextLine();//from the existing keyword list to choose one keyword for this conference
                         while(isStringAlphabetic(newTopic) || Integer.parseInt(newTopic) >= keywordList.size() || Integer.parseInt(newTopic) < 0)
                         {
                             System.out.println("Please input the correct number");
@@ -412,6 +458,8 @@ public class ConferenceManagement {
                         }
 
                         one.setConTitle(keywordList.get(Integer.parseInt(newTopic)));
+                        chair.getConferenceListForChair().add(one);
+                        //add this conference into chair's chair conference list
                         break;
                     case "4":
                         System.out.print("please input the new submission deadline,the format is (yyyy-MM-dd HH:mm:ss)");
@@ -423,6 +471,9 @@ public class ConferenceManagement {
                             newSubDeadline = sc.nextLine();
                         }
                         one.setSubDate(newSubDeadline);
+                        //some validation on deadline, its new submission time should not after the existing review deadline
+                        chair.getConferenceListForChair().add(one);
+                        //add this conference into chair's chair conference list
                         break;
                     case "5":
                         System.out.print("please input the new review deadline,the format is (yyyy-MM-dd HH:mm:ss)");
@@ -433,7 +484,10 @@ public class ConferenceManagement {
                             System.out.print("please input the correct review deadline:");
                             newRevDeadline = sc.nextLine();
                         }
+                        //some validation on deadline, its existing  submission time should not after the new review deadline
                         one.setRevDate(newRevDeadline);
+                        chair.getConferenceListForChair().add(one);
+                        //add this conference into chair's chair conference list
                         break;
                     case "6":
                         conferenceList.remove(one);
@@ -444,6 +498,9 @@ public class ConferenceManagement {
                         break;
 
                 }
+                writeUserToUserFile();
+                writeConferenceToFile();
+                //reload the database
             }
 
         }
@@ -451,8 +508,8 @@ public class ConferenceManagement {
     }
 
 
-    public void assignReviewer(String name) throws Exception {
-        readFromFile();
+    public void assignReviewer(String name) throws Exception
+    {
         User chair = searchUser(name);
         System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as a chair!");
         System.out.println("**************************************");
@@ -466,16 +523,16 @@ public class ConferenceManagement {
         {
             System.out.println("Please input the correct number");
             option = sc.nextLine();
-        }
+        }//create a chair object and let he/she choose the function
         switch (option)
         {
-            case"0":
-                ArrayList<User> reviewerListAuto = new ArrayList<>();
-                System.out.println("Please choose one paper to assign reviewer:");
+            case"0"://this choice is assign reviewers automatically
+                ArrayList<User> reviewerListAuto = new ArrayList<>();//find the reviewer list int the whole user list
+                System.out.println("Please choose one paper to assign reviewer:");//find the non reviewed papers
                 for(Paper p:paperList)
                 {
                     if(p.getStatus().equals("NO"))
-                        System.out.println(paperList.indexOf(p)+"."+p.getName()+" "+"[Key word:]"+p.getKeyword());
+                        System.out.println(paperList.indexOf(p)+"."+p.getName()+" "+"[Key word:]"+p.getStringListNames(p.getKeywords()));
                 }
 
                 String paperNumAuto = sc.nextLine();
@@ -484,45 +541,67 @@ public class ConferenceManagement {
                     System.out.println("Please input the correct number");
                     paperNumAuto = sc.nextLine();
                 }
-                Paper paperAuto = paperList.get(Integer.parseInt(paperNumAuto));
+                Paper paperAuto = paperList.get(Integer.parseInt(paperNumAuto));//after choose the paper , create a paper object
                 for(User u:userList)
                 {
-                    if(u.getChooseType() == 2)
+                    if(u.getChooseType() == 2&& u!=null )
                         reviewerListAuto.add(u);
                 }
+
+                for(Paper p: paperList)
+                {
+                    p.getAssignedReviewerList().clear();
+                }//clear the list to avoid the list does not contain null elements
+
                 int i = 0;
                 while(paperAuto.getAssignedReviewerList().size() < 3 && i < reviewerListAuto.size())
+                //choose 3 reviewers for this paper and ensure the choice in the reviewer list boundary
                 {
-                    User userAutoOne = reviewerListAuto.get(i);
-                    User userAuto = searchUser(userAutoOne.getName());
-                    if(!userAuto.getName().equals(paperAuto.getAuthor()) &&userAuto.getKeywords().contains(paperAuto.getKeyword()))
-                    {
-                        userAuto.getConferenceListForReviewer().add(searchConference(paperAuto.getConName()));
-                        paperAuto.getAssignedReviewerList().add(userAuto);
-                        userAuto.getAssignedPaper().add(paperAuto);
+                    User userAutoOne = reviewerListAuto.get(i);//find the specific reviewer
 
+                    User userAuto = searchUser(userAutoOne.getName());
+                    //find the specific reviewer and find the location in the user list
+                    if(!userAuto.getName().equals(paperAuto.getAuthor())&&checkTwoArrayListHaveSameVariable(userAutoOne.getKeywords(),paperAuto.getKeywords())&&userAuto!=null)
+                    //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords
+                    {
+                        if(userAuto != null)
+                            paperAuto.getAssignedReviewerList().add(userAuto);
+                        //paper add this reviewer into its assigned reviewer list
                     }
 
                     i++;
                 }
                 for(User u:paperAuto.getAssignedReviewerList())
                 {
-                    sendMessage(u);
+                    if(u!=null)
+                    {
+                        sendMessage(u);//send every reviewer a message to prompt him/her they have a paper to review
+                        u.getAssignedPaper().add(paperAuto);
+                    //reviewer add this paper into his/her assigned paper list
+                        u.getConferenceListForReviewer().add(searchConference(paperAuto.getConName()));
+                    }
+                    //reviewer add this paper's conference into his/her reviewer conference list
                 }
                 chair.getConferenceListForChair().add(searchConference(paperAuto.getConName()));
+                //this chair add this paper's conference into his chair conference list
                 if(paperAuto.getAssignedReviewerList().size() == 3)
                     paperAuto.setStatus("YES");
+                //set the paper status to "yes",so it can not be choose to review next time
                 System.out.println("Add Successfully!");
                 writeUserToUserFile();
                 writePaperToFile();
+                //reload into database
                 break;
             case"1":
                 System.out.println("please choose one paper to assign");
-
+                for(Paper p: paperList)
+                {
+                    p.getAssignedReviewerList().clear();
+                }//clear the list to avoid the list does not contain null elements
                 for(Paper p:paperList)
                 {
                     if(p.getStatus().equals("NO"))
-                        System.out.println(paperList.indexOf(p)+"."+p.getName()+" "+"[Key word:]"+p.getKeyword());
+                        System.out.println(paperList.indexOf(p)+"."+p.getName()+" "+"[Key word:]"+p.getStringListNames(p.getKeywords()));
                 }
 
                 String paperNum = sc.nextLine();
@@ -532,15 +611,17 @@ public class ConferenceManagement {
                     paperNum = sc.nextLine();
                 }
                 Paper paperObject = paperList.get(Integer.parseInt(paperNum));
+                //show the paper which could be assigned reviewer and after choosing create a paper object
                 System.out.println("This is the reviewer list, please choose one to assign this paper");
 
                 for(User u:userList)
                 {
-                    if(u.getChooseType() == 2 && !u.getName().equals(paperObject.getAuthor()))
+                    if(u.getChooseType() == 2 && !u.getName().equals(paperObject.getAuthor()))//reviewer could not be the author of this paper
                         System.out.println(userList.indexOf(u)+"."+u.getName()+" "+"[Keywords:]"+u.getStringListNames(u.getKeywords()));
                 }
-
+                //show who can review paper and show their keywords
                 while(paperObject.getAssignedReviewerList().size() < 3)
+                //assign 3 reviewers a time for a paper
                 {
                     System.out.println("Please choose one reviewer:");
                     String number = sc.nextLine();
@@ -556,27 +637,34 @@ public class ConferenceManagement {
                             System.out.println("You have already assign this reviewer,please choose again");
                             number = sc.nextLine();
                         }
-                    }
-                    while(!userList.get(Integer.parseInt(number)).getKeywords().contains(paperObject.getKeyword()))
+                    }//could not assign the same reviewer
+                    while(!checkTwoArrayListHaveSameVariable(userList.get(Integer.parseInt(number)).getKeywords(),paperObject.getKeywords()))
                     {
                         System.out.println("You choose the reviewer's keywords do not match the paper's key word");
                         number = sc.nextLine();
-                    }
+                    }//reviewers' key words should match the paper's key words
 
                     User reviewerObject = userList.get(Integer.parseInt(number));
+                    //create this reviewer object
                     paperObject.getAssignedReviewerList().add(reviewerObject);
+                    //paper's reviewer list add this reviewer
                 }
                 for(User u:paperObject.getAssignedReviewerList())
                 {
                     u.getAssignedPaper().add(paperObject);
+                    //reviewer add this paper into their assigned paper list
                     u.getConferenceListForReviewer().add(searchConference(paperObject.getConName()));
+                    //reviewer add this paper's conference into their reviewer conference list
                     sendMessage(u);
+                    //send every reviewer a message
                 }
 
                 paperObject.setStatus("YES");
+                //set the paper status to yes
                 System.out.println("This paper have enough reviewers!");
                 writeUserToUserFile();
                 writePaperToFile();
+                //reload into database
                 break;
             default:
                 System.out.println("Please input the correct number");
@@ -585,6 +673,15 @@ public class ConferenceManagement {
         }
 
 
+    }
+    public boolean checkTwoArrayListHaveSameVariable(ArrayList<String> one, ArrayList<String> two)
+    {
+        for(String s: one)
+        {
+            if(two.contains(s))
+                return true;
+        }
+        return false;
     }
 
 
@@ -609,33 +706,45 @@ public class ConferenceManagement {
         //rewrite the new conference to database
         try
         {
-            PrintWriter outputFile = new PrintWriter("src/paper.txt");
+            PrintWriter outputFile = new PrintWriter("src/paper test.txt");
             String str = "";
             for (Paper one : paperList)
-            { if(one.getAssignedReviewerList().size()==0)
             {
-                str = one.getName()+ "," +one.getSmDeadline()
-                        +","+one.getRmDeadline()+","+one.getStatus()
-                        +"," +one.getAuthor()+","+one.getKeyword()
-                        +","+one.getDecision()+","+one.getConName();
+                String reviewerString = "" ;
+                String keywordString = "";
+                String evaluationString = "";
+
+               if(one.getAssignedReviewerList().size() ==0)
+                    reviewerString = "";
+                if(one.getAssignedReviewerList().size() > 0)
+                    reviewerString = one.getReviewerNames(one.getAssignedReviewerList());
+
+                if(one.getKeywords().size() ==0)
+                    keywordString = "";
+                if(one.getKeywords().size() > 0)
+                    keywordString = one.getStringListNames(one.getKeywords());
+
+                if(one.getEvaluation().size() == 0)
+                    evaluationString ="";
+                if(one.getEvaluation().size() > 0)
+                    evaluationString = one.getStringListNames(one.getEvaluation());
+
+
+
+                str = "paper{"+one.getName()+","+one.getSmDeadline()+","+one.getRmDeadline()+","+one.getStatus()+","+one.getAuthor()+","+one.getDecision()+","+one.getConName()+"}\n"
+                        +"reviewer for this paper{"+reviewerString+"}\n"
+                        +"keywords{"+keywordString+"}\n"
+                        +"Evaluation{"+evaluationString+"}\n";
                 outputFile.println(str);
             }
-                if(one.getAssignedReviewerList().size()>0)
-                {
-                    str = one.getName()+ "," +one.getSmDeadline()
-                            +","+one.getRmDeadline()+","+one.getStatus()
-                            +"," +one.getAuthor()+","+one.getKeyword()
-                            +","+one.getDecision()+","+one.getConName()
-                            + one.getReviewerNames(one.getAssignedReviewerList());
-                    outputFile.println(str);
-                }
-            }
+
             outputFile.close();
         }
         catch(IOException e)
         {
             System.out.println("Unexpected I/O exception occurs");
         }
+
 
     }
 
@@ -761,10 +870,9 @@ public class ConferenceManagement {
 
     }
 
-    public void submitPaper(String name) throws Exception
+    public void submitPaper(String name) throws Exception//this function is for chair to submit the paper
     {
-        readFromFile();
-        User author =searchUser(name);
+        User author =searchUser(name);// create the user object
         System.out.println("Hi"+" "+author.getName()+","+"you are now logging in as an author!");
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
@@ -783,45 +891,56 @@ public class ConferenceManagement {
             option =sc.nextLine();
         }
         Conference conferenceObject = conferenceList.get(Integer.parseInt(option));
+        //show the conference list and let the author to choose one conference to submit paper.
         System.out.println("The submission deadline for conference: " + conferenceObject.getSubDate());
         if(d.after(sdf.parse(conferenceObject.getSubDate())))
         {
-            System.out.println("you can not submit the paper");
+            System.out.println("you can not submit the paper in this current time");
+            //show the submission deadline for this conference, if the submission time is after this deadline, this paper will be rejected.
             return;
         }
         System.out.println("Please enter the paper name (end with [.pdf] ot [.docx])");
+        //in put the specific paper format
         String paperName = sc.nextLine();
         while(!validFile(paperName))
         {
             System.out.println("The file format is invalid");
-            paperName = sc.nextLine();
+            paperName = sc.nextLine();//some validation for this paper format
         }
-        System.out.println("Please choose the key word for this paper");
-        for(int i = 0; i < keywordList.size();i++)
+        //choose 3 keywords for this author key word list
+        ArrayList<String> submittingPaperKeywords = new ArrayList<>();
+        int i = 0;
+        while(i < 3)
         {
-            if (keywordList.get(i).equals(""))
+         for(String s:author.getKeywords())
+             System.out.println(author.getKeywords().indexOf(s)+"."+s);
+         System.out.println("Please choose the key word for this paper");
+         String number = sc.nextLine();//add validations
+         while(isStringAlphabetic(number) || Integer.parseInt(number) >= author.getKeywords().size() || Integer.parseInt(number) < 0)
+            //validation in input
             {
-                keywordList.remove(keywordList.get(i));
-            }
-            else
-                System.out.println(i+"."+keywordList.get(i));
+                System.out.println("Please input the correct number");
+                number = sc.nextLine();
+             }
+         submittingPaperKeywords.add(author.getKeywords().get(Integer.parseInt(number)));
+         i++;
         }
-        String number = sc.nextLine();//add validations
-        while(isStringAlphabetic(number) || Integer.parseInt(number) >= keywordList.size() || Integer.parseInt(number) < 0)
-        {
-            System.out.println("Please input the correct number");
-            number = sc.nextLine();
-        }
-        String paperKeyWord = keywordList.get(Integer.parseInt(number));
-        Paper newPaper = new Paper(paperName,conferenceObject.getSubDate(),conferenceObject.gatRevDate(),"NO",author.getName(),paperKeyWord,"null",conferenceObject.getConName());
-        paperList.add(newPaper);
 
+        Paper newPaper = new Paper(paperName,conferenceObject.getSubDate(),conferenceObject.gatRevDate(),"NO",author.getName(),"null",conferenceObject.getConName());
+        //create the paper object
+        newPaper.getKeywords().addAll(submittingPaperKeywords);
+        paperList.add(newPaper);
+        //add the paper to paper list
 
         author.getConferenceListForAuthor().add(conferenceObject);
+        //add the relevant conference to this author's chair conference list
         author.getSubmittedPaper().add(newPaper);
+        //add this paper to this author's submitted paper list
 
         writePaperToFile();
         writeUserToUserFile();
+        //reload this new adding info into user and paper database
+        System.out.println("Submit the paper successfully");
     }
 
 
@@ -838,10 +957,8 @@ public class ConferenceManagement {
     {
 
         ConferenceManagement cm = new ConferenceManagement();
-        cm.submitPaper("Carol" );
-
-
-
+        cm.readFromFile();
+        cm.assignReviewer("Joyce");
 
 
     }
