@@ -130,16 +130,16 @@ public class Paper {
     {
         String names = "";
         if(u.size()==1)
-            if(u.get(0)!=null&&!u.get(0).getName().equals(""))
+            if(u.get(0)!=null)
                 names = u.get(0).getName();
         if(u.size()>1)
         {
-            for(int i = 0 ; i < u.size()-1; i++ )
+            for(int i = 0 ; i < u.size(); i++ )
             {
                 if(u.get(i) != null)
                     names += u.get(i).getName()+",";
             }
-            names += u.get(u.size()-1).getName();
+
         }
 
 
