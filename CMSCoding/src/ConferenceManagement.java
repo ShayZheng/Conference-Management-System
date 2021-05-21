@@ -354,7 +354,7 @@ public class ConferenceManagement {
         writeConferenceToFile();//reload the database
 
     }
-    public User searchUserAccordingToEmail(String s)
+    public User searchUserByEmail(String s)
     {
         for(User u:userList)
             if(u.getEmail().equals(s))
@@ -1024,6 +1024,21 @@ public class ConferenceManagement {
         ConferenceManagement cm = new ConferenceManagement();
         cm.readFromFile();
         cm.submitPaper("Carol");
+
+        User chair = cm.userList.get(1);
+        System.out.println("Please input your keywords (Split with comma)");
+        Scanner sc = new Scanner(System.in);
+        String[] inputKeywords = sc.nextLine().split(",");
+        for(int i = 0;i<inputKeywords.length;i++)
+        {
+            chair.getKeywords().add(inputKeywords[i]);
+        }
+        cm.writeUserToUserFile();
+
+        for(String s: chair.getKeywords())
+        {
+            System.out.println(s);
+        }
 
     }
 

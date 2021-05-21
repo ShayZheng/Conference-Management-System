@@ -6,6 +6,7 @@ public class Menu {
     public Menu(){}
 
     public void displayMainMenu(){
+        System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("     Conference Management System     ");
         System.out.println("**************************************");
@@ -17,6 +18,7 @@ public class Menu {
     }
 
     public void displayAdministratorMenu(){
+        System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("        Administrator Management      ");
         System.out.println("**************************************");
@@ -28,6 +30,7 @@ public class Menu {
     }
 
     public void displayChairMenu(){
+        System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("           Chair Management           ");
         System.out.println("**************************************");
@@ -40,16 +43,18 @@ public class Menu {
     }
 
     public void displayReviewerMenu(){
+        System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("          Reviewer Management         ");
         System.out.println("**************************************");
-        System.out.println("(1) Choose a topic to review");
+        System.out.println("(1) Specify your expertise keywords");
         System.out.println("(2) Submit evaluation for paper");
         System.out.println("(3) Return to Main Menu");
         System.out.print("Choose an option: ");
     }
 
     public void displayAuthorMenu(){
+        System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
         System.out.println("**************************************");
@@ -60,6 +65,7 @@ public class Menu {
     }
 
     public void displayTypeMenu() {
+        System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("     Conference Management System     ");
         System.out.println("**************************************");
