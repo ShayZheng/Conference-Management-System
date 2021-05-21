@@ -53,7 +53,7 @@ public class Menu {
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
         System.out.println("**************************************");
-        System.out.println("(1) Set keywords");
+        System.out.println("(1) Provide key words for paper");
         System.out.println("(2) Submit paper");
         System.out.println("(3) Return to Main Menu");
         System.out.print("Choose an option: ");

@@ -150,16 +150,16 @@ public class User {
     {
         String names = "";
         if(con.size()==1)
-            if(con.get(0)!=null&&!con.get(0).getConName().equals(""))
+            if(con.get(0)!=null && !con.get(0).getConName().equals(""))
                 names = con.get(0).getConName();
         if(con.size()>1)
         {
-            for(int i = 0 ; i < con.size()-1; i++ )
+            for(int i = 0 ; i < con.size(); i++ )
             {
                 if(con.get(i) != null)
                     names += con.get(i).getConName()+",";
             }
-            names += con.get(con.size()-1).getConName();
+
         }
 
 
