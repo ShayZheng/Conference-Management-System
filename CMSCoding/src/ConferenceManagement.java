@@ -1023,6 +1023,7 @@ public class ConferenceManagement {
 
         ConferenceManagement cm = new ConferenceManagement();
         cm.readFromFile();
+        cm.submitPaper("Carol");
 
     }
 
