@@ -10,10 +10,9 @@ public class Menu {
         System.out.println("**************************************");
         System.out.println("     Conference Management System     ");
         System.out.println("**************************************");
-        System.out.println("(1) Administrator login");
-        System.out.println("(2) Register New User");
-        System.out.println("(3) Login");
-        System.out.println("(4) Exit System");
+        System.out.println("(1) Register");
+        System.out.println("(2) Login");
+        System.out.println("(3) Exit System");
         System.out.print("Choose an option: ");
     }
 
@@ -58,9 +57,8 @@ public class Menu {
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
         System.out.println("**************************************");
-        System.out.println("(1) Provide key words for paper");
-        System.out.println("(2) Submit paper");
-        System.out.println("(3) Return to Main Menu");
+        System.out.println("(1) Submit paper");
+        System.out.println("(2) Return to Main Menu");
         System.out.print("Choose an option: ");
     }
 
@@ -75,6 +73,21 @@ public class Menu {
         System.out.println("(3) Author");
         System.out.println("(4) Return to main menu.");
         System.out.print("Choose an option: ");
+    }
+
+    public void displayKeywordsMenu()
+    {
+        System.out.println("\n" + "Please select three keywords(first one should be your strong expertise)" + "\n");
+        System.out.println("1.Information Technology");
+        System.out.println("2.Cyber Security");
+        System.out.println("3.Cloud Computing");
+        System.out.println("4.Network Develop");
+        System.out.println("5.Software Engineering");
+        System.out.println("6.Distributed Mobile Develop");
+        System.out.println("7.Database");
+        System.out.println("8.Big Data");
+        System.out.println("9.User Interface Design");
+        System.out.println("10.Manually Add New Keywords ");
     }
 
 }
