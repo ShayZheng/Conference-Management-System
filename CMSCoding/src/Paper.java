@@ -15,6 +15,7 @@ public class Paper {
     private String Author;
     private String Decision;
     private String conName;
+    private String filePath;
     private ArrayList<User> assignedReviewers;
     private ArrayList<String> Evaluation;
     private ArrayList<String> Keywords;
@@ -22,7 +23,7 @@ public class Paper {
     public Paper() {
     }
 
-    public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String decision, String conName) {
+    public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String decision, String conName,String file) {
         this.Name = name;
         this.smDeadline = smDeadline;
         this.rmDeadline = rmDeadline;
@@ -30,9 +31,18 @@ public class Paper {
         this.Author = author;
         this.Decision = decision;
         this.conName = conName;
+        this.filePath = file;
         this.assignedReviewers = new ArrayList();
         this.Keywords = new ArrayList();
         this.Evaluation = new ArrayList();
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
     public String getName() {

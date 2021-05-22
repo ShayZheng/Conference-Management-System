@@ -24,7 +24,7 @@ public class User {
 
 
 
-    public User(int newID, String newName, String newPsw,int newType, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA)
+    public User(int newID, String newName, String newPsw, int newType, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA)
     {
         ID = newID;
         Name = newName;
