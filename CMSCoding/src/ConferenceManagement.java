@@ -273,7 +273,7 @@ public class ConferenceManagement {
             if(u.getEmail().equals(s))
                 return u;
 
-            return null;
+        return null;
     }
 
 
@@ -345,7 +345,7 @@ public class ConferenceManagement {
                 String keywordString = "";
                 String evaluationString = "";
 
-               if(one.getAssignedReviewerList().size() ==0)
+                if(one.getAssignedReviewerList().size() ==0)
                     reviewerString = "";
                 if(one.getAssignedReviewerList().size() > 0)
                     reviewerString = one.getReviewerNames(one.getAssignedReviewerList());
@@ -498,13 +498,13 @@ public class ConferenceManagement {
     }
 
 
-      public boolean checkConferenceOverlaps(ArrayList<Conference> one,Conference two)
+    public boolean checkConferenceOverlaps(ArrayList<Conference> one,Conference two)
     {
         if(one.contains(two))
             return true;
 
         return false;
-     }//this method is used to check if the same user login with different identity, whether his conferences for different identities overlap
+    }//this method is used to check if the same user login with different identity, whether his conferences for different identities overlap
 
 
     public boolean validFile(String fileName)
