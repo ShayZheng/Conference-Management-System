@@ -68,8 +68,8 @@ reviewer for this paper{}
 keywords{DS,IT,Finance,}
 Evaluation{good}
 
-paper{it,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,T3,null,zzz,null}
-reviewer for this paper{}
+paper{it,2021-05-23 23:55:55,2021-06-01 23:55:55,YES,T3,null,zzz,null}
+reviewer for this paper{,Shay,T1,T2}
 keywords{DS,IT,Finance,}
 Evaluation{}
 

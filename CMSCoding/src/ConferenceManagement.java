@@ -216,19 +216,19 @@ public class ConferenceManagement {
             if(u.getKeywords().get(0).equals(""))
                 u.getKeywords().clear();
             if(u.getConferenceListForChair().size()==1)
-                if(u.getConferenceListForChair().get(0).equals(""))
+                if(u.getConferenceListForChair().get(0) == null)
                     u.getConferenceListForChair().clear();
             if(u.getConferenceListForAuthor().size()==1)
-                if(u.getConferenceListForAuthor().get(0).equals(""))
+                if(u.getConferenceListForAuthor().get(0) == null)
                     u.getConferenceListForAuthor().clear();
             if(u.getConferenceListForReviewer().size()==1)
-                if(u.getConferenceListForReviewer().get(0).equals(""))
+                if(u.getConferenceListForReviewer().get(0) == null)
                     u.getConferenceListForReviewer().clear();
             if(u.getAssignedPaper().size()==1)
-                if(u.getAssignedPaper().get(0).equals(""))
+                if(u.getAssignedPaper().get(0) == null)
                     u.getAssignedPaper().clear();
             if(u.getSubmittedPaper().size()==1)
-                if(u.getSubmittedPaper().get(0).equals(""))
+                if(u.getSubmittedPaper().get(0) == null)
                     u.getSubmittedPaper().clear();
 
 
@@ -242,7 +242,7 @@ public class ConferenceManagement {
                 p.getKeywords().clear();
             if(p.getAssignedReviewerList().size()>1)
                 if(p.getAssignedReviewerList().get(0)!=null);
-                    p.getAssignedReviewerList().clear();
+            p.getAssignedReviewerList().clear();
 
         }//clear some variables equals ""
 
@@ -508,13 +508,13 @@ public class ConferenceManagement {
             return false;
         }
 
-        /*String[]dateBlocks = s.split(" ");
-        String[]dateLeftPart = dateBlocks[0].split("-");
-        String[]dateRightPart = dateBlocks[1].split(":");
-        if(Integer.parseInt(dateLeftPart[0]) > 2025 || Integer.parseInt(dateLeftPart[1]) < 0|| Integer.parseInt(dateLeftPart[1]) > 12
-                || Integer.parseInt(dateLeftPart[2]) < 0|| Integer.parseInt(dateLeftPart[2]) > 31 || Integer.parseInt(dateRightPart[0]) < 0
-                ||Integer.parseInt(dateRightPart[0]) > 24||Integer.parseInt(dateRightPart[1]) < 0 || Integer.parseInt(dateRightPart[1]) > 60
-                ||Integer.parseInt(dateRightPart[2]) < 0 || Integer.parseInt(dateRightPart[2]) > 60)*/
+    /*String[]dateBlocks = s.split(" ");
+    String[]dateLeftPart = dateBlocks[0].split("-");
+    String[]dateRightPart = dateBlocks[1].split(":");
+    if(Integer.parseInt(dateLeftPart[0]) > 2025 || Integer.parseInt(dateLeftPart[1]) < 0|| Integer.parseInt(dateLeftPart[1]) > 12
+            || Integer.parseInt(dateLeftPart[2]) < 0|| Integer.parseInt(dateLeftPart[2]) > 31 || Integer.parseInt(dateRightPart[0]) < 0
+            ||Integer.parseInt(dateRightPart[0]) > 24||Integer.parseInt(dateRightPart[1]) < 0 || Integer.parseInt(dateRightPart[1]) > 60
+            ||Integer.parseInt(dateRightPart[2]) < 0 || Integer.parseInt(dateRightPart[2]) > 60)*/
         return true;
     }
 
