@@ -9,21 +9,21 @@ Message{one,two,three}
 
 user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{name}
-Conference for Author{conference test,con5}
+Conference for Author{conference test,con5,conference test,conference test}
 Conference for Reviewer{}
-Keywords{CS,IT,BIS,zhou,yu,xin}
+Keywords{CS,IT,BIS,zhou,yu,xin,shay,lol,int,nw,new,new,new,new,nwe}
 Assigned Paper{}
-Submitted Paper{p.pdf,z.pdf,paper one.docx}
+Submitted Paper{p.pdf,z.pdf,paper one.docx,fjal.pdf,fajl.pdf}
 Message{}
 
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{Cyber Security}
 Conference for Author{}
 Conference for Reviewer{}
-Keywords{DS,CS}
-Assigned Paper{}
+Keywords{DS,CS,new,new,new,again,new,again,Information Technology,Cyber Security,no regex,need regex,regex}
+Assigned Paper{paper one,paper two}
 Submitted Paper{}
-Message{}
+Message{one,two}
 
 user{4,Joyce,********,1,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{Cyber Security,Cyber Security,Cyber Security,conference test}
@@ -61,21 +61,21 @@ Assigned Paper{paper one,paper one,paper two,paper three}
 Submitted Paper{}
 Message{zhou,z,s}
 
-user{8,shayzheng,11111111,0,test@gmail.com,student,111111111111,high,null,IT}
-Conference for chair{}
-Conference for Author{}
-Conference for Reviewer{}
-Keywords{}
-Assigned Paper{}
-Submitted Paper{}
-Message{}
-
 user{8,T4,********,2,T4@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
 Conference for Reviewer{Cyber Security}
 Keywords{DS,IT,Finance}
 Assigned Paper{paper one}
+Submitted Paper{}
+Message{}
+
+user{9,test,Zzzz1111,0,test@gmail.com,student,15220566753,high,Monash Student,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{IT,CS,NW,Information Technology,Cyber Security,Database,new,regex,regex}
+Assigned Paper{}
 Submitted Paper{}
 Message{}
 

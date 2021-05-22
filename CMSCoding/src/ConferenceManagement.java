@@ -852,8 +852,6 @@ public class ConferenceManagement {
         {
             System.out.println("Unexpected I/O exception occurs");
         }
-
-
     }
 
 
@@ -886,6 +884,7 @@ public class ConferenceManagement {
         }
         return true;
     }
+
     public boolean isTimeUpToStandard(String s) throws ParseException {
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -944,9 +943,12 @@ public class ConferenceManagement {
             //show the submission deadline for this conference, if the submission time is after this deadline, this paper will be rejected.
             return;
         }
-        System.out.println("Please enter the paper name (end with [.pdf] ot [.docx])");
+
+        System.out.println("Please enter the paper path");
         //in put the specific paper format
-        String paperName = sc.nextLine();
+        String paperPath = sc.nextLine();
+        String paperName = paperPath.split("/")[paperPath.split("/").length-1];
+
         while(!validFile(paperName))
         {
             System.out.println("The file format is invalid");
@@ -1025,7 +1027,7 @@ public class ConferenceManagement {
         cm.readFromFile();
         cm.submitPaper("Carol");
 
-        User chair = cm.userList.get(1);
+        /*User chair = cm.userList.get(1);
         System.out.println("Please input your keywords (Split with comma)");
         Scanner sc = new Scanner(System.in);
         String[] inputKeywords = sc.nextLine().split(",");
@@ -1039,8 +1041,6 @@ public class ConferenceManagement {
         {
             System.out.println(s);
         }
-
+*/
     }
-
-
 }
