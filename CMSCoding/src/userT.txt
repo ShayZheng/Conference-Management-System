@@ -79,3 +79,21 @@ Assigned Paper{}
 Submitted Paper{}
 Message{}
 
+user{10,Merritt,Merritt0206,0,merrittwyz@monash.edu,Student,1289711011,Master degree,unemployement,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{11,asd,Asdf1234,0,asd@aaa.edu,wqrqwqr,1234567890,qweqwe,qweqwe,qweqwe}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
