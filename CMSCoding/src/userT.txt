@@ -8,8 +8,8 @@ Submitted Paper{}
 Message{one,two,three}
 
 user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{name}
-Conference for Author{conference test,con5,Data Science}
+Conference for chair{name,}
+Conference for Author{con5,Data Science,}
 Conference for Reviewer{}
 Keywords{CS,IT,BIS,zhou,yu,xin,shay,lol,int}
 Assigned Paper{}
@@ -17,16 +17,16 @@ Submitted Paper{p.pdf,z.pdf,paper one.docx,asd}
 Message{}
 
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{Cyber Security}
+Conference for chair{Cyber Security,}
 Conference for Author{}
 Conference for Reviewer{}
-Keywords{Information Technology,new,regex,Cyber Security,again,Database,need regex,no regex,CS,DS}
-Assigned Paper{}
+Keywords{Database,new,regex,Cyber Security,again,need regex,CS,no regex,DS,Information Technology}
+Assigned Paper{paper one,paper two,it}
 Submitted Paper{}
-Message{}
+Message{one,two,qwe[From: Carol To:Shay]}
 
 user{4,Joyce,********,1,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{Cyber Security,Cyber Security,Cyber Security,conference test}
+Conference for chair{Cyber Security,Cyber Security,Cyber Security,}
 Conference for Author{}
 Conference for Reviewer{}
 Keywords{DS,IT}
@@ -37,25 +37,25 @@ Message{one,two,three}
 user{5,T1,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security}
+Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,}
 Keywords{DS,IT}
-Assigned Paper{paper one,paper two,paper three}
+Assigned Paper{paper one,paper two,paper three,it}
 Submitted Paper{}
-Message{zhou,z,ss}
+Message{zhou,z,ss,qwe[From: Carol To:T1]}
 
 user{6,T2,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security}
+Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,}
 Keywords{DS,IT,Finance}
-Assigned Paper{paper one,paper two,paper three}
+Assigned Paper{paper one,paper two,paper three,it}
 Submitted Paper{}
-Message{zhou,z,s}
+Message{zhou,z,s,qwe[From: Carol To:T2]}
 
 user{7,T3,********,2,T3@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,Cyber Security}
+Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,Cyber Security,}
 Keywords{DS,IT,Finance}
 Assigned Paper{paper one,paper one,paper two,paper three}
 Submitted Paper{}
@@ -64,7 +64,7 @@ Message{zhou,z,s}
 user{8,T4,********,2,T4@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security}
+Conference for Reviewer{Cyber Security,}
 Keywords{DS,IT,Finance}
 Assigned Paper{paper one}
 Submitted Paper{}
