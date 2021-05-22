@@ -132,13 +132,15 @@ public class Paper {
         return this.assignedReviewers;
     }
 
+
     public String getReviewerNames(ArrayList<User> u) {
         String names = "";
         if(u.size() > 0 )
         {
-            for(int i = 1 ; i < u.size();i++)
+            for(int i = 0 ; i < u.size();i++)
             {
-                names += u.get(i).getName()+",";
+                if(u.get(i)!= null)
+                    names += u.get(i).getName()+",";
             }
 
         }
@@ -153,7 +155,7 @@ public class Paper {
         String names = "";
         if(as.size() > 0 )
         {
-            for(int i = 1 ; i < as.size();i++)
+            for(int i = 0 ; i < as.size();i++)
             {
                 if(as.get(i) != null)
                     names += as.get(i)+",";

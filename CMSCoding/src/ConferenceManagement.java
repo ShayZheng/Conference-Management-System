@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -211,42 +212,69 @@ public class ConferenceManagement {
 
         for(User u:userList)
         {
-            if(u.getMessageBox().get(0).equals(""))
-                u.getMessageBox().clear();
-            if(u.getKeywords().get(0).equals(""))
-                u.getKeywords().clear();
+            if(u.getMessageBox().size()==1)
+            {
+                if(u.getMessageBox().get(0).equals(""))
+                    u.getMessageBox().clear();
+            }
+            if(u.getKeywords().size() == 1)
+            {
+                if(u.getKeywords().get(0).equals(""))
+                    u.getKeywords().clear();
+            }
             if(u.getConferenceListForChair().size()==1)
+            {
                 if(u.getConferenceListForChair().get(0) == null)
                     u.getConferenceListForChair().clear();
+            }
             if(u.getConferenceListForAuthor().size()==1)
+            {
                 if(u.getConferenceListForAuthor().get(0) == null)
                     u.getConferenceListForAuthor().clear();
+            }
             if(u.getConferenceListForReviewer().size()==1)
+            {
                 if(u.getConferenceListForReviewer().get(0) == null)
                     u.getConferenceListForReviewer().clear();
+            }
             if(u.getAssignedPaper().size()==1)
+            {
                 if(u.getAssignedPaper().get(0) == null)
                     u.getAssignedPaper().clear();
+            }
             if(u.getSubmittedPaper().size()==1)
+            {
                 if(u.getSubmittedPaper().get(0) == null)
                     u.getSubmittedPaper().clear();
+            }
 
 
 
         }//clear some variables equals ""
         for(Paper p:paperList)
         {
-            if(p.getEvaluation().get(0).equals(""))
-                p.getEvaluation().clear();
-            if(p.getKeywords().get(0).equals(""))
-                p.getKeywords().clear();
-            if(p.getAssignedReviewerList().size()>1)
-                if(p.getAssignedReviewerList().get(0)!=null);
-            p.getAssignedReviewerList().clear();
+            if(p.getEvaluation().size() == 1)
+            {
+                if(p.getEvaluation().get(0).equals(""))
+                     p.getEvaluation().clear();
+            }
+            if(p.getKeywords().size() == 1)
+            {
+                if(p.getKeywords().get(0).equals(""))
+                     p.getKeywords().clear();
+            }
+            if(p.getAssignedReviewerList().size() == 1)
+            {
+                if(p.getAssignedReviewerList().get(0) == null);
+                    p.getAssignedReviewerList().clear();
+            }
 
         }//clear some variables equals ""
 
+
+
     }
+
 
 
     public boolean isRepeat(String s)
@@ -534,6 +562,7 @@ public class ConferenceManagement {
             return true;
         return false;
     }
+
 
 
 }

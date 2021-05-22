@@ -533,6 +533,7 @@ public class CMS
         System.out.println("**************************************");
         System.out.println("1.Assign reviewer by system");
         System.out.println("2.Assign reviewer manually");
+        System.out.println("Please choose one function");
         Scanner sc = new Scanner(System.in);
         String option  = sc.nextLine().trim();
         while(!isStringNumeric(option)||(Integer.parseInt(option)!= 1 && Integer.parseInt(option)!= 2)||option.trim().equals(""))
@@ -697,8 +698,14 @@ public class CMS
                     }//could not assign the same reviewer
                     while(!CM.checkTwoArrayListHaveSameVariable(reviewers.get(Integer.parseInt(number)-1).getKeywords(),paperObject.getKeywords()))
                     {
-                        System.out.println("You choose the reviewer's keywords do not match the paper's key word");
+                        System.out.println("You choose the reviewer's keywords do not match the paper's key word, please choose again");
                         number = sc.nextLine().trim();
+                        while(!isStringNumeric(number))
+                        {
+                            System.out.println("You input the invalid number, please choose again");
+                            number = sc.nextLine().trim();
+
+                        }
                     }//reviewers' key words should match the paper's key words
 
                     User reviewerObject =reviewers.get(Integer.parseInt(number)-1);
@@ -1450,8 +1457,8 @@ public class CMS
     public static void main(String[] args) throws Exception
     {
         CMS cms = new CMS();
-        System.out.println(cms.CM.getUserList().get(4).getConferenceListForChair().size());
-        cms.assignReviewer("Carol@monash.edu");
+        cms.makeDecision("Joyce@monash.edu");
+
 
 
     }
