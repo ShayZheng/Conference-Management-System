@@ -1,65 +1,80 @@
-paper{paper one,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security}
+paper{paper one,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,Reject,Cyber Security,null}
+reviewer for this paper{}
+keywords{IT,CS,DS,}
+Evaluation{good}
+
+paper{paper two,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,Accept,Cyber Security,null}
+reviewer for this paper{}
+keywords{IT,CS,DS,}
+Evaluation{Good,Nice,Good,good,good ,}
+
+paper{paper three,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
 
-paper{paper two,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security}
-reviewer for this paper{}
-keywords{IT,CS,DS,}
-Evaluation{Good,Nice,Good,}
-
-paper{paper three,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security}
+paper{paper four,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
 
-paper{paper four,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Cyber Security}
+paper{paper five,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
 
-paper{paper five,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Cyber Security}
+paper{paper six,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,null,Cyber Security,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
 
-paper{paper six,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Cyber Security}
-reviewer for this paper{}
-keywords{IT,CS,DS,}
-Evaluation{}
-
-paper{paper.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Joyce,null,zhou}
+paper{paper.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,YES,Joyce,null,zhou,null}
 reviewer for this paper{}
 keywords{DS,IT,BIS,}
-Evaluation{}
+Evaluation{cool}
 
-paper{paper test one.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,con1}
+paper{paper test one.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,con1,null}
 reviewer for this paper{}
 keywords{CS,Finance,IT,}
 Evaluation{}
 
-paper{p.pdf,2021-09-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,name}
+paper{p.pdf,2021-09-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,name,null}
 reviewer for this paper{}
 keywords{CS,IT,BIS,}
 Evaluation{}
 
-paper{z.pdf,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,Carol,null,conferecn one}
+paper{z.pdf,2021-05-23 23:55:55,2021-06-01 23:55:55,YES,Carol,null,conference one,null}
 reviewer for this paper{}
 keywords{CS,IT,BIS,}
 Evaluation{}
 
-paper{paper one.docx,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Carol,null,con5}
+paper{paper one.docx,2021-06-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,con5,null}
 reviewer for this paper{}
 keywords{CS,IT,BIS,}
 Evaluation{}
 
-paper{fjal.pdf,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,Carol,null,conference test}
+paper{paper test.pdf,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,zhou,null}
 reviewer for this paper{}
-keywords{BIS,shay,yu,}
+keywords{sss,int,lol,}
 Evaluation{}
 
-paper{fajl.pdf,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,Carol,null,conference test}
+paper{paper.pdf,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,test,null,Data Science,null}
 reviewer for this paper{}
-keywords{CS,IT,BIS,}
+keywords{CS,NW,new,}
+Evaluation{}
+
+paper{ap.docx,2021-09-01 23:55:55 ,2021-10-01 23:55:55,YES,T4,null,last conference,null}
+reviewer for this paper{}
+keywords{DS,IT,Finance,}
+Evaluation{good}
+
+paper{it,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,T3,null,zzz,null}
+reviewer for this paper{}
+keywords{DS,IT,Finance,}
+Evaluation{}
+
+paper{asd,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,Data Science,/d/flaj/dflaj/asd.pdf}
+reviewer for this paper{}
+keywords{Information Technology,Cyber Security,Cloud Computing,}
 Evaluation{}
 

@@ -9,18 +9,18 @@ Message{one,two,three}
 
 user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{name}
-Conference for Author{conference test,con5,conference test,conference test}
+Conference for Author{conference test,con5,Data Science}
 Conference for Reviewer{}
-Keywords{CS,IT,BIS,zhou,yu,xin,shay,lol,int,nw,new,new,new,new,nwe}
+Keywords{CS,IT,BIS,zhou,yu,xin,shay,lol,int}
 Assigned Paper{}
-Submitted Paper{p.pdf,z.pdf,paper one.docx,fjal.pdf,fajl.pdf}
+Submitted Paper{p.pdf,z.pdf,paper one.docx,asd}
 Message{}
 
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{Cyber Security}
 Conference for Author{}
 Conference for Reviewer{}
-Keywords{DS,CS,new,new,new,again,new,again,Information Technology,Cyber Security,no regex,need regex,regex}
+Keywords{Database,new,regex,Cyber Security,again,need regex,CS,no regex,DS,Information Technology}
 Assigned Paper{paper one,paper two}
 Submitted Paper{}
 Message{one,two}
@@ -75,6 +75,24 @@ Conference for chair{}
 Conference for Author{}
 Conference for Reviewer{}
 Keywords{IT,CS,NW,Information Technology,Cyber Security,Database,new,regex,regex}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{10,Merritt,Merritt0206,0,merrittwyz@monash.edu,Student,1289711011,Master degree,unemployement,IT}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{}
+Assigned Paper{}
+Submitted Paper{}
+Message{}
+
+user{11,asd,Asdf1234,0,asd@aaa.edu,wqrqwqr,1234567890,qweqwe,qweqwe,qweqwe}
+Conference for chair{}
+Conference for Author{}
+Conference for Reviewer{}
+Keywords{}
 Assigned Paper{}
 Submitted Paper{}
 Message{}
