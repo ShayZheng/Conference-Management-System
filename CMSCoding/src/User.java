@@ -128,17 +128,14 @@ public class User {
     public String getStringListNames(ArrayList<String> as)
     {
         String names = "";
-        if(as.size()==1)
-            if(as.get(0)!=null)
-                names = as.get(0);
-        if(as.size()>1)
+
+        if(as.size()>0)
         {
-            for(int i = 0 ; i < as.size()-1; i++ )
+            for(int i = 0 ; i < as.size(); i++ )
                 {
                     if(as.get(i) != null)
                         names += as.get(i)+",";
                 }
-            names += as.get(as.size()-1);
         }
 
 
@@ -167,17 +164,14 @@ public class User {
     public String getPaperNames(ArrayList<Paper> papers)
     {
         String names = "";
-        if(papers.size()==1)
-            if(papers.get(0)!=null&&!papers.get(0).getName().equals(""))
-                names = papers.get(0).getName();
-        if(papers.size()>1)
+
+        if(papers.size()>0)
         {
-            for(int i = 0 ; i < papers.size()-1; i++ )
+            for(int i = 0 ; i < papers.size(); i++ )
             {
                 if(papers.get(i) != null)
                     names +=papers.get(i).getName()+",";
             }
-            names += papers.get(papers.size()-1).getName();
         }
 
 
