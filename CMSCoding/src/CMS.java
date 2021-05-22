@@ -93,6 +93,7 @@ public class CMS
                     case "1": retrieveUser(); break;
                     case "2": retrieveConference(); break;
                     case "3": retrievePaper(); break;
+
                 }
             }
 
@@ -116,13 +117,14 @@ public class CMS
                             option = scan.nextLine().trim();
                             System.out.print("\n");
                             // Check whether the input option is valid.
-                            if (!isStringNumeric(option))
+                            if(!isStringNumeric(option)||option.trim().equals(""))
                                 System.out.println("You need to choose a number between 1 to 4.");
+
                             else
                             {
                                 int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
                                 if (checkOption < 1 || checkOption > 3)
-                                    System.out.println("You need to choose a number between 1 to 4.");
+                                    System.out.println("You need to choose a number between 1 to 3.");
                             }
 
                             switch (option)
@@ -244,10 +246,12 @@ public class CMS
         login();
     }
 
-
     public boolean isStringAlphabetic(String checkedString)
     {
         int i;
+        if (checkedString.trim().equals("")){
+            return false;
+        }
         for (i = 0; i < checkedString.length(); i ++)
         {
             char character = checkedString.charAt(i);
@@ -262,6 +266,9 @@ public class CMS
     public boolean isStringNumeric(String checkedString)
     {
         int i;
+        if (checkedString.trim().equals("")){
+            return false;
+        }
         for (i = 0; i < checkedString.length(); i ++)
         {
             if (!Character.isDigit(checkedString.charAt(i)))
@@ -369,6 +376,7 @@ public class CMS
         String revDate = sc.nextLine().trim();//set the review deadline for this conference
         while(!CM.isTimeUpToStandard(revDate))
         {
+            System.out.println("");
             revDate = sc.nextLine().trim();
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -884,10 +892,6 @@ public class CMS
             selectKeywords = sc.nextLine().trim();
             keywordSelectionForPaper(paperObject, selectKeywords, sc);
         }
-
-
-
-
 
         CM.getPaperList().add(paperObject);
         //add the paper to paper list
