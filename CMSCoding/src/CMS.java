@@ -1290,6 +1290,7 @@ This function is to check whether the items in a string are all Alphabetic
 
         //Highlighting the keywords after selection or input from reviewers
         System.out.println("After specify: You have " + currentUser.getKeywords().size() + " Keywords");
+        System.out.println("Your strong expertise keyword is: " + currentUser.getKeywords().get(0));
         if (confirmChanges() == true)
         {
             CM.writeUserToUserFile();
