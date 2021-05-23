@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -211,20 +212,69 @@ public class ConferenceManagement {
 
         for(User u:userList)
         {
-            if(u.getMessageBox().get(0).equals(""))
-                u.getMessageBox().clear();
-            if(u.getKeywords().get(0).equals(""))
-                u.getKeywords().clear();
+            if(u.getMessageBox().size()==1)
+            {
+                if(u.getMessageBox().get(0).equals(""))
+                    u.getMessageBox().clear();
+            }
+            if(u.getKeywords().size() == 1)
+            {
+                if(u.getKeywords().get(0).equals(""))
+                    u.getKeywords().clear();
+            }
+            if(u.getConferenceListForChair().size()==1)
+            {
+                if(u.getConferenceListForChair().get(0) == null)
+                    u.getConferenceListForChair().clear();
+            }
+            if(u.getConferenceListForAuthor().size()==1)
+            {
+                if(u.getConferenceListForAuthor().get(0) == null)
+                    u.getConferenceListForAuthor().clear();
+            }
+            if(u.getConferenceListForReviewer().size()==1)
+            {
+                if(u.getConferenceListForReviewer().get(0) == null)
+                    u.getConferenceListForReviewer().clear();
+            }
+            if(u.getAssignedPaper().size()==1)
+            {
+                if(u.getAssignedPaper().get(0) == null)
+                    u.getAssignedPaper().clear();
+            }
+            if(u.getSubmittedPaper().size()==1)
+            {
+                if(u.getSubmittedPaper().get(0) == null)
+                    u.getSubmittedPaper().clear();
+            }
+
 
 
         }//clear some variables equals ""
         for(Paper p:paperList)
         {
-            if(p.getEvaluation().get(0).equals(""))
-                p.getEvaluation().clear();
+            if(p.getEvaluation().size() == 1)
+            {
+                if(p.getEvaluation().get(0).equals(""))
+                     p.getEvaluation().clear();
+            }
+            if(p.getKeywords().size() == 1)
+            {
+                if(p.getKeywords().get(0).equals(""))
+                     p.getKeywords().clear();
+            }
+            if(p.getAssignedReviewerList().size() == 1)
+            {
+                if(p.getAssignedReviewerList().get(0) == null);
+                    p.getAssignedReviewerList().clear();
+            }
+
         }//clear some variables equals ""
 
+
+
     }
+
 
 
     public boolean isRepeat(String s)
@@ -475,6 +525,9 @@ public class ConferenceManagement {
         return true;
     }
     public boolean isTimeUpToStandard(String s) throws ParseException {
+        if(!s.matches("^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29))\\s+([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$"))
+            return false;
+
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if(dateFormat.parse(s).before(now))
@@ -482,19 +535,15 @@ public class ConferenceManagement {
             System.out.println("The input date could not before the current time!");
             return false;
         }
-        String[]dateBlocks = s.split(" ");
-        String[]dateLeftPart = dateBlocks[0].split("-");
-        String[]dateRightPart = dateBlocks[1].split(":");
-        if(Integer.parseInt(dateLeftPart[0]) > 2025 || Integer.parseInt(dateLeftPart[1]) < 0|| Integer.parseInt(dateLeftPart[1]) > 12
-                || Integer.parseInt(dateLeftPart[2]) < 0|| Integer.parseInt(dateLeftPart[2]) > 31 || Integer.parseInt(dateRightPart[0]) < 0
-                ||Integer.parseInt(dateRightPart[0]) > 24||Integer.parseInt(dateRightPart[1]) < 0 || Integer.parseInt(dateRightPart[1]) > 60
-                ||Integer.parseInt(dateRightPart[2]) < 0 || Integer.parseInt(dateRightPart[2]) > 60)
-        {
-            System.out.println("Input the correct time format");
-            return false;
-        }
-        return true;
 
+    /*String[]dateBlocks = s.split(" ");
+    String[]dateLeftPart = dateBlocks[0].split("-");
+    String[]dateRightPart = dateBlocks[1].split(":");
+    if(Integer.parseInt(dateLeftPart[0]) > 2025 || Integer.parseInt(dateLeftPart[1]) < 0|| Integer.parseInt(dateLeftPart[1]) > 12
+            || Integer.parseInt(dateLeftPart[2]) < 0|| Integer.parseInt(dateLeftPart[2]) > 31 || Integer.parseInt(dateRightPart[0]) < 0
+            ||Integer.parseInt(dateRightPart[0]) > 24||Integer.parseInt(dateRightPart[1]) < 0 || Integer.parseInt(dateRightPart[1]) > 60
+            ||Integer.parseInt(dateRightPart[2]) < 0 || Integer.parseInt(dateRightPart[2]) > 60)*/
+        return true;
     }
 
 
@@ -513,6 +562,7 @@ public class ConferenceManagement {
             return true;
         return false;
     }
+
 
 
 }

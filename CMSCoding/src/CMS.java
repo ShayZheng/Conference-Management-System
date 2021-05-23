@@ -15,7 +15,7 @@ public class CMS
         menu = new Menu();
         CM.readFromFile();
         admin = new Administrator("admin@monash.edu", "Administrator");
-        openSystem();
+        // openSystem();
     }
 
 
@@ -32,12 +32,12 @@ public class CMS
             System.out.print("\n");
             // Check whether the input option is valid.
             if (!isStringNumeric(option))
-                System.out.println("You need to choose a number between 1 to 4.");
+                System.out.println("You need to choose a number between 1 to 3.");
             else
             {
                 int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
                 if (checkOption < 1 || checkOption > 4)
-                    System.out.println("You need to choose a number between 1 to 4.");
+                    System.out.println("You need to choose a number between 1 to 3.");
             }
 
             switch (option)
@@ -117,7 +117,7 @@ public class CMS
                             System.out.print("\n");
                             // Check whether the input option is valid.
                             if (!isStringNumeric(option))
-                                System.out.println("You need to choose a number between 1 to 4.");
+                                System.out.println("You need to choose a number between 1 to 4. The option should not be empty.");
                             else
                             {
                                 int checkOption = Integer.parseInt(option); // convert the String into an integer. I got this method from https://blog.csdn.net/a772304419/article/details/79723249.
@@ -137,6 +137,7 @@ public class CMS
                                 case "3":
                                     authorFunction(email);//0519 author functions
                                     break;
+
                             }
                         }
                         break;
@@ -248,6 +249,9 @@ public class CMS
     public boolean isStringAlphabetic(String checkedString)
     {
         int i;
+        if (checkedString.trim().equals("")){
+            return false;
+        }
         for (i = 0; i < checkedString.length(); i ++)
         {
             char character = checkedString.charAt(i);
@@ -262,6 +266,9 @@ public class CMS
     public boolean isStringNumeric(String checkedString)
     {
         int i;
+        if (checkedString.trim().equals("")){
+            return false;
+        }
         for (i = 0; i < checkedString.length(); i ++)
         {
             if (!Character.isDigit(checkedString.charAt(i)))
@@ -326,17 +333,17 @@ public class CMS
         System.out.print("Please input the conference name:");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine().trim();
-        while (!CM.isInputUpToFormat(name)) // check whether the name is allowed.
+        while (!isStringAlphabetic(name)) // check whether the name is allowed.
         {
-            System.out.println("The name cannot be null and should only be alphabetic.");
+            System.out.println("The name cannot be empty and should only be alphabetic.");
             System.out.print("Enter the conference name: ");
             name = sc.nextLine().trim();
         }
         System.out.print("Please input the conference title:");
         String title = sc.nextLine().trim();
-        while (!CM.isInputUpToFormat(title)) // check whether the name is allowed.
+        while (!isStringAlphabetic(title)) // check whether the name is allowed.
         {
-            System.out.println("The title cannot be null and should only be alphabetic.");
+            System.out.println("The title cannot be empty and should only be alphabetic.");
             System.out.print("Enter the conference title: ");
             title = sc.nextLine().trim();
         }
@@ -348,10 +355,10 @@ public class CMS
                 CM.getKeywordList().remove(CM.getKeywordList().get(i));
             }
             else
-                System.out.println(i+"."+CM.getKeywordList().get(i));
+                System.out.println(i+1 +"."+CM.getKeywordList().get(i));
         }
         String option = sc.nextLine().trim();//add validations
-        while(isStringAlphabetic(option) || Integer.parseInt(option) >= CM.getKeywordList().size() || Integer.parseInt(option) < 0)
+        while(!isStringNumeric(option) || Integer.parseInt(option) >= CM.getKeywordList().size() || Integer.parseInt(option) < 0)
         {
             System.out.println("Please input the correct number");
             option = sc.nextLine().trim();
@@ -362,6 +369,7 @@ public class CMS
         String subDate = sc.nextLine().trim();//set submission deadline for this conference
         while(!CM.isTimeUpToStandard(subDate))
         {
+            System.out.println("Your time format is not correct, please enter again: ");
             subDate = sc.nextLine().trim();
         }
 
@@ -369,6 +377,7 @@ public class CMS
         String revDate = sc.nextLine().trim();//set the review deadline for this conference
         while(!CM.isTimeUpToStandard(revDate))
         {
+            System.out.println("Your time format is not correct, please enter again: ");
             revDate = sc.nextLine().trim();
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -380,7 +389,10 @@ public class CMS
         }
         Conference newConference = new Conference(name,title,topic,subDate,revDate);//create the conference object
         CM.getConferenceList().add(newConference);
-        CM.writeConferenceToFile();//reload the database
+        if(confirmChanges() == true)
+            CM.writeConferenceToFile();//reload the database
+        else
+            return;
 
     }
 
@@ -391,10 +403,10 @@ public class CMS
         System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as a chair!");
         Scanner sc = new Scanner(System.in);
         for(Conference one : CM.getConferenceList())
-            System.out.println( CM.getConferenceList().indexOf(one)+"."+ one.toString());
+            System.out.println( CM.getConferenceList().indexOf(one)+1 +"."+ one.toString());
         System.out.println("Please choose one conference to modify");
         String option = sc.nextLine().trim();
-        while(CM.isInputUpToFormat(option) || Integer.parseInt(option) >= CM.getConferenceList().size() || Integer.parseInt(option) < 0)
+        while(!isStringNumeric(option) || Integer.parseInt(option) >= CM.getConferenceList().size() || Integer.parseInt(option) < 0)
         {
             System.out.println("Can not find the conference!");
             System.out.println("Please enter the number again: ");
@@ -403,7 +415,7 @@ public class CMS
         }//let chair to choose one conference to modify
         for(Conference one:  CM.getConferenceList())
         {
-            if (Integer.parseInt(option) ==  CM.getConferenceList().indexOf(one))
+            if (Integer.parseInt(option)-1 ==  CM.getConferenceList().indexOf(one))
             {
                 System.out.println("Please choose which part to modify:");
                 System.out.println("(1) conference name");
@@ -412,7 +424,7 @@ public class CMS
                 System.out.println("(4) conference submission deadline");
                 System.out.println("(5) conference review deadline");
                 String number = sc.nextLine().trim();
-                while(isStringAlphabetic(number)||Integer.parseInt(number) < 0||Integer.parseInt(number) >6)
+                while(!isStringNumeric(number)||Integer.parseInt(number) < 0||Integer.parseInt(number) >5)
                 {
                     System.out.println("Please input the correct number");
                     number = sc.nextLine().trim();
@@ -421,10 +433,10 @@ public class CMS
                     case "1":
                         System.out.print("Please input the new name:");
                         String newName = sc.nextLine().trim();
-                        while(CM.isInputUpToFormat(newName)==false)
+                        while(!isStringAlphabetic(newName))
                         {
                             System.out.println("Please input the correct name format:");
-                            sc.nextLine().trim();
+                            newName = sc.nextLine().trim();
                         }
                         one.setConName(newName);//new name, title and topic should not be null
                         chair.getConferenceListForChair().add(one);
@@ -433,10 +445,10 @@ public class CMS
                     case "2":
                         System.out.print("Please input the new title:");
                         String newTitle = sc.nextLine().trim();
-                        while(CM.isInputUpToFormat(newTitle)==false)
+                        while(isStringAlphabetic(newTitle)==false)
                         {
                             System.out.println("Please input the correct title format:");
-                            sc.nextLine().trim();
+                            newTitle = sc.nextLine().trim();
                         }
                         one.setConTitle(newTitle);
                         chair.getConferenceListForChair().add(one);
@@ -451,16 +463,16 @@ public class CMS
                                 CM.getKeywordList().remove(CM.getKeywordList().get(i));
                             }
                             else
-                                System.out.println(i+"."+CM.getKeywordList().get(i));
+                                System.out.println(i+1 +"."+CM.getKeywordList().get(i));
                         }
                         String newTopic = sc.nextLine().trim();//from the existing keyword list to choose one keyword for this conference
-                        while(isStringAlphabetic(newTopic) || Integer.parseInt(newTopic) >= CM.getKeywordList().size() || Integer.parseInt(newTopic) < 0)
+                        while(!isStringNumeric(newTopic) || Integer.parseInt(newTopic) >= CM.getKeywordList().size() || Integer.parseInt(newTopic) < 0)
                         {
                             System.out.println("Please input the correct number");
                             newTopic = sc.nextLine().trim();
                         }
 
-                        one.setConTitle(CM.getKeywordList().get(Integer.parseInt(newTopic)));
+                        one.setConTitle(CM.getKeywordList().get(Integer.parseInt(newTopic)-1));
                         chair.getConferenceListForChair().add(one);
                         //add this conference into chair's chair conference list
                         break;
@@ -521,6 +533,7 @@ public class CMS
         System.out.println("**************************************");
         System.out.println("1.Assign reviewer by system");
         System.out.println("2.Assign reviewer manually");
+        System.out.println("Please choose one function");
         Scanner sc = new Scanner(System.in);
         String option  = sc.nextLine().trim();
         while(!isStringNumeric(option)||(Integer.parseInt(option)!= 1 && Integer.parseInt(option)!= 2)||option.trim().equals(""))
@@ -623,10 +636,6 @@ public class CMS
                 ArrayList<Paper> reviewPapers = new ArrayList<>();
                 ArrayList<User>  reviewers = new ArrayList<>();
                 System.out.println("Please choose one paper to assign");
-                for(Paper p: CM.getPaperList())
-                {
-                    p.getAssignedReviewerList().clear();
-                }
                 //clear the list to avoid the list does not contain empty elements
                 for(Paper p:CM.getPaperList())
                 {
@@ -652,9 +661,12 @@ public class CMS
                 {
                     if(u.getChooseType() == 2
                             && !u.getName().equals(paperObject.getAuthor())
-                            && CM.checkConferenceOverlaps(u.getConferenceListForChair(),CM.searchConference(paperObject.getConName()))==false
+                            && !CM.checkConferenceOverlaps(u.getConferenceListForChair(),CM.searchConference(paperObject.getConName()))
                     )//reviewer could not be the author of this paper
+                    {
+                        System.out.println(u.getName());
                         reviewers.add(u);
+                    }
                 }
                 for(User reU:reviewers)
                 {
@@ -674,16 +686,26 @@ public class CMS
 
                     for(User u: paperObject.getAssignedReviewerList())
                     {
-                        while(u.getName().equals(reviewers.get(Integer.parseInt(number)-1).getName()))
+                        if(paperObject.getAssignedReviewerList().size() > 0 && u != null)
                         {
-                            System.out.println("You have already assign this reviewer,please choose again");
-                            number = sc.nextLine().trim();
+                            while(u.getName().equals(reviewers.get(Integer.parseInt(number)-1).getName()))
+                            {
+                                System.out.println("You have already assign this reviewer,please choose again");
+                                number = sc.nextLine().trim();
+                            }
                         }
+
                     }//could not assign the same reviewer
                     while(!CM.checkTwoArrayListHaveSameVariable(reviewers.get(Integer.parseInt(number)-1).getKeywords(),paperObject.getKeywords()))
                     {
-                        System.out.println("You choose the reviewer's keywords do not match the paper's key word");
+                        System.out.println("You choose the reviewer's keywords do not match the paper's key word, please choose again");
                         number = sc.nextLine().trim();
+                        while(!isStringNumeric(number))
+                        {
+                            System.out.println("You input the invalid number, please choose again");
+                            number = sc.nextLine().trim();
+
+                        }
                     }//reviewers' key words should match the paper's key words
 
                     User reviewerObject =reviewers.get(Integer.parseInt(number)-1);
@@ -693,12 +715,15 @@ public class CMS
                 }
                 for(User u:paperObject.getAssignedReviewerList())
                 {
-                    u.getAssignedPaper().add(paperObject);
-                    //reviewer add this paper into their assigned paper list
-                    u.getConferenceListForReviewer().add(CM.searchConference(paperObject.getConName()));
-                    //reviewer add this paper's conference into their reviewer conference list
-                    sendMessage(u,chair);
-                    //send every reviewer a message
+                    if(u != null){
+                        u.getAssignedPaper().add(paperObject);
+                        //reviewer add this paper into their assigned paper list
+                        u.getConferenceListForReviewer().add(CM.searchConference(paperObject.getConName()));
+                        //reviewer add this paper's conference into their reviewer conference list
+                        sendMessage(u,chair);
+                        //send every reviewer a message
+                    }
+
                 }
                 if(CM.checkConferenceOverlaps(chair.getConferenceListForAuthor(),CM.searchConference(paperObject.getConName())) ==false
                         &&CM.checkConferenceOverlaps(chair.getConferenceListForReviewer(),CM.searchConference(paperObject.getConName()))==false)
@@ -1427,7 +1452,10 @@ public class CMS
 
     public static void main(String[] args) throws Exception
     {
-        new CMS();
+        CMS cms = new CMS();
+        cms.makeDecision("Joyce@monash.edu");
+
+
 
     }
 }

@@ -132,22 +132,20 @@ public class Paper {
         return this.assignedReviewers;
     }
 
+
     public String getReviewerNames(ArrayList<User> u) {
         String names = "";
-        if (u.size() == 0) {
-            names = "";
-        }
-
-        if (u.size() > 0) {
-            Iterator var3 = u.iterator();
-
-            while (var3.hasNext()) {
-                User i = (User) var3.next();
-                if (i != null) {
-                    names = names + "," + i.getName();
-                }
+        if(u.size() > 0 )
+        {
+            for(int i = 0 ; i < u.size();i++)
+            {
+                if(u.get(i)!= null)
+                    names += u.get(i).getName()+",";
             }
+
         }
+
+
 
         return names;
     }
@@ -155,17 +153,9 @@ public class Paper {
     public String getStringListNames(ArrayList<String> as)
     {
         String names = "";
-        if(as.size() == 0)
-            names="";
-        if(as.size() == 1)
-            names=as.get(0);
-        if(as.size() > 1 )
+        if(as.size() > 0 )
         {
-            if(as.get(0)==null)
-                names ="";
-            if(as.get(0)!=null)
-                names+=as.get(0)+",";
-            for(int i = 1 ; i < as.size();i++)
+            for(int i = 0 ; i < as.size();i++)
             {
                 if(as.get(i) != null)
                     names += as.get(i)+",";
