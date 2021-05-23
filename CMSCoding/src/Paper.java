@@ -23,7 +23,7 @@ public class Paper {
     public Paper() {
     }
 
-    public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String decision, String conName,String file) {
+    public Paper(String name, String smDeadline, String rmDeadline, String status, String author, String decision, String conName, String file) {
         this.Name = name;
         this.smDeadline = smDeadline;
         this.rmDeadline = rmDeadline;
@@ -135,30 +135,24 @@ public class Paper {
 
     public String getReviewerNames(ArrayList<User> u) {
         String names = "";
-        if(u.size() > 0)
-        {
-            for(int i = 0 ; i < u.size();i++)
-            {
-                if(u.get(i)!= null)
-                    names += u.get(i).getName()+",";
+        if (u.size() > 0) {
+            for (int i = 0; i < u.size(); i++) {
+                if (u.get(i) != null)
+                    names += u.get(i).getName() + ",";
             }
 
         }
 
 
-
         return names;
     }
 
-    public String getStringListNames(ArrayList<String> as)
-    {
+    public String getStringListNames(ArrayList<String> as) {
         String names = "";
-        if(as.size() > 0 )
-        {
-            for(int i = 0 ; i < as.size();i++)
-            {
-                if(as.get(i) != null)
-                    names += as.get(i)+",";
+        if (as.size() > 0) {
+            for (int i = 0; i < as.size(); i++) {
+                if (as.get(i) != null)
+                    names += as.get(i) + ",";
             }
 
         }

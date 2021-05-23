@@ -3,9 +3,10 @@
  * @version 29 Oct 2020
  */
 public class Menu {
-    public Menu(){}
+    public Menu() {
+    }
 
-    public void displayMainMenu(){
+    public void displayMainMenu() {
         System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("     Conference Management System     ");
@@ -16,7 +17,7 @@ public class Menu {
         System.out.print("Choose an option: ");
     }
 
-    public void displayAdministratorMenu(){
+    public void displayAdministratorMenu() {
         System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("        Administrator Management      ");
@@ -28,7 +29,7 @@ public class Menu {
         System.out.print("Choose an option: ");
     }
 
-    public void displayChairMenu(){
+    public void displayChairMenu() {
         System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("           Chair Management           ");
@@ -41,7 +42,7 @@ public class Menu {
         System.out.print("Choose an option: ");
     }
 
-    public void displayReviewerMenu(){
+    public void displayReviewerMenu() {
         System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("          Reviewer Management         ");
@@ -52,7 +53,7 @@ public class Menu {
         System.out.print("Choose an option: ");
     }
 
-    public void displayAuthorMenu(){
+    public void displayAuthorMenu() {
         System.out.println("\n");
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
@@ -76,8 +77,7 @@ public class Menu {
     }
 
     //Provides keywords menu for user to select, if the menu do not contains reviewers' keyword, he/she can choose manually input keywords.
-    public void displayKeywordsMenu()
-    {
+    public void displayKeywordsMenu() {
         System.out.println("\n" + "Please select your keywords(first one should be your strong expertise)" + "\n");
         System.out.println("1.Information Technology");
         System.out.println("2.Cyber Security");
@@ -91,7 +91,7 @@ public class Menu {
         System.out.println("10.Manually Add New Keywords ");
     }
 
-     public void displayAuthorKeywordsMenu(){
+    public void displayAuthorKeywordsMenu() {
         System.out.println("\n" + "Please select three keywords" + "\n");
         System.out.println("1.Information Technology");
         System.out.println("2.Cyber Security");

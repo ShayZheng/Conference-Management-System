@@ -68,3 +68,23 @@ reviewer for this paper{}
 keywords{DS,IT,Finance,}
 Evaluation{}
 
+paper{The data processing1,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,Data Science,C:\Users\Bill\Documents\The_data_processing.pdf}
+reviewer for this paper{}
+keywords{Information Technology,Software Engineering,Big Data,}
+Evaluation{}
+
+paper{The data processing2,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,Data Science,C:\Users\Bill\Documents\The_data_processing.pdf}
+reviewer for this paper{}
+keywords{Big Data, Machine learning, Data mining,}
+Evaluation{}
+
+paper{The data processing,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,Data Science,C:\Users\Bill\Documents\The data processing.pdf}
+reviewer for this paper{}
+keywords{Information Technology,Distributed Mobile Develop,Big Data,}
+Evaluation{}
+
+paper{The data processing,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,Data Science,C:\Users\Bill\Documents\The data processing.pdf}
+reviewer for this paper{}
+keywords{Information Technology,Software Engineering,Big data,Machine learning, Data mining,}
+Evaluation{}
+
