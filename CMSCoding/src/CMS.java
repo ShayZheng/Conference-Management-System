@@ -1247,7 +1247,7 @@ public class CMS
         System.out.print("Please choose a user: ");
         option = scan.nextLine().trim();
 
-        while(isStringAlphabetic(option) || Integer.parseInt(option) > CM.getUserList().size() || Integer.parseInt(option) < 1){
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getUserList().size() || Integer.parseInt(option) < 1){
             System.out.print("You should input a number and choose a user from the list. Please enter again: ");
             option = scan.nextLine().trim();
         }
@@ -1274,7 +1274,7 @@ public class CMS
         }
         System.out.print("Please choose a conference: ");
         option = scan.nextLine().trim();
-        while(isStringAlphabetic(option) || Integer.parseInt(option) > CM.getConferenceList().size() || Integer.parseInt(option) < 1){
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getConferenceList().size() || Integer.parseInt(option) < 1){
             System.out.print("You should input a number and choose a conference from the list. Please enter again: ");
             option = scan.nextLine().trim();
         }
@@ -1298,7 +1298,7 @@ public class CMS
         }
         System.out.print("Please choose a paper: ");
         option = scan.nextLine().trim();
-        while(isStringAlphabetic(option) || Integer.parseInt(option) > CM.getPaperList().size() || Integer.parseInt(option) < 1){
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getPaperList().size() || Integer.parseInt(option) < 1){
             System.out.print("You should input a number and choose a paper from the list. Please enter again: ");
             option = scan.nextLine().trim();
         }
@@ -1457,7 +1457,7 @@ public class CMS
     public static void main(String[] args) throws Exception
     {
         CMS cms = new CMS();
-        cms.makeDecision("Joyce@monash.edu");
+        cms.retrievePaper();
 
 
 
