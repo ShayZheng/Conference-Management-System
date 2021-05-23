@@ -15,7 +15,7 @@ public class CMS
         menu = new Menu();//open menu
         CM.readFromFile();//read from database
         admin = new Administrator("admin@monash.edu", "Administrator");//create an administrator
-        openSystem();
+        //openSystem();
     }
 
 
@@ -1499,8 +1499,9 @@ public class CMS
     {
 
        CMS cms = new CMS();
-       cms.retrieveConference();
-
+        cms.CM.writePaperToFile();
+        cms.CM.writeUserToUserFile();
+        cms.CM.writeConferenceToFile();
 
 
     }

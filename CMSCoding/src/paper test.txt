@@ -1,14 +1,14 @@
-paper{paper one,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,Reject,Cyber Security,null}
+paper{paper one,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,Reject,Data Science,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
-Evaluation{good,fashkljdfhskajdhasdfk,}
+Evaluation{}
 
-paper{paper two,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,Accept,Cyber Security,null}
+paper{paper two,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,Accept,Cyber Security,null}
 reviewer for this paper{}
-keywords{IT,CS,DS,}
-Evaluation{Good,Nice,Good,good,good ,}
+keywords{Finance,IT,CS,}
+Evaluation{}
 
-paper{paper three,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Cyber Security,null}
+paper{paper three,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Information Technology,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
@@ -18,44 +18,44 @@ reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
 
-paper{paper five,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Cyber Security,null}
+paper{paper five,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Network,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
 Evaluation{}
 
-paper{paper six,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Cyber Security,null}
+paper{paper six,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Finance,null}
 reviewer for this paper{}
-keywords{IT,CS,DS,}
+keywords{IT,CS,Finance,}
 Evaluation{}
 
-paper{paper.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Joyce,null,zhou,null}
+paper{paper.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Joyce,null,Software Engineering,null}
 reviewer for this paper{}
 keywords{DS,IT,BIS,}
 Evaluation{cool,}
 
-paper{paper test one.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Carol,null,con1,null}
+paper{paper test one.pdf,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Carol,null,Big Data,null}
 reviewer for this paper{}
 keywords{CS,Finance,IT,}
 Evaluation{}
 
-paper{p.pdf,2021-09-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,name,null}
+paper{p.pdf,2021-09-01 23:55:55,2021-07-01 23:55:55,NO,Carol,null,Block Chain,null}
 reviewer for this paper{}
 keywords{CS,IT,BIS,}
 Evaluation{}
 
-paper{z.pdf,2021-05-23 23:55:55,2021-06-01 23:55:55,YES,Carol,null,conference one,null}
+paper{z.pdf,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,Carol,null,Machine Learning,null}
 reviewer for this paper{}
 keywords{CS,IT,BIS,}
 Evaluation{}
 
-paper{paper one.docx,2021-06-01 23:55:55,2021-07-01 23:55:55,YES,Carol,null,con5,null}
+paper{paper one.docx,2021-06-01 23:55:55,2021-07-01 23:55:55,NO,Carol,null,Deap Learning,null}
 reviewer for this paper{}
 keywords{CS,IT,BIS,}
 Evaluation{}
 
-paper{paper test.pdf,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,zhou,null}
+paper{paper test.pdf,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,Carol,null,Bitcoin,null}
 reviewer for this paper{}
-keywords{sss,int,lol,}
+keywords{CS,IT,BIS,}
 Evaluation{}
 
 paper{paper.pdf,2021-09-01 23:55:55,2021-10-01 23:55:55,NO,test,null,Data Science,null}
@@ -63,28 +63,8 @@ reviewer for this paper{}
 keywords{CS,NW,new,}
 Evaluation{}
 
-paper{ap.docx,2021-09-01 23:55:55 ,2021-10-01 23:55:55,YES,T4,Accept,last conference,null}
+paper{ap.docx,2021-09-01 23:55:55 ,2021-10-01 23:55:55,NO,T4,Accept,Data Mining,null}
 reviewer for this paper{}
 keywords{DS,IT,Finance,}
-Evaluation{good,}
-
-paper{it,2021-05-23 23:55:55,2021-06-01 23:55:55,NO,T3,null,zzz,null}
-reviewer for this paper{}
-keywords{DS,IT,Finance,}
-Evaluation{}
-
-paper{p,2021-06-01 23:55:55,2021-09-30 23:55:33,NO,Carol,null,asd,/d/fajl/dfajl/fajfla/fjalfa/p.pdf}
-reviewer for this paper{}
-keywords{data science,cyber,network,}
-Evaluation{}
-
-paper{p,2021-06-01 23:55:55,2021-09-30 23:55:33,NO,Carol,null,asd,/d/fajl/dfajl/fajfla/fjalfa/p.docx}
-reviewer for this paper{}
-keywords{Information Technology,Cyber Security,Cloud Computing,}
-Evaluation{}
-
-paper{ass,2021-06-01 23:55:55,2021-09-30 23:55:33,NO,Carol,null,asd,ass.pdf}
-reviewer for this paper{}
-keywords{Information Technology,Cyber Security,Cloud Computing,}
 Evaluation{}
 
