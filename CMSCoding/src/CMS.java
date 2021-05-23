@@ -885,10 +885,6 @@ public class CMS
             keywordSelectionForPaper(paperObject, selectKeywords, sc);
         }
 
-
-
-
-
         CM.getPaperList().add(paperObject);
         //add the paper to paper list
 
