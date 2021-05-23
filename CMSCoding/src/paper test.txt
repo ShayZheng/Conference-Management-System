@@ -1,9 +1,9 @@
-paper{paper one,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,Reject,Data Science,null}
+paper{paper one,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,Accept,Data Science,null}
 reviewer for this paper{}
 keywords{IT,CS,DS,}
-Evaluation{}
+Evaluation{this paper is very good,}
 
-paper{paper two,2021-05-01 23:55:55,2021-06-01 23:55:55,NO,Carol,Accept,Cyber Security,null}
+paper{paper two,2021-05-01 23:55:55,2021-06-01 23:55:55,YES,Carol,Accept,Cyber Security,null}
 reviewer for this paper{}
 keywords{Finance,IT,CS,}
 Evaluation{}
