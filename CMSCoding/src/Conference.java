@@ -64,6 +64,5 @@ public class Conference
     public String toStringToDatabase()
     {
         return conName + ","+ conTitle +","+ conTopic +","+ subDate + "," + revDate;
-
     }
 }

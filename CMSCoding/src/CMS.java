@@ -578,26 +578,26 @@ public class CMS
                 }//clear the list to avoid the list does not contain null elements
 
                 int i = 0;
-                while(paperAuto.getAssignedReviewerList().size() < 3 && i < reviewerListAuto.size())
+                while (paperAuto.getAssignedReviewerList().size() < 3 && i < reviewerListAuto.size())
                 //choose 3 reviewers for this paper and ensure the choice in the reviewer list boundary
                 {
                     User userAuto = reviewerListAuto.get(i);//find the specific reviewer
-                    if(paperAuto.getKeywords().contains(userAuto.getKeywords().get(0))
-                            &&userAuto !=null &&!userAuto.getName().equals(paperAuto.getAuthor()))
+                    if (paperAuto.getKeywords().contains(userAuto.getKeywords().get(0))
+                            && userAuto != null && !userAuto.getName().equals(paperAuto.getAuthor()))
                     //the reviewer could not be the author of this paper and the paper keywords will match the reviewer's strong expertises
                     {
-                        if(userAuto != null)
+                        if (userAuto != null)
                             paperAuto.getAssignedReviewerList().add(userAuto);
                         //paper add this reviewer into its assigned reviewer list
                     }
                     //find the specific reviewer and find the location in the user list
-                    if(!userAuto.getName().equals(paperAuto.getAuthor())
-                            &&CM.checkTwoArrayListHaveSameVariable(userAuto.getKeywords(),paperAuto.getKeywords())
-                            &&userAuto!=null
-                            &&(CM.checkConferenceOverlaps(userAuto.getConferenceListForChair(),CM.searchConference(paperAuto.getConName())))==false)
+                    if (!userAuto.getName().equals(paperAuto.getAuthor())
+                            && CM.checkTwoArrayListHaveSameVariable(userAuto.getKeywords(), paperAuto.getKeywords())
+                            && userAuto != null
+                            && (CM.checkConferenceOverlaps(userAuto.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
                     //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords and ensure this conference not in this reviewer's chair list and author list
                     {
-                        if(userAuto != null)
+                        if (userAuto != null)
                             paperAuto.getAssignedReviewerList().add(userAuto);
                         //paper add this reviewer into its assigned reviewer list
                     }
