@@ -20,6 +20,10 @@ public class CMS
 
 
 
+    /*
+ This function is used to start the system.
+ */
+
     public void openSystem() throws Exception {
         String option;
         option = "";
@@ -64,7 +68,7 @@ public class CMS
         System.out.println("**************************************");
         System.out.print("Enter the email: ");
         email = scan.nextLine().trim();
-        if(email.equals(admin.getAdminUsername())){
+        if(email.equals(admin.getAdminUsername())){ // To check the email belongs to a normal user or the Administrator.
             System.out.print("Please enter the administrator's password: ");
             psw = scan.nextLine().trim();
             System.out.print("\n");
@@ -90,20 +94,20 @@ public class CMS
 
                 switch (option)
                 {
-                    case "1": retrieveUser(); break;
-                    case "2": retrieveConference(); break;
-                    case "3": retrievePaper(); break;
+                    case "1": retrieveUser(); break; // Retrieve the user information
+                    case "2": retrieveConference(); break; // Retrieve the conference information
+                    case "3": retrievePaper(); break; // Retrieve the paper information
                 }
             }
 
         } else{
             for (User thisUser : CM.getUserList() ) {
-                if (thisUser.getEmail().equals(email)) {
+                if (thisUser.getEmail().equals(email)) {  // To check whether the email belongs to a current user.
                     label = 1;
                     System.out.print("Enter password: ");
                     psw = scan.nextLine().trim();
                     int count = 1;
-                    while(count < 3 && !psw.equals(thisUser.getPsw())) {
+                    while(count < 3 && !psw.equals(thisUser.getPsw())) { // To restrict the times of entering psw of 3.
                         System.out.print("Your password is incorrect, please enter again: ");
                         psw = scan.nextLine().trim();
                         count += 1;
@@ -244,8 +248,9 @@ public class CMS
         CM.writeUserToUserFile();
         login();
     }
-
-
+/*
+This function is to check whether the items in a string are all Alphabetic
+ */
     public boolean isStringAlphabetic(String checkedString)
     {
         int i;
@@ -262,7 +267,9 @@ public class CMS
         }
         return true;
     }
-
+    /*
+    This function is to check whether the items in a string are all Numeric.
+     */
     public boolean isStringNumeric(String checkedString)
     {
         int i;
@@ -280,7 +287,7 @@ public class CMS
 
     public String setUserInfo(String info){
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter the " + info + ": ");
+        System.out.print("Enter the " + info + ": "); // Print which kind of information should be entered.
         String inFo = scan.nextLine().trim();
         while (inFo.trim().equals("") || isStringAlphabetic(inFo) == false) // check whether the name is allowed.
         {
@@ -290,6 +297,8 @@ public class CMS
         }
         return inFo;
     }
+
+
     public void chairFunction(String email)throws Exception
     {
         menu.displayChairMenu();
@@ -1434,7 +1443,7 @@ public class CMS
             option = scan.nextLine().trim();
         }
 
-        numOption = Integer.parseInt(option);
+        numOption = Integer.parseInt(option); //Convert the option into an integer, use it as a index.
         System.out.println("\nEmail: " + CM.getUserList().get(numOption - 1).getEmail());
         System.out.println("Password: " + CM.getUserList().get(numOption - 1).getPsw());
         System.out.println("Mobile Number: " + CM.getUserList().get(numOption - 1).getMobileNumber());
@@ -1461,7 +1470,7 @@ public class CMS
             option = scan.nextLine().trim();
         }
 
-        numOption = Integer.parseInt(option);
+        numOption = Integer.parseInt(option); //Convert the option into an integer, use it as a index.
         System.out.println("\nTitle: " + CM.getConferenceList().get(numOption - 1).getConTitle());
         System.out.println("Topic: " + CM.getConferenceList().get(numOption - 1).getConTopic());
         System.out.println("Submission Deadline: " + CM.getConferenceList().get(numOption - 1).getSubDate());
@@ -1485,7 +1494,7 @@ public class CMS
             option = scan.nextLine().trim();
         }
 
-        numOption = Integer.parseInt(option);
+        numOption = Integer.parseInt(option); //Convert the option into an integer, use it as a index.
         System.out.println("\nAuthor: " + CM.getPaperList().get(numOption - 1).getAuthor());
         System.out.println("Conference: " + CM.getPaperList().get(numOption - 1).getConName());
         System.out.println("Keywords: " + CM.getPaperList().get(numOption - 1).getKeywords());
