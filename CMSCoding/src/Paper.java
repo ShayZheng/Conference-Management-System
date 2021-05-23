@@ -135,7 +135,7 @@ public class Paper {
 
     public String getReviewerNames(ArrayList<User> u) {
         String names = "";
-        if(u.size() > 0 )
+        if(u.size() > 0)
         {
             for(int i = 0 ; i < u.size();i++)
             {
