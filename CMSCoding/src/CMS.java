@@ -418,7 +418,7 @@ This function is to check whether the items in a string are all Alphabetic
             System.out.println( CM.getConferenceList().indexOf(one)+1 +"."+ one.toString());
         System.out.println("Please choose one conference to modify");
         String option = sc.nextLine().trim();
-        while(!isStringNumeric(option) || Integer.parseInt(option) >= CM.getConferenceList().size() || Integer.parseInt(option) < 0)
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getConferenceList().size() || Integer.parseInt(option) < 0)
         {
             System.out.println("Can not find the conference!");
             System.out.println("Please enter the number again: ");
