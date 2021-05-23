@@ -15,7 +15,7 @@ public class CMS
         menu = new Menu();//open menu
         CM.readFromFile();//read from database
         admin = new Administrator("admin@monash.edu", "Administrator");//create an administrator
-        //openSystem();
+        openSystem();
     }
 
 
@@ -348,22 +348,25 @@ public class CMS
             title = sc.nextLine().trim();
         }
         System.out.println("Please choose the conference topic from the keywordList(Here is the keyword list):");
-        for(int i = 0; i < CM.getKeywordList().size();i++)//choose one keyword as a this conference topic
+
+        ArrayList<String> showKeywords = new ArrayList<>();
+        for(String k:CM.getKeywordList())
         {
-            if (CM.getKeywordList().get(i).equals(""))
-            {
-                CM.getKeywordList().remove(CM.getKeywordList().get(i));
-            }
-            else
-                System.out.println(i+1 +"."+CM.getKeywordList().get(i));
+            if(!k.equals(""))
+                showKeywords.add(k);
+
+        }
+        for(String key:showKeywords)
+        {
+            System.out.println(showKeywords.indexOf(key)+1+"."+key);
         }
         String option = sc.nextLine().trim();//add validations
-        while(!isStringNumeric(option) || Integer.parseInt(option) >= CM.getKeywordList().size() || Integer.parseInt(option) < 0)
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getKeywordList().size() || Integer.parseInt(option) < 0)
         {
             System.out.println("Please input the correct number");
             option = sc.nextLine().trim();
         }
-        String topic = CM.getKeywordList().get(Integer.parseInt(option));
+        String topic = showKeywords.get(Integer.parseInt(option)-1);
 
         System.out.println("Please set the submission deadline for this conference, the format is (yyyy-MM-dd HH:mm:ss)");
         String subDate = sc.nextLine().trim();//set submission deadline for this conference
@@ -1498,10 +1501,7 @@ public class CMS
     public static void main(String[] args) throws Exception
     {
 
-       CMS cms = new CMS();
-        cms.CM.writePaperToFile();
-        cms.CM.writeUserToUserFile();
-        cms.CM.writeConferenceToFile();
+            CMS cms= new CMS();
 
 
     }
