@@ -19,38 +19,38 @@ Message{}
 user{3,Shay,Shay0003,2,Shay@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{}
-Keywords{}
-Assigned Paper{}
+Conference for Reviewer{Data Science,Cyber Security,}
+Keywords{CS,IT,BIS,Finance,}
+Assigned Paper{paper two,}
 Submitted Paper{}
-Message{}
+Message{hello you have a paper to review[From: Joyce To:Shay],}
 
 user{4,Joyce,Joyce003,1,Joyce@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
-Conference for chair{}
+Conference for chair{Data Science,Cyber Security,}
 Conference for Author{}
 Conference for Reviewer{}
-Keywords{}
+Keywords{CS,IT,BIS,Finance,}
 Assigned Paper{}
 Submitted Paper{}
-Message{}
+Message{hello i hav already reviewed you assigned me the paper[From: Shay To:Joyce],}
 
 user{5,T1,********,2,T1@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{}
-Keywords{}
-Assigned Paper{}
+Conference for Reviewer{Data Science,Cyber Security,}
+Keywords{CS,IT,BIS,Finance,}
+Assigned Paper{paper one,paper two,}
 Submitted Paper{}
-Message{}
+Message{hello T1 you have a paper to review[From: Joyce To:T1],hello you have a paper to review[From: Joyce To:T1],}
 
 user{6,T2,********,2,T1@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{}
+Conference for Reviewer{Data Science,Cyber Security,}
 Keywords{DS,IT,Finance,}
-Assigned Paper{}
+Assigned Paper{paper one,paper two,}
 Submitted Paper{}
-Message{}
+Message{hello T2 you have a paper to review[From: Joyce To:T2],hello[From: Joyce To:T2],}
 
 user{7,T3,********,2,T3@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
 Conference for chair{}
@@ -65,7 +65,7 @@ user{8,T4,********,2,T4@monash.edu,occupation one,1111111111,highQualification o
 Conference for chair{}
 Conference for Author{}
 Conference for Reviewer{}
-Keywords{}
+Keywords{CS,IT,BIS,Finance,}
 Assigned Paper{}
 Submitted Paper{}
 Message{}

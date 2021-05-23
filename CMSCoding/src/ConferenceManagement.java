@@ -271,7 +271,10 @@ public class ConferenceManagement {
 
         }//clear some variables equals ""
 
-
+        HashSet<String> hs = new HashSet<>();
+        hs.addAll(keywordList);
+        keywordList.clear();
+        keywordList.addAll(hs);// clear the repeat keywords
 
     }
 
