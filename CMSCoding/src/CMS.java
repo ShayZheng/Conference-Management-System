@@ -787,9 +787,13 @@ This function is to check whether the items in a string are all Alphabetic
     {
         System.out.println("You are sending message to"+" "+destination.getName()+",please input your message content");
         Scanner sc = new Scanner(System.in);
-        String content = sc.nextLine().trim() +"["+"From: "+sources.getName()+" "+"To:"+destination.getName()+"]";
-        destination.getMessageBox().add(content);
-
+        String content = sc.nextLine().trim();
+        while (isStringNumeric(content) || content.trim().equals("") || content.matches("^[^a-z0-9]+$") || content.trim().length() < 10 || content.matches("^[0-9*`~#+,./;'<>?:!@$%^()_=&{}]+$"))
+        {
+            System.out.println("Message input is invalid, please try again");
+            content = sc.nextLine().trim() +"["+"From: "+sources.getName()+" "+"To:"+destination.getName()+"]";
+        }
+        destination.getMessageBox().add(content  +"["+"From: "+sources.getName()+" "+"To:"+destination.getName()+"]");
     }
 
     public void makeDecision(String email)
@@ -1647,9 +1651,6 @@ This function is to check whether the items in a string are all Alphabetic
 
     public static void main(String[] args) throws Exception
     {
-
-            CMS cms= new CMS();
-
-
+        new CMS();
     }
 }
