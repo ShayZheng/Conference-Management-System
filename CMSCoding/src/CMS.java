@@ -588,37 +588,37 @@ public class CMS
                     return;
                 }
 
-                for(User u:reviewerListAuto)
-                {
-                    if(paperAuto.getAssignedReviewerList().size() < 3)
+                    for(User u:reviewerListAuto)
                     {
-                        if(paperAuto.getKeywords().contains(u.getKeywords().get(0))
-                                &&u !=null
-                                &&!u.getName().equals(paperAuto.getAuthor())
-                                &&(CM.checkConferenceOverlaps(u.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
-                        //the reviewer could not be the author of this paper and the paper keywords will match the reviewer's strong expertises
+                        if(paperAuto.getAssignedReviewerList().size() < 3)
                         {
-                            paperAuto.getAssignedReviewerList().add(u);
-                            continue;
-                            //paper add this reviewer into its assigned reviewer list
+                            if(paperAuto.getKeywords().contains(u.getKeywords().get(0))
+                                    &&u !=null
+                                    &&!u.getName().equals(paperAuto.getAuthor())
+                                    &&(CM.checkConferenceOverlaps(u.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
+                                //the reviewer could not be the author of this paper and the paper keywords will match the reviewer's strong expertises
+                            {
+                                paperAuto.getAssignedReviewerList().add(u);
+                                continue;
+                                //paper add this reviewer into its assigned reviewer list
+                            }
+
+
+                            //find the specific reviewer and find the location in the user list
+                            if (!u.getName().equals(paperAuto.getAuthor())
+                                    //&&(paperAuto.getKeywords().contains(u.getKeywords().get(0))
+                                    && CM.checkTwoArrayListHaveSameVariable(u.getKeywords(), paperAuto.getKeywords())
+                                    && u != null
+                                    && (CM.checkConferenceOverlaps(u.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
+
+                            //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords and ensure this conference not in this reviewer's chair list and author list
+                            {
+                                paperAuto.getAssignedReviewerList().add(u);
+                                //paper add this reviewer into its assigned reviewer list
+                            }
+
                         }
-
-
-                        //find the specific reviewer and find the location in the user list
-                        if (!u.getName().equals(paperAuto.getAuthor())
-                                //&&(paperAuto.getKeywords().contains(u.getKeywords().get(0))
-                                && CM.checkTwoArrayListHaveSameVariable(u.getKeywords(), paperAuto.getKeywords())
-                                && u != null
-                                && (CM.checkConferenceOverlaps(u.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
-
-                        //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords and ensure this conference not in this reviewer's chair list and author list
-                        {
-                            paperAuto.getAssignedReviewerList().add(u);
-                            //paper add this reviewer into its assigned reviewer list
-                        }
-
                     }
-                }
 
 
                 for(User u:paperAuto.getAssignedReviewerList())
@@ -1639,7 +1639,7 @@ public class CMS
     public static void main(String[] args) throws Exception
     {
 
-        CMS cms= new CMS();
+            CMS cms= new CMS();
 
 
     }
