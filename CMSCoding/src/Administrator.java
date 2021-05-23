@@ -6,26 +6,26 @@ public class Administrator {
     private String adminUsername;
     private String adminPsw;
 
-    public Administrator(String newUsername, String newPsw){
+    public Administrator(String newUsername, String newPsw) {
         adminPsw = newPsw;
         adminUsername = newUsername;
     }
 
-    public String getAdminUsername(){
+    public String getAdminUsername() {
         return adminUsername;
     }
 
-    public  String getAdminPsw(){
+    public String getAdminPsw() {
 
         return adminPsw;
     }
 
-    public void setAdminUsername(String newUsername){
+    public void setAdminUsername(String newUsername) {
 
         adminUsername = newUsername;
     }
 
-    public void setAdminPsw(String newPsw){
+    public void setAdminPsw(String newPsw) {
 
         adminPsw = newPsw;
     }

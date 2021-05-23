@@ -23,9 +23,7 @@ public class User {
     private ArrayList<String> messageBox;
 
 
-
-    public User(int newID, String newName, String newPsw, int newType, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA)
-    {
+    public User(int newID, String newName, String newPsw, int newType, String newEmail, String newOccupation, String newMN, String newHQ, String newED, String newIA) {
         ID = newID;
         Name = newName;
         Psw = newPsw;
@@ -38,7 +36,7 @@ public class User {
         interestArea = newIA;//some basic features for user
         keywords = new ArrayList<>();
         conferenceListForChair = new ArrayList<>();
-        conferenceListForAuthor= new ArrayList<>();
+        conferenceListForAuthor = new ArrayList<>();
         conferenceListForReviewer = new ArrayList<>();
         assignedPaper = new ArrayList<>();
         submittedPaper = new ArrayList<>();
@@ -46,60 +44,102 @@ public class User {
     }
 
 
-    public int getID(){
+    public int getID() {
         return ID;
     }
 
-    public String getName(){
+    public String getName() {
         return Name;
     }
 
-    public String getPsw(){
+    public String getPsw() {
         return Psw;
     }
 
-    public String getEmail(){ return Email; }
+    public String getEmail() {
+        return Email;
+    }
 
-    public String getOccupation(){ return Occupation; }
+    public String getOccupation() {
+        return Occupation;
+    }
 
-    public String getMobileNumber(){ return mobileNumber; }
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
 
-    public String getHighQualification(){ return highQualification; }
+    public String getHighQualification() {
+        return highQualification;
+    }
 
-    public String getEmployerDetail(){ return employerDetail; }
+    public String getEmployerDetail() {
+        return employerDetail;
+    }
 
-    public String getInterestArea(){ return interestArea; }
+    public String getInterestArea() {
+        return interestArea;
+    }
 
 
-    public int getChooseType() { return chooseType; }
+    public int getChooseType() {
+        return chooseType;
+    }
 
-    public ArrayList<String> getKeywords() { return keywords; }
+    public ArrayList<String> getKeywords() {
+        return keywords;
+    }
 
-    public ArrayList<Conference> getConferenceListForAuthor() { return conferenceListForAuthor; }
+    public ArrayList<Conference> getConferenceListForAuthor() {
+        return conferenceListForAuthor;
+    }
 
-    public ArrayList<Conference> getConferenceListForChair() { return conferenceListForChair; }
+    public ArrayList<Conference> getConferenceListForChair() {
+        return conferenceListForChair;
+    }
 
-    public ArrayList<Conference> getConferenceListForReviewer() { return conferenceListForReviewer; }
+    public ArrayList<Conference> getConferenceListForReviewer() {
+        return conferenceListForReviewer;
+    }
 
-    public void setEmail(String newEmail){ Email = newEmail; }
+    public void setEmail(String newEmail) {
+        Email = newEmail;
+    }
 
-    public void setOccupation(String newOccupation){ Occupation = newOccupation; }
+    public void setOccupation(String newOccupation) {
+        Occupation = newOccupation;
+    }
 
-    public void setMobileNumber(String newNuber){ mobileNumber = newNuber; }
+    public void setMobileNumber(String newNuber) {
+        mobileNumber = newNuber;
+    }
 
-    public void setHighQualification(String newHighQualification){ highQualification = newHighQualification; }
+    public void setHighQualification(String newHighQualification) {
+        highQualification = newHighQualification;
+    }
 
-    public void setEmployerDetail(String newEmployerDetail){ employerDetail = newEmployerDetail; }
+    public void setEmployerDetail(String newEmployerDetail) {
+        employerDetail = newEmployerDetail;
+    }
 
-    public void setInterestArea(String newInterestArea){ interestArea = newInterestArea; }
+    public void setInterestArea(String newInterestArea) {
+        interestArea = newInterestArea;
+    }
 
-    public void setID(int newID){ ID = newID; }
+    public void setID(int newID) {
+        ID = newID;
+    }
 
-    public void setName(String newName){ Name = newName; }
+    public void setName(String newName) {
+        Name = newName;
+    }
 
-    public void setPsw(String newPsw){ Psw = newPsw; }
+    public void setPsw(String newPsw) {
+        Psw = newPsw;
+    }
 
-    public void setChooseType(int chooseType) { this.chooseType = chooseType; }
+    public void setChooseType(int chooseType) {
+        this.chooseType = chooseType;
+    }
 
     public void setConferenceListForChair(ArrayList<Conference> conferenceListForChair) {
         this.conferenceListForChair = conferenceListForChair;
@@ -121,37 +161,22 @@ public class User {
     public void setAssignedPaper(ArrayList<Paper> assignedPaper) {
         this.assignedPaper = assignedPaper;
     }
-    public ArrayList<Paper> getSubmittedPaper(){return submittedPaper;}
 
-    public ArrayList<Paper> getAssignedPaper() { return assignedPaper;}
+    public ArrayList<Paper> getSubmittedPaper() {
+        return submittedPaper;
+    }
 
-    public String getStringListNames(ArrayList<String> as)
-    {
+    public ArrayList<Paper> getAssignedPaper() {
+        return assignedPaper;
+    }
+
+    public String getStringListNames(ArrayList<String> as) {
         String names = "";
 
-        if(as.size()>0)
-        {
-            for(int i = 0 ; i < as.size(); i++ )
-                {
-                    if(as.get(i) != null)
-                        names += as.get(i)+",";
-                }
-        }
-
-
-         return names;
-        }
-
-
-    public String getConferenceNames(ArrayList<Conference> con)
-    {
-        String names = "";
-        if(con.size()>0)
-        {
-            for(int i = 0 ; i < con.size(); i++ )
-            {
-                if(con.get(i) != null)
-                    names += con.get(i).getConName()+",";
+        if (as.size() > 0) {
+            for (int i = 0; i < as.size(); i++) {
+                if (as.get(i) != null)
+                    names += as.get(i) + ",";
             }
         }
 
@@ -160,25 +185,33 @@ public class User {
     }
 
 
-
-    public String getPaperNames(ArrayList<Paper> papers)
-    {
+    public String getConferenceNames(ArrayList<Conference> con) {
         String names = "";
-
-        if(papers.size()>0)
-        {
-            for(int i = 0 ; i < papers.size(); i++ )
-            {
-                if(papers.get(i) != null)
-                    names +=papers.get(i).getName()+",";
+        if (con.size() > 0) {
+            for (int i = 0; i < con.size(); i++) {
+                if (con.get(i) != null)
+                    names += con.get(i).getConName() + ",";
             }
         }
 
 
         return names;
+    }
+
+
+    public String getPaperNames(ArrayList<Paper> papers) {
+        String names = "";
+
+        if (papers.size() > 0) {
+            for (int i = 0; i < papers.size(); i++) {
+                if (papers.get(i) != null)
+                    names += papers.get(i).getName() + ",";
+            }
         }
 
 
+        return names;
+    }
 
 
     public ArrayList<String> getMessageBox() {
@@ -189,18 +222,15 @@ public class User {
         this.messageBox = messageBox;
     }
 
-    public int findConference(String conferenceName)
-    {
+    public int findConference(String conferenceName) {
         int index1 = -1;
         int index2 = -1;
         int result;
-        for (Conference con : conferenceListForChair)
-        {
+        for (Conference con : conferenceListForChair) {
             if (con.getConName().equals(conferenceName))
                 index1 = 1;
         }
-        for (Conference con : conferenceListForAuthor)
-        {
+        for (Conference con : conferenceListForAuthor) {
             if (con.getConName().equals(conferenceName))
                 index2 = 1;
         }
@@ -210,7 +240,6 @@ public class User {
             result = 1;
         return result;
     }
-
 
 
 }
