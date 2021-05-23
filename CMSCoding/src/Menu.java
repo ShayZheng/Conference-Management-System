@@ -90,4 +90,18 @@ public class Menu {
         System.out.println("10.Manually Add New Keywords ");
     }
 
+    public void displayAuthorKeywordsMenu(){
+        System.out.println("\n" + "Please select three keywords" + "\n");
+        System.out.println("1.Information Technology");
+        System.out.println("2.Cyber Security");
+        System.out.println("3.Cloud Computing");
+        System.out.println("4.Network Develop");
+        System.out.println("5.Software Engineering");
+        System.out.println("6.Distributed Mobile Develop");
+        System.out.println("7.Database");
+        System.out.println("8.Big Data");
+        System.out.println("9.User Interface Design");
+        System.out.println("10.Manually Add New Keywords ");
+    }
+
 }

@@ -15,7 +15,7 @@ public class CMS
         menu = new Menu();//open menu
         CM.readFromFile();//read from database
         admin = new Administrator("admin@monash.edu", "Administrator");//create an administrator
-        //openSystem();
+        openSystem();
     }
 
 
@@ -745,7 +745,6 @@ public class CMS
             default:
                 System.out.println("Please input the correct number");
                 break;
-
         }
     }
 
@@ -859,25 +858,30 @@ public class CMS
 
     public void submitPaper(String email) throws Exception//this function is for chair to submit the paper
     {
-        User author =CM.searchUserByEmail(email);// create the user object
+        // create the user object
+        User author =CM.searchUserByEmail(email);
         System.out.println("Hi"+" "+author.getName()+","+"you are now logging in as an author!");
         System.out.println("**************************************");
         System.out.println("          Author Management           ");
         System.out.println("**************************************");
+        //show the current time
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("Current Time: " + sdf.format(d));
         System.out.println("Please choose a conference to submit paper:");
+        //choose one conference
         for(Conference c: CM.getConferenceList())
             System.out.println(CM.getConferenceList().indexOf(c)+1+"."+c.getConName());
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Choose a Conference: ");
         String option  = sc.nextLine().trim();
+        // input a valid number
         while(!isStringNumeric(option)|| Integer.parseInt(option) < 0)
         {
             System.out.println("Please input the correct number:");
             option =sc.nextLine().trim();
         }
+        // if you have other identity in this conference, you can not add paper in this conference as a author
         while(CM.checkConferenceOverlaps(author.getConferenceListForChair(),CM.getConferenceList().get(Integer.parseInt(option)-1))==true
                 ||CM.checkConferenceOverlaps(author.getConferenceListForReviewer(),CM.getConferenceList().get(Integer.parseInt(option)-1))==true)
         {
@@ -917,15 +921,23 @@ public class CMS
         //choose 3 keywords for this author key word list
         System.out.println("Please input three keywords");
         String selectKeywords = "";
-        while (paperObject.getKeywords().size() < 3)
+        if (paperObject.getKeywords().size() < 3) {
+            //select keywords for 3 times
+            while (paperObject.getKeywords().size() < 3)
+            {
+                menu.displayAuthorKeywordsMenu();
+                selectKeywords = sc.nextLine().trim();
+                keywordSelectionForPaper(paperObject, selectKeywords, sc);
+
+            }
+        }
+        // if user already have three keywords then select keyword for one time
+        else
         {
-            menu.displayKeywordsMenu();
-            selectKeywords = sc.nextLine().trim();
+            menu.displayAuthorKeywordsMenu();
+            selectKeywords = sc.nextLine();
             keywordSelectionForPaper(paperObject, selectKeywords, sc);
         }
-
-
-
 
 
         CM.getPaperList().add(paperObject);
@@ -1499,9 +1511,7 @@ public class CMS
     {
 
        CMS cms = new CMS();
-        cms.CM.writePaperToFile();
-        cms.CM.writeUserToUserFile();
-        cms.CM.writeConferenceToFile();
+
 
 
     }

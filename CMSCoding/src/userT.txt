@@ -9,11 +9,11 @@ Message{}
 
 user{2,Carol,Carol0002,0,Carol@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
 Conference for chair{}
-Conference for Author{}
+Conference for Author{Data Science,Data Science,Data Science,Data Science,}
 Conference for Reviewer{}
 Keywords{}
 Assigned Paper{}
-Submitted Paper{}
+Submitted Paper{The data processing,The data processing,}
 Message{}
 
 user{3,Shay,Shay0003,2,Shay@monash.edu,occupation one,1111111111,highQualification one,employer one,IT}
