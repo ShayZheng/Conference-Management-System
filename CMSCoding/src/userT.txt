@@ -8,54 +8,54 @@ Submitted Paper{}
 Message{one,two,three,}
 
 user{2,Carol,********,0,Carol@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{name,zhou,Cyber Security,Cyber Security,con1,con1,}
-Conference for Author{con5,Data Science,}
+Conference for chair{name,}
+Conference for Author{con5,Data Science,asd,asd,asd,}
 Conference for Reviewer{}
 Keywords{CS,IT,BIS,zhou,yu,xin,shay,lol,int,}
 Assigned Paper{}
-Submitted Paper{}
+Submitted Paper{p,p,ass,}
 Message{}
 
 user{3,Shay,********,2,Shay@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{Cyber Security,}
+Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Data Science,con1,con1,}
-Keywords{Database,new,regex,Cyber Security,again,need regex,CS,no regex,DS,Information Technology,}
-Assigned Paper{it,it,it,H,I,K,J,}
+Conference for Reviewer{Data Science,con1,con1,Cyber Security,Cyber Security,}
+Keywords{CS,new,regex,Cyber Security,again,Database,need regex,no regex,DS,Information Technology,}
+Assigned Paper{paper two,}
 Submitted Paper{}
 Message{one,two,qwe[From: Carol To:Shay],hello[From: Carol To:Shay],hello you have a paper to review[From: Carol To:Shay],you have a paper[From: Carol To:Shay],ss[From: Carol To:Shay],ddd[From: Carol To:Shay],hell[From: Carol To:Shay],sss[From: Carol To:Shay],}
 
 user{4,Joyce,********,1,Joyce@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
-Conference for chair{Cyber Security,Cyber Security,Cyber Security,}
+Conference for chair{Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,}
 Conference for Author{}
 Conference for Reviewer{}
 Keywords{DS,IT,}
 Assigned Paper{}
 Submitted Paper{}
-Message{one,two,three,}
+Message{one,two,three,hello I have reviwed the paper you assigned me[From: Shay To:Joyce],hello I hav reviewed paper[From: Shay To:Joyce],}
 
 user{5,T1,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,con1,con1,}
+Conference for Reviewer{Cyber Security,Cyber Security,}
 Keywords{DS,IT,}
-Assigned Paper{it,it,it,it,H,I,K,J,}
+Assigned Paper{it,it,it,it,paper one,paper two,}
 Submitted Paper{}
-Message{zhou,z,ss,qwe[From: Carol To:T1],ghe[From: Carol To:T1],he[From: Carol To:T1],he[From: Carol To:T1],S[From: Carol To:T1],S[From: Carol To:T1],you have a paper[From: Carol To:T1],ss[From: Carol To:T1],ddd[From: Carol To:T1],hell[From: Carol To:T1],sss[From: Carol To:T1],}
+Message{zhou,z,ss,qwe[From: Carol To:T1],ghe[From: Carol To:T1],he[From: Carol To:T1],he[From: Carol To:T1],S[From: Carol To:T1],S[From: Carol To:T1],you have a paper[From: Carol To:T1],ss[From: Carol To:T1],ddd[From: Carol To:T1],hell[From: Carol To:T1],sss[From: Carol To:T1],ss[From: Joyce To:T1],ss[From: Joyce To:T1],}
 
 user{6,T2,********,2,T1@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,con1,con1,}
+Conference for Reviewer{Cyber Security,Cyber Security,}
 Keywords{DS,IT,Finance,}
-Assigned Paper{it,it,H,I,K,J,}
+Assigned Paper{it,it,paper one,paper two,}
 Submitted Paper{}
-Message{zhou,z,s,qwe[From: Carol To:T2],ge[From: Carol To:T2],S[From: Carol To:T2],S[From: Carol To:T2],you have a paepr[From: Carol To:T2],s[From: Carol To:T2],dd[From: Carol To:T2],hell[From: Carol To:T2],sss[From: Carol To:T2],}
+Message{zhou,z,s,qwe[From: Carol To:T2],ge[From: Carol To:T2],S[From: Carol To:T2],S[From: Carol To:T2],you have a paepr[From: Carol To:T2],s[From: Carol To:T2],dd[From: Carol To:T2],hell[From: Carol To:T2],sss[From: Carol To:T2],sss[From: Joyce To:T2],ss[From: Joyce To:T2],}
 
 user{7,T3,********,2,T3@monash.edu,occupation one,1111111,highQualification one,employer one,IT}
 Conference for chair{}
 Conference for Author{}
-Conference for Reviewer{Cyber Security,Cyber Security,Cyber Security,Cyber Security,Cyber Security,}
+Conference for Reviewer{}
 Keywords{DS,IT,Finance,}
 Assigned Paper{}
 Submitted Paper{}

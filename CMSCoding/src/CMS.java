@@ -7,15 +7,15 @@ import java.util.*;
 public class CMS
 {
     private ConferenceManagement CM;
-    private Menu menu;
-    private Administrator admin;
+    private Menu menu;//boundary class
+    private Administrator admin;//Administrator is different from other users,so it needs to a distinct fields
 
     public CMS() throws Exception{
         CM = new ConferenceManagement();
-        menu = new Menu();
-        CM.readFromFile();
-        admin = new Administrator("admin@monash.edu", "Administrator");
-        // openSystem();
+        menu = new Menu();//open menu
+        CM.readFromFile();//read from database
+        admin = new Administrator("admin@monash.edu", "Administrator");//create an administrator
+        openSystem();
     }
 
 
@@ -42,9 +42,9 @@ public class CMS
 
             switch (option)
             {
-                case "1": register(); break;
-                case "2": login(); break;
-                case "3": System.exit(0);  //exit system
+                case "1": register(); break;//register function trigger
+                case "2": login(); break;//login function trigger
+                case "3": System.exit(0); //exit system
             }
         }
 
@@ -54,7 +54,7 @@ public class CMS
     public void login() throws Exception {
         String email;
         String psw;
-        int label = 0;
+        int label = 0;//flag of different part
         String option;
         option = "";
 
@@ -572,38 +572,39 @@ public class CMS
                         reviewerListAuto.add(u);
                 }
 
-                for(Paper p: CM.getPaperList())
-                {
-                    p.getAssignedReviewerList().clear();
-                }//clear the list to avoid the list does not contain null elements
-
-                int i = 0;
-                while(paperAuto.getAssignedReviewerList().size() < 3 && i < reviewerListAuto.size())
-                //choose 3 reviewers for this paper and ensure the choice in the reviewer list boundary
-                {
-                    User userAuto = reviewerListAuto.get(i);//find the specific reviewer
-                    if(paperAuto.getKeywords().contains(userAuto.getKeywords().get(0))
-                            &&userAuto !=null &&!userAuto.getName().equals(paperAuto.getAuthor()))
-                    //the reviewer could not be the author of this paper and the paper keywords will match the reviewer's strong expertises
+                    for(User u:reviewerListAuto)
                     {
-                        if(userAuto != null)
-                            paperAuto.getAssignedReviewerList().add(userAuto);
-                        //paper add this reviewer into its assigned reviewer list
-                    }
-                    //find the specific reviewer and find the location in the user list
-                    if(!userAuto.getName().equals(paperAuto.getAuthor())
-                            &&CM.checkTwoArrayListHaveSameVariable(userAuto.getKeywords(),paperAuto.getKeywords())
-                            &&userAuto!=null
-                            &&(CM.checkConferenceOverlaps(userAuto.getConferenceListForChair(),CM.searchConference(paperAuto.getConName())))==false)
-                    //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords and ensure this conference not in this reviewer's chair list and author list
-                    {
-                        if(userAuto != null)
-                            paperAuto.getAssignedReviewerList().add(userAuto);
-                        //paper add this reviewer into its assigned reviewer list
+                        if(paperAuto.getAssignedReviewerList().size() < 3)
+                        {
+                            if(paperAuto.getKeywords().contains(u.getKeywords().get(0))
+                                    &&u !=null
+                                    &&!u.getName().equals(paperAuto.getAuthor())
+                                    &&(CM.checkConferenceOverlaps(u.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
+                                //the reviewer could not be the author of this paper and the paper keywords will match the reviewer's strong expertises
+                            {
+                                paperAuto.getAssignedReviewerList().add(u);
+                                continue;
+                                //paper add this reviewer into its assigned reviewer list
+                            }
+
+
+                            //find the specific reviewer and find the location in the user list
+                            if (!u.getName().equals(paperAuto.getAuthor())
+                                    //&&(paperAuto.getKeywords().contains(u.getKeywords().get(0))
+                                    && CM.checkTwoArrayListHaveSameVariable(u.getKeywords(), paperAuto.getKeywords())
+                                    && u != null
+                                    && (CM.checkConferenceOverlaps(u.getConferenceListForChair(), CM.searchConference(paperAuto.getConName()))) == false)
+
+                            //the reviewer could not be the author of this paper and the reviewer keywords should match the paper's keywords and ensure this conference not in this reviewer's chair list and author list
+                            {
+                                paperAuto.getAssignedReviewerList().add(u);
+                                //paper add this reviewer into its assigned reviewer list
+                            }
+
+                        }
                     }
 
-                    i++;
-                }
+
                 for(User u:paperAuto.getAssignedReviewerList())
                 {
                     if(u!=null)
@@ -750,7 +751,7 @@ public class CMS
 
     public void sendMessage(User destination,User sources)
     {
-        System.out.println("You are sending message to"+" "+destination.getName());
+        System.out.println("You are sending message to"+" "+destination.getName()+",please input your message content");
         Scanner sc = new Scanner(System.in);
         String content = sc.nextLine().trim() +"["+"From: "+sources.getName()+" "+"To:"+destination.getName()+"]";
         destination.getMessageBox().add(content);
@@ -760,12 +761,15 @@ public class CMS
     public void makeDecision(String email)
     {
         User chair = CM.searchUserByEmail(email);// create the user object
-        System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as an author!");
+        System.out.println("Hi"+" "+chair.getName()+","+"you are now logging in as a chair!");
         System.out.println("**************************************");
         System.out.println("           Chair Management           ");
         System.out.println("**************************************");
         if(chair.getMessageBox().size()==0)
+        {
             System.out.println("You have no message");
+            return;
+        }
         System.out.println("==================<Message Box>=====================");
         if(chair.getMessageBox().size()>0)
         {
@@ -781,6 +785,11 @@ public class CMS
         {
             if(p.getEvaluation().size() > 0)
                 couldMakeDecision.add(p);
+        }
+        if(couldMakeDecision.size() == 0)
+        {
+            System.out.println("There is no paper need to make decision!");
+            return;
         }
         System.out.println("This is the evaluation for this paper and you can make decision for it");
         System.out.println("==================<Paper List>=====================");
@@ -860,22 +869,27 @@ public class CMS
         System.out.println("Current Time: " + sdf.format(d));
         System.out.println("Please choose a conference to submit paper:");
         for(Conference c: CM.getConferenceList())
-            System.out.println(CM.getConferenceList().indexOf(c)+"."+c.getConName());
+            System.out.println(CM.getConferenceList().indexOf(c)+1+"."+c.getConName());
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Choose a Conference: ");
         String option  = sc.nextLine().trim();
-        while(isStringAlphabetic(option)|| Integer.parseInt(option) < 0)
+        while(!isStringNumeric(option)|| Integer.parseInt(option) < 0)
         {
             System.out.println("Please input the correct number:");
             option =sc.nextLine().trim();
         }
-        while(CM.checkConferenceOverlaps(author.getConferenceListForChair(),CM.getConferenceList().get(Integer.parseInt(option)))==true
-                ||CM.checkConferenceOverlaps(author.getConferenceListForReviewer(),CM.getConferenceList().get(Integer.parseInt(option)))==true)
+        while(CM.checkConferenceOverlaps(author.getConferenceListForChair(),CM.getConferenceList().get(Integer.parseInt(option)-1))==true
+                ||CM.checkConferenceOverlaps(author.getConferenceListForReviewer(),CM.getConferenceList().get(Integer.parseInt(option)-1))==true)
         {
             System.out.println("You can not submit paper in this conference, because you have another identity in this conference");
             option =sc.nextLine().trim();
+            while(!isStringNumeric(option))
+            {
+                System.out.println("Please input the correct number:");
+                option =sc.nextLine().trim();
+            }
         }
-        Conference conferenceObject = CM.getConferenceList().get(Integer.parseInt(option));
+        Conference conferenceObject = CM.getConferenceList().get(Integer.parseInt(option)-1);
         //show the conference list and let the author to choose one conference to submit paper.
         System.out.println("The submission deadline for conference: " + conferenceObject.getSubDate());
         if(d.after(sdf.parse(conferenceObject.getSubDate())))
@@ -887,7 +901,7 @@ public class CMS
         System.out.println("Please enter the paper name");
         //in put the specific paper format
         String paperName = sc.nextLine().trim();
-        while(!isStringAlphabetic(paperName)&&!paperName.trim().equals(""))
+        while(!isStringAlphabetic(paperName))
         {
             System.out.println("You input an invalid name,please input again");
             paperName = sc.nextLine().trim();
@@ -938,6 +952,11 @@ public class CMS
         Scanner sc= new Scanner(System.in);
         System.out.println("Please offer the file path");
         String filePath = sc.nextLine().trim();
+        while(filePath.trim().equals(""))//|| !filePath.matches("^/|(/[a-zA-Z0-9_-]+)+$"))
+        {
+            System.out.println("You input an invalid filepath,please input again");
+            filePath = sc.nextLine().trim();
+        }
         Paper newPaper = new Paper(name,conference.getSubDate(),conference.gatRevDate(),"NO",user.getName(),"null",conference.getConName(),filePath);
         return newPaper;
 
@@ -1073,7 +1092,6 @@ public class CMS
         }
     }
 
-    //specify the keywords for reviewer
     public void specifyKeywords(String email)
     {
         User currentUser = CM.searchUserByEmail(email);
@@ -1111,7 +1129,7 @@ public class CMS
         System.out.println("Your current keywords: ");
         for (int i = 0; i < currentUser.getKeywords().size(); i++)
         {
-            System.out.println("\n" + currentUser.getKeywords().get(i));
+            System.out.println(currentUser.getKeywords().get(i));
         }
 
         System.out.println("\n" + "Please select your strong expertise keyword ");
@@ -1123,6 +1141,8 @@ public class CMS
             System.out.println("Invalid inputs, pleasae try again");
             strongExpertise = sc.nextLine().trim();
         }
+
+        //swap the Strong expertise to the top of the keyword list
         if (currentUser.getKeywords().contains(strongExpertise) && isStringAlphabetic(strongExpertise))
         {
             int indexOfStrongKeyword = returnIndex(currentUser.getKeywords(), strongExpertise);
@@ -1132,17 +1152,20 @@ public class CMS
             currentUser.getKeywords().set(0, strongExpertise);
 
         }
-        if (!currentUser.getKeywords().contains(strongExpertise))
-            System.out.println("Keyword not exist in your list");
-
+        while (!currentUser.getKeywords().contains(strongExpertise))
+        {
+            System.out.println("Keyword do not exist in your list, please enter again");
+            strongExpertise = sc.nextLine().trim();
+        }
 
         System.out.println("After specify: You have " + currentUser.getKeywords().size() + " Keywords");
         if (confirmChanges() == true)
         {
             CM.writeUserToUserFile();
         }
+        else
+            return;
     }
-
 
     public void writeEvaluation(String email) throws ParseException
     {
@@ -1179,6 +1202,7 @@ public class CMS
             System.out.println("You have no assigned paper now");
             return;
         }
+        System.out.println("==================<Assigned Paper>=====================");
         if(assignedPaper.size()>0)
         {
             System.out.println("This is your assigned paper, please choose one to review");
@@ -1187,9 +1211,10 @@ public class CMS
                     System.out.println(assignedPaper.indexOf(p)+1+"."+p.getName());
 
         }
+        System.out.println("==================<Assigned Paper>=====================");
         Scanner sc = new Scanner(System.in);
         String choose = sc.nextLine().trim();
-        while(isStringAlphabetic(choose)||Integer.parseInt(choose)<0||Integer.parseInt(choose)>assignedPaper.size())
+        while(!isStringNumeric(choose)||Integer.parseInt(choose)<0||Integer.parseInt(choose)>assignedPaper.size())
         {
             System.out.println("You input the invalid number,please input again");
             choose = sc.nextLine().trim();
@@ -1202,20 +1227,37 @@ public class CMS
             System.out.println("You input nothing, please input again");
             content= sc.nextLine().trim();
         }
+        while(isStringNumeric(content))
+        {
+            System.out.println("You should input words not just numbers, please input again");
+            content= sc.nextLine().trim();
+        }
+        // Validationg for the length of the evaluation
+        while(content.trim().length() < 10)
+        {
+            System.out.println("Evaluation should be at least contains 10 words");
+            content= sc.nextLine().trim();
+        }
         paperObject.getEvaluation().add(content);
         userReviewer.getAssignedPaper().remove(paperObject);
         System.out.println("Set the evaluation for this paper successfully, and you will send message to chair");
         System.out.println("Here is your message box again, please choose one to send message");
+        System.out.println("==================<Message Box>=====================");
         for(String s: messages)
         {
             System.out.println(messages.indexOf(s)+1+"."+s);
 
         }
+        System.out.println("==================<Message Box>=====================");
         System.out.println("Enter one sender name:");
         String chairName = sc.nextLine().trim();
+        if(!isStringAlphabetic(chairName))
+        {
+            System.out.println("You should input the sender name which can find in the message box, please enter again ");
+        }
         while(CM.searchUser(chairName) == null)
         {
-            System.out.println(chairName+" does not exist!");
+            System.out.println(chairName+" does not exist, please enter again");
             chairName =sc.nextLine().trim();
         }
         sendMessage(CM.searchUser(chairName),userReviewer);
@@ -1236,7 +1278,6 @@ public class CMS
 
 
     }
-
     public void retrieveUser(){
         String option;
         int numOption;
@@ -1247,7 +1288,7 @@ public class CMS
         System.out.print("Please choose a user: ");
         option = scan.nextLine().trim();
 
-        while(isStringAlphabetic(option) || Integer.parseInt(option) > CM.getUserList().size() || Integer.parseInt(option) < 1){
+        while(!isStringNumeric(option)|| Integer.parseInt(option) > CM.getUserList().size() || Integer.parseInt(option) < 1){
             System.out.print("You should input a number and choose a user from the list. Please enter again: ");
             option = scan.nextLine().trim();
         }
@@ -1274,7 +1315,7 @@ public class CMS
         }
         System.out.print("Please choose a conference: ");
         option = scan.nextLine().trim();
-        while(isStringAlphabetic(option) || Integer.parseInt(option) > CM.getConferenceList().size() || Integer.parseInt(option) < 1){
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getConferenceList().size() || Integer.parseInt(option) < 1){
             System.out.print("You should input a number and choose a conference from the list. Please enter again: ");
             option = scan.nextLine().trim();
         }
@@ -1298,7 +1339,7 @@ public class CMS
         }
         System.out.print("Please choose a paper: ");
         option = scan.nextLine().trim();
-        while(isStringAlphabetic(option) || Integer.parseInt(option) > CM.getPaperList().size() || Integer.parseInt(option) < 1){
+        while(!isStringNumeric(option) || Integer.parseInt(option) > CM.getPaperList().size() || Integer.parseInt(option) < 1){
             System.out.print("You should input a number and choose a paper from the list. Please enter again: ");
             option = scan.nextLine().trim();
         }
@@ -1456,8 +1497,9 @@ public class CMS
 
     public static void main(String[] args) throws Exception
     {
-        CMS cms = new CMS();
-        cms.makeDecision("Joyce@monash.edu");
+
+       CMS cms = new CMS();
+       cms.retrieveConference();
 
 
 
